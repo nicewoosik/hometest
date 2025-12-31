@@ -117,7 +117,12 @@ const server = http.createServer(async (req, res) => {
   
   // career HTML 파일을 사용하는 경우가 아니면 기본 경로 사용
   if (!filePath) {
-    filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath)
+    // /css/, /js/, /images/ 경로는 /NEW/ 하위에서 찾기
+    if (urlPath.startsWith('/css/') || urlPath.startsWith('/js/') || urlPath.startsWith('/images/')) {
+      filePath = path.join(DIST_DIR, 'NEW', urlPath)
+    } else {
+      filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath)
+    }
   }
   
   // 디렉토리인 경우 index.html 찾기
