@@ -45,13 +45,17 @@ export default async function handler(req, res) {
     if (queryString && urlPath.includes('board.php')) {
       const params = new URLSearchParams(queryString)
       const boTable = params.get('bo_table')
+      const wrId = params.get('wr_id')
+      
       // bo_table 파라미터가 있으면 PHP 파일을 읽어서 동적으로 수정
       if (boTable) {
         // 나중에 파일을 읽을 때 bo_table 값을 사용하기 위해 req 객체에 저장
         req._boTable = boTable
+        req._wrId = wrId
         
         // career 페이지는 별도로 크롤링한 HTML 파일이 있으면 사용
-        if (boTable === 'career') {
+        // 단, wr_id가 있으면 상세 페이지이므로 board.php 사용
+        if (boTable === 'career' && !wrId) {
           const careerHtmlPath = path.join(DIST_DIR, 'NEW/board/bbs/board_career.html')
           try {
             await fs.access(careerHtmlPath)
