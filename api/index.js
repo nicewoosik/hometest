@@ -121,6 +121,16 @@ export default async function handler(req, res) {
       urlPath = '/' + urlPath
     }
     
+    // CSS, JS, Images 경로 매핑 (로컬 serve.js와 동일하게)
+    if (urlPath.startsWith('/css/') || urlPath.startsWith('/js/') || urlPath.startsWith('/images/')) {
+      urlPath = '/NEW' + urlPath
+    }
+    
+    // font 경로 매핑
+    if (urlPath.startsWith('/font/')) {
+      urlPath = '/NEW' + urlPath
+    }
+    
     // 상대 경로 정규화
     const parts = urlPath.split('/').filter(p => p && p !== '.')
     const normalized = []
@@ -137,7 +147,12 @@ export default async function handler(req, res) {
     
     // career HTML 파일을 사용하는 경우가 아니면 기본 경로 사용
     if (!filePath) {
-      filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath)
+      // 루트 경로인 경우 /NEW/html/index.html 사용
+      if (urlPath === '/') {
+        filePath = path.join(DIST_DIR, 'NEW/html/index.html')
+      } else {
+        filePath = path.join(DIST_DIR, urlPath)
+      }
     }
     
     // 디렉토리인 경우 index.html 찾기
