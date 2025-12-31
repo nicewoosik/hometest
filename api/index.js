@@ -39,6 +39,8 @@ export default async function handler(req, res) {
       queryString = parts[1] || ''
     }
     
+    let filePath = null
+    
     // PHP 파일 쿼리 파라미터 처리 (board.php)
     if (queryString && urlPath.includes('board.php')) {
       const params = new URLSearchParams(queryString)
@@ -84,7 +86,7 @@ export default async function handler(req, res) {
     urlPath = '/' + normalized.join('/')
     
     // career HTML 파일을 사용하는 경우가 아니면 기본 경로 사용
-    if (!req._useCareerHtml) {
+    if (!filePath) {
       filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath)
     }
     

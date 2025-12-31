@@ -29,8 +29,30 @@ const mimeTypes = {
 }
 
 const server = http.createServer(async (req, res) => {
-  // URL 파싱 (쿼리 스트링 제거)
-  let urlPath = new URL(req.url, `http://localhost:${PORT}`).pathname
+  // URL 파싱
+  const urlObj = new URL(req.url, `http://localhost:${PORT}`)
+  let urlPath = urlObj.pathname
+  const queryString = urlObj.search.substring(1) // '?' 제거
+  
+  let filePath = null
+  
+  // PHP 파일 쿼리 파라미터 처리 (board.php)
+  if (queryString && urlPath.includes('board.php')) {
+    const params = new URLSearchParams(queryString)
+    const boTable = params.get('bo_table')
+    // career 페이지는 별도로 크롤링한 HTML 파일 사용
+    if (boTable === 'career') {
+      const careerHtmlPath = path.join(DIST_DIR, 'NEW/board/bbs/board_career.html')
+      try {
+        const stat = await fs.stat(careerHtmlPath)
+        if (stat.isFile()) {
+          filePath = careerHtmlPath
+        }
+      } catch {
+        // 파일이 없으면 기존 board.php 사용
+      }
+    }
+  }
   
   // 상대 경로 정규화 (.. 처리)
   const parts = urlPath.split('/').filter(p => p)
@@ -44,7 +66,10 @@ const server = http.createServer(async (req, res) => {
   }
   urlPath = '/' + normalized.join('/')
   
-  let filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath)
+  // career HTML 파일을 사용하는 경우가 아니면 기본 경로 사용
+  if (!filePath) {
+    filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath)
+  }
   
   // 디렉토리인 경우 index.html 찾기
   try {
