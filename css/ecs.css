@@ -1,0 +1,132 @@
+/* �ؽ�Ʈ �⺻�ѱ� ��Ÿ��.*/
+
+.01{
+    color: #555555;
+    font-family: "����,verdana,applegothic";
+    font-size: 9pt;
+    line-height: 20px;
+        }
+.01 a:link    { text-decoration:none; font-size:9pt; color:#555555}
+.01 a:visited { text-decoration:none; font-size:9pt; color:#555555}
+.01 a:hover   { text-decoration:underline; font-size:9pt; color:#555555}
+.01 a:active  { text-decoration:none; font-size:9pt; color:#555555}
+
+
+
+
+/* ���� �������׺κ� ��Ÿ��.*/
+
+.0{
+    color: #555555;
+    font-family: "����,verdana,applegothic";
+    font-size: 8pt;
+    line-height: 20px;
+        }
+.0 a:link    { text-decoration:none; font-size:8pt; color:#555555}
+.0 a:visited { text-decoration:none; font-size:8pt; color:#555555}
+.0 a:hover   { text-decoration:none; font-size:8pt; color:#000000}
+.0 a:active  { text-decoration:none; font-size:8pt; color:#555555}
+
+
+
+
+
+/* �ؽ�Ʈ ��ũ��� ���� ��Ÿ��.*/
+
+.02{
+    color: #555555;
+    font-family: "verdana,applegothic";
+    font-size: 8pt;
+    line-height: 20px;
+        }
+.02 a:link    { text-decoration:none; font-size:8pt; color:#555555}
+.02 a:visited { text-decoration:none; font-size:8pt; color:#555555}
+.02 a:hover   { text-decoration:none; font-size:8pt; color:#777777}
+.02 a:active  { text-decoration:none; font-size:8pt; color:#555555}
+
+
+/* Ŀ�´�Ƽ�κп� ���� �̺�Ʈ ���� ���� �ؽ�Ʈ ��Ÿ��.*/
+
+.03{
+    color: #268CEC;
+    font-family: "����,verdana,applegothic";
+    font-size: 9pt; 
+    line-height: 20px;
+    font-weight: bold;
+        }
+.03 a:link    { text-decoration:none; font-size:9pt; color:#268CEC}
+.03 a:visited { text-decoration:none; font-size:9pt; color:#268CEC}
+.03 a:hover   { text-decoration:underline; font-size:9pt; color:#268CEC}
+.03 a:active  { text-decoration:none; font-size:9pt; color:#268CEC}
+
+
+
+
+.04 {
+      FONT-SIZE: 9pt; 
+      COLOR: #999999;
+      LINE-HEIGHT: 18px;
+      FONT-FAMILY: "����", "verdana", "applegothic"
+    }
+.04 A:link {FONT-SIZE: 9pt; COLOR: #666666; TEXT-DECORATION: none}
+.04 A:visited {	FONT-SIZE: 9pt; COLOR: #666666; TEXT-DECORATION: none}
+.04 A:hover {FONT-SIZE: 9pt; COLOR: #7a8612; TEXT-DECORATION: underline}
+.04 A:active {FONT-SIZE: 9pt; COLOR: #7a8612; TEXT-DECORATION: none}
+
+
+
+
+/* �ؽ�Ʈ ��ũ��� ���� ��Ÿ��.*/
+
+.05{
+    color: #555555;
+    font-family: "verdana,applegothic";
+    font-size: 8pt;
+    line-height: 20px;
+        }
+.05 a:link    { text-decoration:none; font-size:8pt; color:#555555}
+.05 a:visited { text-decoration:none; font-size:8pt; color:#555555}
+.05 a:hover   { text-decoration:none; font-size:8pt; color:#0F98EE}
+.05 a:active  { text-decoration:none; font-size:8pt; color:#555555}
+
+
+/* �Խ��� ��Ÿ��.*/
+
+body
+{scrollbar-face-color: #ffffff; 
+scrollbar-shadow-color: #9F9F9F;
+scrollbar-highlight-color: #9F9F9F; 
+scrollbar-3dlight-color: #ffffff;
+scrollbar-darkshadow-color: #ffffff;
+scrollbar-track-color: #EEEEEE; 
+scrollbar-arrow-color: #717171} 
+
+
+
+body, td, select, input, div, form, textarea, center, option, pre, blockquote {font-family:����;tahoma;color:777777;font-size:9pt}
+
+A:link    {color:777777;text-decoration:none;}
+A:visited {color:777777;text-decoration:none;}
+A:active  {color:777777;text-decoration:none;}
+A:hover  {color:0088CC;text-decoration:none;}
+
+.input2 {border-style:none; BACKGROUND:  url('../Local%20Settings/Temporary%20Internet%20Files/Content.IE5/XW7FS3FO/%27image/dot.gif%27') repeat-x bottom;solid;font-size:9pt;color:#777777;line-height:100%;HEIGHT: 17px}
+.input1 {border:1px solid ECECEC;background-color:ffffff;height:15px; font-family:����; tahoma; font-size:9pt; color:777777; border-top-color:ECECEC; border-right-color:ECECEC; border-bottom-color:ECECEC; border-left-color:ECECEC}
+.input {border:none;height=15px;font-family:tahoma;font-size:9pt;color:777777;}
+.submit {border:1px solid e3e3e3;font-family:tahoma;font-size:9pt;color:white;background-color:efefef; height=16px}
+.thm6 {font-family:tahoma;color:4EB2E4;font-size:6pt;font-weight:bold;letter-spacing:-1px}
+.thm7 {font-family:tahoma;color:777777;font-size:7pt}
+.thm8 {font-family:tahoma;color:0088CC;font-size:9pt}
+.thm9 {font-family:tahoma;color:777777;font-size:9pt}
+.page {font-family:tahoma;color:0088CC;font-size:7pt}
+.ver7 {font-family:tahoma;color:0088CC;font-size:7pt;font-weight:bold;letter-spacing:-1px}
+.in {border:1px solid #c6c6c6;line-height:120%;background-color:#ffffff;line-height:120%;color:777777}
+.textarea {border:1px solid #C0C0C0;font-family:tahoma;font-size:9pt;color:777777;overflow:auto; background-color:transparent}
+
+/*----------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+/*�������� view������ �̹���������*/
+.interVBOX2 .TTPP .TTPP_R img{width:220px !important;height:236px !important;}

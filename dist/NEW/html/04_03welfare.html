@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECS | ECS텔레콤</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css">
+<link rel="stylesheet" type="text/css" href="../css/ecs.css">
+<link rel="stylesheet" type="text/css" href="../css/ecs_mobile.css">
+<link rel="stylesheet" type="text/css" href="../css/font.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+<link rel="icon" type="image/x-icon" href="/NEW/images/favicon.ico">
+<script type="text/javascript" src="../js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
+<script type="text/javascript" src="../js/jquery.bxslider.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content=">">
+<meta name="keywords" content="" />
+<meta name="robots" content="follow, all" />
+
+<!--[if lte IE 8]>
+<style type="text/css">
+#bg ul li{background:none !important}
+#bg ul li img{position:static; left:0; top:0;}
+</style>
+<script type="text/javascript" src="js/minhyuk.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+
+<div class="mobile_home_btn">
+  <a href="#"><img src="/NEW/images/common/mobile_btn.png" alt="모바일에서 메뉴열기"></a>
+</div><!-- Only Mobile -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111281995-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-111281995-1');
+</script>
+<!-- //Global site tag (gtag.js) - Google Analytics -->
+<!-- <script src="http://ecstel.co.kr/NEW/js/jquery.droppy.js"></script> -->
+
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+<script>
+$(function(){
+  let hoverTimer;
+
+  $('.pcGNB').on('mouseenter', function(){
+    clearTimeout(hoverTimer);
+    $('.nav_bg').stop(true, true).slideDown(250);
+    $('.gnb > li > ul').stop(true, true).slideDown(250);
+  });
+
+  $('.pcGNB').on('mouseleave', function(){
+    hoverTimer = setTimeout(() => {
+      $('.nav_bg').stop(true, true).slideUp(250);
+      $('.gnb > li > ul').stop(true, true).slideUp(250);
+      $('.gnb > li').removeClass('active');
+    }, 200);
+  });
+
+  $('.gnb > li').hover(
+    function(){
+      $('.gnb > li').removeClass('active');
+      $(this).addClass('active');
+    },
+    function(){
+      $(this).removeClass('active');
+    }
+  );
+});
+
+</script>
+
+<div class="wrap Mwrap">
+  <div class="bodys">
+
+    <div id="nav">
+      <div class="inner">
+
+        <div class="right_top">
+          <ul class="sns">
+            <li><a href="https://www.facebook.com/ecstel" target="_blank"><img src="/NEW/images/common/sns_fb.png"
+                  alt=""></a></li>
+            <li><a href="https://www.instagram.com/ecstelecom/" target="_blank"><img
+                  src="/NEW/images/common/sns_insta.png" alt=""></a></li>
+            <li><a href="http://ecstel.business.site/" target="_blank"><img src="/NEW/images/common/sns_gg.png"
+                  alt=""></a>
+            </li>
+            <li><a href="https://www.linkedin.com/company/482822/" target="_blank"><img
+                  src="/NEW/images/common/sns_in.png" alt=""></a></li>
+            <li><a href="https://www.youtube.com/channel/UCICHlAfNdW_Gl1WzduPTeQw/featured" target="_blank"><img
+                  src="/NEW/images/common/sns_yt.png" alt=""></a></li>
+          </ul>
+          <ul class="language">
+            <li><a href="/NEW/html/index.html"><img src="/NEW/images/common/kor_on.png" alt=""></a></li>
+            <li><a href="/NEW/html/en_index.html"><img src="/NEW/images/common/eng_off.png" alt=""></a></li>
+          </ul>
+        </div>
+
+
+        <div class="nav_body">
+          <div class="Gnb_btn"><a href="/NEW/html/index.html"><img src="/NEW/images/gnbK/newlogo.png" alt="뉴로고"></a>
+          </div>
+
+          <div class="pcGNB">
+            <ul class="gnb">
+              <li class="gnb01">
+                <a class="gnb01_a" href="#">COMPANY</a>
+                <ul>
+                  <li class="nb"><a class="gn0101" href="/NEW/html/01_01mission.html">Mission & Values</a></li>
+                  <li><a class="gn0102" href="/NEW/html/01_02history.html">History</a></li>
+                  <li><a class="gn0103" href="/NEW/html/01_03award.html">Awards & Recognition</a></li>
+                </ul>
+              </li>
+              <li class="gnb02">
+                <a class="gnb02_a" href="#">서비스&솔루션</a>
+                <ul>
+                  <li class="nb"><a class="gn0201" href="/NEW/html/02_02contact.html">Customer Success(CC)</a></li>
+                  <li><a class="gn0202" href="/NEW/html/02_01unified.html">Digital Workplace(UC)</a></li>
+                  <li><a class="gn0203" href="/NEW/html/02_05maintain.html">ETaaS</a></li>
+                  <!-- <li><a class="gn0204" href="/NEW/html/02_03si.html">시스템 통합</a></li>
+				  <li><a class="gn0205" href="/NEW/html/02_04tel.html">비디오</a></li>
+				  <li><a class="gn0206" href="/NEW/html/02_05maintain.html">고객맞춤형 서비스</a></li> -->
+                </ul>
+                <!-- 2020-08-07 주석 <ul>
+				  <li class="nb"><a class="gn0201" href="/NEW/html/02_02contact.html">컨택센터</a></li>
+				  <li><a class="gn0202" href="/NEW/html/02_01unified.html">통합커뮤니케이션</a></li>
+				  <li><a class="gn0203" href="/NEW/html/02_02_ni.html">네트워크 통합</a></li>
+				  <li><a class="gn0204" href="/NEW/html/02_03si.html">시스템 통합</a></li>
+				  <li><a class="gn0205" href="/NEW/html/02_04tel.html">비디오</a></li>
+				<li><a class="gn0206" href="/NEW/html/02_05maintain.html">고객맞춤형 서비스</a></li>
+			  </ul> -->
+              </li>
+              <li class="gnb03">
+                <a class="gnb03_a" href="#">파트너&고객사</a>
+                <ul>
+                  <li class="nb"><a class="gn0301" href="/NEW/html/03_01partners.html">Partners</a></li>
+                  <li><a class="gn0302" href="/NEW/html/03_02customers.html">Customers</a></li>
+
+                </ul>
+              </li>
+              <li class="gnb04">
+                <a class="gnb04_a" href="#">ECS ONE채용</a>
+                <ul>
+                  <li class="nb"><a class="gn0401" href="/NEW/html/04_01injae.html">인재상</a></li>
+                  <li><a class="gn0402" href="/NEW/html/04_02zikmu.html">직무소개</a></li>
+                  <li><a class="gn0403" href="/NEW/html/04_03welfare.html">복지 및 웰니스 프로그램</a></li>
+                  <li><a class="gn0404" href="/NEW/html/04_04edu.html">교육체계</a></li>
+                  <li><a class="gn0405" href="/NEW/html/04_06ourCom.html">우리회사는요</a></li>
+                  <li><a class="gn0406" href="/NEW/html/04_07careerProcess.html">채용 프로세스</a></li>
+                  <li><a class="gn0407" href="/NEW/board/bbs/board.php?bo_table=career">채용 공고</a></li>
+                </ul>
+              </li>
+              <li class="gnb05">
+                <a class="gnb05_a" href="#">CONTACT US</a>
+                <ul>
+                  <li class="mmEng nb"><a class="gn0501" href="/NEW/html/05_01support.html">Support</a></li>
+                  <li><a class="gn0502" href="/NEW/html/05_02location.html">찾아오시는 길</a></li>
+                </ul>
+              </li>
+              <li class="gnb06">
+                <a class="gnb06_a" href="#">ECS소식</a>
+                <ul>
+                  <li class="nb"><a class="gn0601" href="/NEW/html/06_01ir.html">재무/공시·공고정보</a></li>
+                  <li><a class="gn0602" href="/NEW/pdf/ECSTelecom_Introduction_FY25_f.pdf" target="_blank">회사소개서</a></li>
+                  <li class="mmEng"><a class="gn0603" href="/NEW/board/bbs/board.php?bo_table=notice">ECS News</a></li>
+                  <li><a class="gn0604" href="https://blog.naver.com/ecstelecom">ECS 블로그</a></li>
+                </ul>
+              </li>
+            </ul><!-- pcGNB_BOX -->
+          </div>
+        </div>
+		<h1></h1>
+
+
+        <div class="nav_bg"></div>
+      </div>
+    </div>
+    <h1></h1>
+    <!--     <style>
+    .right_top {
+      overflow: hidden;
+      position: absolute;
+      right: 30px;
+      top: 15px;
+      display: flex;
+    }
+  
+    .right_top .language {
+      position: relative;
+      right: auto;
+      top: 8px;
+    }
+  
+    .right_top .sns {
+      padding-right: 10px;
+    }
+  
+    .right_top .sns li {
+      float: left;
+      margin-right: 7px;
+    }
+  
+    .right_top .sns li img {
+      width: 25px;
+    }
+  
+    @media (max-width: 1196px) {
+      .right_top .sns {
+        display: none;
+      }
+    }
+  </style> -->
+
+    <div class="subpage_img">
+        <p>Benefits & Wellness Program</p>        
+        <div><img src="../images/kor/top_e_04_new.jpg" alt=""></div>
+    </div>
+    <div class="subpage_cont">
+        <div class="locs">
+            <a href="#"><img src="../images/kor/icon_house.png"></a>
+            Recruitment <img src="../images/kor/icon_next.png">
+            Welfare Program
+        </div>
+        <div class="welfare_box">
+            <p class="serv_title"><img src="../images/kor/serv_title09.png" alt="복리후생제도">
+                <i>복리후생제도</i>
+            </p>
+        <p class="serv_title_bar"><img src="../images/kor/serv_bar.png" alt=""></p>    
+        <div class="wel">
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok1.png" alt="건강검진"></li>
+                <li class="welTxt">직원들의 보건생활 향상을 목적으로 년1회 전문건강검진센터에서 검진을 받을 수 있도록 지원</li>
+            </ul>
+			 <ul>
+                <li class="welImg"><img src="../images/kor/bok1_1.png" alt="독감예방접종 지원"></li>
+                <li class="welTxt">직원들의 보건생활 향상을 목적으로 년1회 독감예방접종 지원</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok2.png" alt="단체보험"></li>
+                <li class="welTxt welTTT">직원과 그 가족을 대상으로 질병 치료 시 의료보험으로 보장되지 않는 금액까지 전액 보장받을 수<!--<br class="welNon">-->
+                                    있도록 회사에서 단체보험을 가입 및 지원</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok3.png" alt="콘도지원"></li>
+                <li class="welTxt">다수의 콘도 회원권을 직원용으로 보유, 직원들이 여가 활동 시 사용할 수 있도록 지원</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok4.png" alt="동호회"></li>
+                <li class="welTxt">직원들의 단합과 취미생활 활성화를 위하여 동호회 활동을 장려, 운영비 지원</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok5.png" alt="경조사비"></li>
+                <li class="welTxt">결혼, 수연, 조의 및 기타 직원 경조사에 대하여 경조비 지원</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok6.png" alt="우수사원포상제도"></li>
+                <li class="welTxt">매달/매년 우수사원 및 팀을 선발하여 포상</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok7.png" alt="대출제도"></li>
+                <li class="welTxt">1년 이상 근속한 직원에게 결혼, 전세자금을 무이자로 대출</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok8.png" alt="주차비"></li>
+                <li class="welTxt">개인차량을 이용하여 출퇴근하는 직원들에게 주차비 전액지원</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok9.png" alt="헬스지원"></li>
+                <li class="welTxt">직원 체력증진을 위하여 회사에서 헬스클럽 회원권을 구매하여 직원들이 이용할 수 있도록 지원</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok10.png" alt="상조서비스지원"></li>
+                <li class="welTxt">회사에서 상조서비스를 가입하여 임직원 부모 유고 시 장례비 전액지원</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok11.png" alt="사내도서관"></li>
+                <li class="welTxt">사내도서관을 도입하여 직원들이 여러 종류의 도서를 이용할 수 있도록 지원</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok12.png" alt="사우회"></li>
+                <li class="welTxt welTTT">직원들의 상호부조와 복지 향상을 위하여 각종 경조사 및 자녀입학, 장기근속휴가, 와병,<br class="welNon">생일, 명절 시 사우회비 혹은 선물 지원</li>
+            </ul>
+			<ul>
+                <li class="welImg"><img src="../images/kor/bok13.png" alt="임신출산육아기지원"></li>
+                <li class="welTxt welTTT">출산전후휴가, 육아휴직(남녀), 육아기 근로시간 단축 등을 통해 직원들의  일과 가정이<br class="welNon">조화롭게 균형을 유지할 수 있도록 지원</li>
+            </ul>
+			
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok14a.png" alt="청년 내일채움공제 운영"></li>
+                <li class="welTxt welTTT">중소기업 최초 입사자를 위한 목돈마련 기회 제공<br>청년,기업,정부가 공동으로 공제금을 적립하고, 만기시 적립금 전액을 청년이 수령하는 제도</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok15a.png" alt="청년재직자 내일채움공제 운영"></li>
+                <li class="welTxt welTTT" style="height: 71px">기존 재직자를 위한 목돈마련 기회 제공<br>청년재직자,기업,정부가 공동으로 공제금을 적립하고, 만기시 적립금 전액을 청년재직자가 수령하는 제도</li>
+            </ul>
+            <!--<ul>
+                <li class="welImg"><img src="../images/kor/bok16.png" alt="심리상담 프로그램 운영"></li>
+                <li class="welTxt welTTT" >직원들의 심리적 안정과 직무 스트레스 감소에 도움을 주고자 전문 심리상담센터에 위탁하여 프로그램 운영</li>
+            </ul>-->
+			<ul>
+                <li class="welImg"><img src="../images/kor/bok16.png" alt="고충상담실 운영"></li>
+
+                <li class="welTxt welTTT" >직원들이 업무 내/외적으로 겪고 있는 고충에 대해 보다 편하게 이야기하고 도움을 요청할 수 있도록 고충상담실 운영</li>
+            </ul>
+            <ul>
+                <li class="welImg"><img src="../images/kor/bok17.png" alt="사내 스낵바 운영"></li>
+                <li class="welTxt welTTT" >지하 라운지에서 자유롭게 먹을 수 있는 음료와 간식 제공</li>
+            </ul>
+			<ul>
+                <li class="welImg"><img src="../images/kor/bok18.png" alt="자녀 학자금 지원"></li>
+                <li class="welTxt welTTT" >직원 자녀의 교육비 부담을 줄이기 위해 고3, 재수생, 대학생 자녀의 학자금 일부를 지원합니다.</li>
+            </ul>
+        </div><!-- wel -->
+
+
+    
+        </div><!-- welfare_box -->
+
+    <div class="subpage_copyright_gap">
+    </div>
+
+    
+ <style>
+ .copyright {position:relative;}
+/*.copyright .btn {position:absolute; right:40px; top:30px;}*/
+.copyright .btn a {margin-top:15px; display:inline-block; font-size:13px; color:#a9a9a9; padding:5px 15px; border:1px solid rgba(255,255,255,.3);}
+
+.quick_contact {font-family: 'NotoSansCJKkr-Regular',notokr-regular;position:fixed; bottom:0; right:20px;width:280px;}
+.quick_contact .quick_btn{background:#102381;color:#fff;border-radius:10px 10px 0 0;text-align:center; padding:15px 0; font-size:20px;cursor:pointer;width:100%;letter-spacing:2px;font-weight:100;}
+.quick_contact .cnt {background:rgba(0,0,0,0.8);display:none;padding:5% 5%;}
+.quick_contact .cnt .input{width:98%;margin:2% 0;height:30px; border:1px solid #aaa;padding-left:2%;background:transparent;color:#aaa;font-size:14px;}
+.quick_contact .cnt .input::placeholder{color:#aaa;}
+.quick_contact .cnt .content::placeholder{color:#aaa;}
+.quick_contact .cnt .content{width:97%;margin:2% 0;border:1px solid #aaa;padding-left:2%;padding-top:2%;background:transparent;color:#aaa;font-size:14px;}
+.quick_contact .cnt #btn_submit{width:99%;margin:2% 0;height:45px; border:0;padding-left:2%;background:#102381;color:#fff;font-size:14px;font-family: 'NotoSansCJKkr-Regular',notokr-regular;letter-spacing:2px;cursor:pointer;}
+.quick_contact .cnt .txt{color:#fff;font-size:14px;}
+.quick_contact .cnt a{color:#fff;text-decoration:underline;margin-left:4px;font-size:14px;}
+ </style>
+    <div class="copyright">
+        서울특별시 서초구 반포대로 28길8(서초동 1543-1)일홍빌딩<br class="mobile_sh"> T. 02-3415-8300 F.02-3415-8338<br>
+<i>il-Hong Building 8, Banpo-daero 28-gil, Seocho-gu, Seoul, Korea</i>
+<p><!-- <img src="/NEW/images/kor/copyright.png" alt=""> -->copyrightⓒECS Telecom</p>
+		<div class="btn"><a href="javascript:GoPage('copy1')">개인정보처리방침</a></div>
+    </div>
+</div>
+</div>
+
+<div class="quick_contact">
+<div class="quick_btn">간편문의</div>
+  <form name=frm method=post action="/NEW/board/bbs/write_update.php" onsubmit="return checkFrm(this);">
+		<input type=hidden name=w        value="">
+		<input type=hidden name=bo_table value="rksvusansdml">
+		<input type=hidden name=wr_id    value="">
+		<input type=hidden name=sca      value="">
+		<input type=hidden name=sfl      value="">
+		<input type=hidden name=stx      value="">
+		<input type=hidden name=spt      value="">
+		<input type=hidden name=sst      value="">
+		<input type=hidden name=sod      value="">
+		<input type=hidden name=s    value="s">
+		<input type=hidden value='secret' name='secret'>
+		<input type=hidden name=wr_1    value="main">
+		
+	<ul class="cnt">
+		<li><input class="input name" placeholder="이름 *" name="wr_name" required itemname="이름"></li>
+		<li><input class="input com" placeholder="회사명 *" name="wr_subject" required itemname="회사명"></li>
+		<li><input class="input mail" placeholder="메일주소 *" name="wr_email" id="wr_email" required class="email" email itemname="메일주소"></li>
+		<li><input class="input com" placeholder="연락처" name="wr_2" itemname="연락처"></li>
+		<li><textarea  rows="5" class="content" placeholder="문의내용 *" name="wr_content" required itemname="문의내용"></textarea></li>
+		<li><input type="checkbox" class="chk" name=agree><span class="txt"> 개인정보 취급방침동의</span> <a href="javascript:GoPage('copy1')">전문보기</a></li>
+		<li><input type="submit" id="btn_submit" value="문의하기"></li>
+	</ul>
+</form>
+<iframe width=0 height=0 name='hiddenframe2' style='display:none;'></iframe>
+ 
+</div>
+<script>
+    $("document").ready(function(){            
+        $(".quick_contact .quick_btn").click(function(){
+            $(".quick_contact .cnt").slideToggle()
+        }) 
+    }) 
+</script>
+
+<script type="text/javascript">
+
+function checkFrm(obj) {
+
+		var email = document.getElementById("wr_email").value;
+		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+		if(exptext.test(email)==false){
+			alert("이 메일형식이 올바르지 않습니다.");
+			document.frm.wr_email.focus();
+			return false;
+		}
+
+
+	 if(obj.agree.checked == false) {
+	  alert('개인정보 취급방침 동의에 체크해주세요.');
+	  obj.agree.focus();
+	  return false;
+	 }
+	 document.frm.target ="hiddenframe2";
+
+}
+</script>
+	
+
+<div class="mobile_menu"> 
+    <div class="m_close">            
+        <p><a href="#"><img src="/NEW/images/common/mobile_x_btn.jpg" alt="닫기버튼"></a></p>
+    </div>
+    <div class="mm_language">
+        <a href="#">LANGUAGE - KOR</a>
+    </div>
+    <div class="nn_language">
+        <a href="/NEW/html/en_index.html">ENGLISH</a>
+    <!--     <a href="#">CHINESE</a> -->
+    </div>
+    <div class="mm_login">
+        <a href="/NEW/html/05_02location.html">LOCATION</a>
+ <!--        <a id="mo_Rev" href="#">RESERVATION</a> -->
+    </div>
+
+    <div class="menu1 mm">
+        <a href="#">COMPANY</a>
+    </div>
+    <div class="menu1_x nn">
+        <a href="/NEW/html/01_01mission.html" style="padding-top:2px;">- Mission & Values</a>
+        <a href="/NEW/html/01_02history.html">- History</a>
+        <a href="/NEW/html/01_03award.html">- Awards & Recognition</a> 
+    </div> 
+    <div class="menu2 mm">
+        <a href="#">SERVICES & SOLUTIONS</a>
+    </div>
+	<div class="menu2_x nn">
+        <a href="/NEW/html/02_02contact.html" style="padding-top:2px;">- Customer Success(CC)</a>
+        <a href="/NEW/html/02_01unified.html">- Digital Workplace(UC)</a>
+        <a href="/NEW/html/02_05maintain.html">- ETaaS</a>
+        <!-- <a href="/NEW/html/02_03si.html">- 시스템 통합</a>
+        <a href="/NEW/html/02_04tel.html">- 비디오</a>
+        <a href="/NEW/html/02_05maintain.html">- 고객맞춤형 서비스</a> -->
+    </div>
+    <!-- 2020-08-07 주석 <div class="menu2_x nn">
+        <a href="/NEW/html/02_02contact.html" style="padding-top:2px;">- 컨택센터</a>
+        <a href="/NEW/html/02_01unified.html">- 통합커뮤니케이션</a>
+        <a href="/NEW/html/02_02_ni.html">- 네트워크 통합</a>
+        <a href="/NEW/html/02_03si.html">- 시스템 통합</a>
+        <a href="/NEW/html/02_04tel.html">- 비디오</a>
+        <a href="/NEW/html/02_05maintain.html">- 고객맞춤형 서비스</a>
+    </div> -->
+    <div class="menu3 mm">
+        <a href="#">PARTNERS & CUSTOMERS</a>
+    </div>
+     <div class="menu3_x nn">
+        <a href="/NEW/html/03_01partners.html" style="padding-top:2px;">- Partners</a>
+        <a href="/NEW/html/03_02customers.html">- Customers</a>        
+    </div>
+    <div class="menu4 mm">
+        <a href="#">RECRUITMENT</a>
+    </div>
+   <div class="menu4_x nn">
+        <a href="/NEW/html/04_01injae.html" style="padding-top:2px;">- 인재상</a>
+         <a href="/NEW/html/04_02zikmu.html">- 직무소개</a>
+         <a href="/NEW/html/04_03welfare.html">- 복리후생제도</a>
+         <a href="/NEW/html/04_04edu.html">- 교육체계</a>
+<!--          <a href="/NEW/html/04_05ecsNow.html">- ECS Now</a> -->
+         <a href="/NEW/html/04_06ourCom.html">- 우리회사는요</a>
+         <a href="/NEW/html/04_07careerProcess.html">- 채용 프로세스</a>
+         <a href="/NEW/board/bbs/board.php?bo_table=career">- 채용 공고</a>
+    </div>
+    <div class="menu5 mm">
+        <a href="#">CONTACT US</a>
+    </div>
+    <div class="menu5_x nn">
+        <a href="/NEW/html/05_01support.html" style="padding-top:2px;">- Support</a>
+        <a href="/NEW/html/05_02location.html">- 찾아오시는 길</a>
+    </div>
+    <div class="menu6 mm">
+        <a href="#">ECS NOW</a>
+    </div>
+    <div class="menu6_x nn" style="border-bottom: 1px solid #2e2e2e;">
+        <a href="/NEW/html/06_01ir.html" style="padding-top:2px;">- 재무정보</a>
+        <a href="/NEW/pdf/ECSTelecom_Introduction_FY25.pdf" target="_blank">- 회사소개서</a>
+        <a href="/NEW/board/bbs/board.php?bo_table=notice">- ECS News</a>
+        <a href="/NEW/board/bbs/board.php?bo_table=Open_Archive">- ECS Open Archive</a>
+    </div>
+
+	<ul class="sns">
+		<li><a href="https://www.facebook.com/ecstel" target="_blank"><img src="/NEW/images/common/sns_fb.png" alt=""></a></li>
+		<li><a href="https://www.instagram.com/ecstelecom/" target="_blank"><img src="/NEW/images/common/sns_insta.png" alt=""></a></li>
+		<li><a href="http://ecstel.business.site/" target="_blank"><img src="/NEW/images/common/sns_gg.png" alt=""></a></li>
+		<li><a href="https://www.linkedin.com/company/482822/" target="_blank"><img src="/NEW/images/common/sns_in.png" alt=""></a></li>
+		<li><a href="https://www.youtube.com/channel/UCICHlAfNdW_Gl1WzduPTeQw/featured" target="_blank"><img src="/NEW/images/common/sns_yt.png" alt=""></a></li>
+	</ul>
+<style>
+.mobile_menu .sns{padding: 20px;position: relative;z-index: 50;}
+.mobile_menu .sns li{float: left;margin-right: 6px;}
+.mobile_menu .sns li img{width: 30px;}
+</style>
+    <div class="mm_back">       
+    </div>
+
+</div>
+<div class="black_cover"></div>
+
+
+
+
+
+
+<script type="text/javascript" src="../js/rolling.js"></script>
+<script type="text/javascript" src="../js/ecs.js"></script>
+<script type="text/javascript" src="../js/ecs_sub.js"></script>
+<script type="text/javascript" src="../js/mobile.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "ecstel-clone",
+  "version": "1.0.0",
+  "description": "ECSTEL 웹사이트 클론 프로젝트",
+  "type": "module",
+  "scripts": {
+    "crawl": "node fix_paths.js",
+    "find-images": "node find_missing_images.js",
+    "extract-css-images": "node extract_css_images.js",
+    "create-missing": "node create_missing.js",
+    "crawl-final": "node crawl_final.js",
+    "crawl-working": "node crawl_working.js",
+    "crawl-simple": "node crawl_simple.js",
+    "crawl-main": "node crawl_single.js",
+    "crawl-images": "node crawl_images.js",
+    "download": "./download_all.sh",
+    "download-missing": "./download_missing.sh",
+    "serve": "python3 -m http.server 8000",
+    "dev": "node serve.js"
+  },
+  "keywords": ["ecstel", "clone", "crawler"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "fs-extra": "^11.2.0"
+  }
+}
+

@@ -1,0 +1,749 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECS | ECS텔레콤</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css">
+<link rel="stylesheet" type="text/css" href="../css/ecs.css">
+<link rel="stylesheet" type="text/css" href="../css/ecs_mobile.css">
+<link rel="stylesheet" type="text/css" href="../css/font.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+<link rel="icon" type="image/x-icon" href="/NEW/images/favicon.ico">
+<script type="text/javascript" src="../js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
+<script type="text/javascript" src="../js/jquery.bxslider.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content=">">
+<meta name="keywords" content="" />
+<meta name="robots" content="follow, all" />
+<meta name="author" content="">
+<!--[if lte IE 8]>
+<style type="text/css">
+#bg ul li{background:none !important}
+#bg ul li img{position:static; left:0; top:0;}
+</style>
+<script type="text/javascript" src="js/minhyuk.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+
+<div class="mobile_home_btn">
+  <a href="#"><img src="/NEW/images/common/mobile_btn.png" alt="모바일에서 메뉴열기"></a>
+</div><!-- Only Mobile -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111281995-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-111281995-1');
+</script>
+<!-- //Global site tag (gtag.js) - Google Analytics -->
+<!-- <script src="http://ecstel.co.kr/NEW/js/jquery.droppy.js"></script> -->
+
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+<script>
+$(function(){
+  let hoverTimer;
+
+  $('.pcGNB').on('mouseenter', function(){
+    clearTimeout(hoverTimer);
+    $('.nav_bg').stop(true, true).slideDown(250);
+    $('.gnb > li > ul').stop(true, true).slideDown(250);
+  });
+
+  $('.pcGNB').on('mouseleave', function(){
+    hoverTimer = setTimeout(() => {
+      $('.nav_bg').stop(true, true).slideUp(250);
+      $('.gnb > li > ul').stop(true, true).slideUp(250);
+      $('.gnb > li').removeClass('active');
+    }, 200);
+  });
+
+  $('.gnb > li').hover(
+    function(){
+      $('.gnb > li').removeClass('active');
+      $(this).addClass('active');
+    },
+    function(){
+      $(this).removeClass('active');
+    }
+  );
+});
+
+</script>
+
+<div class="wrap Mwrap">
+  <div class="bodys">
+
+    <div id="nav">
+      <div class="inner">
+
+        <div class="right_top">
+          <ul class="sns">
+            <li><a href="https://www.facebook.com/ecstel" target="_blank"><img src="/NEW/images/common/sns_fb.png"
+                  alt=""></a></li>
+            <li><a href="https://www.instagram.com/ecstelecom/" target="_blank"><img
+                  src="/NEW/images/common/sns_insta.png" alt=""></a></li>
+            <li><a href="http://ecstel.business.site/" target="_blank"><img src="/NEW/images/common/sns_gg.png"
+                  alt=""></a>
+            </li>
+            <li><a href="https://www.linkedin.com/company/482822/" target="_blank"><img
+                  src="/NEW/images/common/sns_in.png" alt=""></a></li>
+            <li><a href="https://www.youtube.com/channel/UCICHlAfNdW_Gl1WzduPTeQw/featured" target="_blank"><img
+                  src="/NEW/images/common/sns_yt.png" alt=""></a></li>
+          </ul>
+          <ul class="language">
+            <li><a href="/NEW/html/index.html"><img src="/NEW/images/common/kor_on.png" alt=""></a></li>
+            <li><a href="/NEW/html/en_index.html"><img src="/NEW/images/common/eng_off.png" alt=""></a></li>
+          </ul>
+        </div>
+
+
+        <div class="nav_body">
+          <div class="Gnb_btn"><a href="/NEW/html/index.html"><img src="/NEW/images/gnbK/newlogo.png" alt="뉴로고"></a>
+          </div>
+
+          <div class="pcGNB">
+            <ul class="gnb">
+              <li class="gnb01">
+                <a class="gnb01_a" href="#">COMPANY</a>
+                <ul>
+                  <li class="nb"><a class="gn0101" href="/NEW/html/01_01mission.html">Mission & Values</a></li>
+                  <li><a class="gn0102" href="/NEW/html/01_02history.html">History</a></li>
+                  <li><a class="gn0103" href="/NEW/html/01_03award.html">Awards & Recognition</a></li>
+                </ul>
+              </li>
+              <li class="gnb02">
+                <a class="gnb02_a" href="#">서비스&솔루션</a>
+                <ul>
+                  <li class="nb"><a class="gn0201" href="/NEW/html/02_02contact.html">Customer Success(CC)</a></li>
+                  <li><a class="gn0202" href="/NEW/html/02_01unified.html">Digital Workplace(UC)</a></li>
+                  <li><a class="gn0203" href="/NEW/html/02_05maintain.html">ETaaS</a></li>
+                  <!-- <li><a class="gn0204" href="/NEW/html/02_03si.html">시스템 통합</a></li>
+				  <li><a class="gn0205" href="/NEW/html/02_04tel.html">비디오</a></li>
+				  <li><a class="gn0206" href="/NEW/html/02_05maintain.html">고객맞춤형 서비스</a></li> -->
+                </ul>
+                <!-- 2020-08-07 주석 <ul>
+				  <li class="nb"><a class="gn0201" href="/NEW/html/02_02contact.html">컨택센터</a></li>
+				  <li><a class="gn0202" href="/NEW/html/02_01unified.html">통합커뮤니케이션</a></li>
+				  <li><a class="gn0203" href="/NEW/html/02_02_ni.html">네트워크 통합</a></li>
+				  <li><a class="gn0204" href="/NEW/html/02_03si.html">시스템 통합</a></li>
+				  <li><a class="gn0205" href="/NEW/html/02_04tel.html">비디오</a></li>
+				<li><a class="gn0206" href="/NEW/html/02_05maintain.html">고객맞춤형 서비스</a></li>
+			  </ul> -->
+              </li>
+              <li class="gnb03">
+                <a class="gnb03_a" href="#">파트너&고객사</a>
+                <ul>
+                  <li class="nb"><a class="gn0301" href="/NEW/html/03_01partners.html">Partners</a></li>
+                  <li><a class="gn0302" href="/NEW/html/03_02customers.html">Customers</a></li>
+
+                </ul>
+              </li>
+              <li class="gnb04">
+                <a class="gnb04_a" href="#">ECS ONE채용</a>
+                <ul>
+                  <li class="nb"><a class="gn0401" href="/NEW/html/04_01injae.html">인재상</a></li>
+                  <li><a class="gn0402" href="/NEW/html/04_02zikmu.html">직무소개</a></li>
+                  <li><a class="gn0403" href="/NEW/html/04_03welfare.html">복지 및 웰니스 프로그램</a></li>
+                  <li><a class="gn0404" href="/NEW/html/04_04edu.html">교육체계</a></li>
+                  <li><a class="gn0405" href="/NEW/html/04_06ourCom.html">우리회사는요</a></li>
+                  <li><a class="gn0406" href="/NEW/html/04_07careerProcess.html">채용 프로세스</a></li>
+                  <li><a class="gn0407" href="/NEW/board/bbs/board.php?bo_table=career">채용 공고</a></li>
+                </ul>
+              </li>
+              <li class="gnb05">
+                <a class="gnb05_a" href="#">CONTACT US</a>
+                <ul>
+                  <li class="mmEng nb"><a class="gn0501" href="/NEW/html/05_01support.html">Support</a></li>
+                  <li><a class="gn0502" href="/NEW/html/05_02location.html">찾아오시는 길</a></li>
+                </ul>
+              </li>
+              <li class="gnb06">
+                <a class="gnb06_a" href="#">ECS소식</a>
+                <ul>
+                  <li class="nb"><a class="gn0601" href="/NEW/html/06_01ir.html">재무/공시·공고정보</a></li>
+                  <li><a class="gn0602" href="/NEW/pdf/ECSTelecom_Introduction_FY25_f.pdf" target="_blank">회사소개서</a></li>
+                  <li class="mmEng"><a class="gn0603" href="/NEW/board/bbs/board.php?bo_table=notice">ECS News</a></li>
+                  <li><a class="gn0604" href="https://blog.naver.com/ecstelecom">ECS 블로그</a></li>
+                </ul>
+              </li>
+            </ul><!-- pcGNB_BOX -->
+          </div>
+        </div>
+		<h1></h1>
+
+
+        <div class="nav_bg"></div>
+      </div>
+    </div>
+    <h1></h1>
+    <!--     <style>
+    .right_top {
+      overflow: hidden;
+      position: absolute;
+      right: 30px;
+      top: 15px;
+      display: flex;
+    }
+  
+    .right_top .language {
+      position: relative;
+      right: auto;
+      top: 8px;
+    }
+  
+    .right_top .sns {
+      padding-right: 10px;
+    }
+  
+    .right_top .sns li {
+      float: left;
+      margin-right: 7px;
+    }
+  
+    .right_top .sns li img {
+      width: 25px;
+    }
+  
+    @media (max-width: 1196px) {
+      .right_top .sns {
+        display: none;
+      }
+    }
+  </style> -->
+
+    <div class="subpage_img">
+        <p>IR Info</p>        
+        <div><img src="../images/kor/top_e_06_new.jpg" alt=""></div>
+    </div>
+    <div class="subpage_cont">
+        <div class="locs">
+            <a href="#"><img src="../images/kor/icon_house.png"></a>
+            ECS NOW <img src="../images/kor/icon_next.png">
+            IR 자료
+        </div>
+        <div class="support_box">
+            <p class="serv_title"><img src="../images/kor/serv_title16.png" alt="IR자료">
+                <i>IR자료</i>
+            </p>
+            <p class="serv_title_bar"><img src="../images/kor/serv_bar.png" alt=""></p>    
+            <div class="ir_title_1">요약 재무상태표
+                <i>(단위:백만원)</i>
+            </div>
+            <table class="irTable_1">
+                <tr>
+                    <th class="itTT_first">구분</th>
+					<th>27기<i>(2025.03)</i></th>
+					<th>26기<i>(2024.03)</i></th>
+					<th>25기<i>(2023.03)</i></th>
+					<th>24기<i>(2022.03)</i></th>
+                </tr>
+                <tr class="C_purple">
+                    <td class="itTT_first">자산총계</td>
+					<td>74,026</td>
+					<td>86,219</td>
+					<td>84,595</td>
+					<td>74,536</td>                    
+                </tr>
+                <tr>
+                    <td class="itTT_first">유동자산</td>
+					<td>64,014</td>
+					<td>79,184</td>
+					<td>78,524</td>
+					<td>69,833</td>                  
+                </tr>
+                <tr>
+                    <td class="itTT_first">비유동자산</td>
+					<td>10,012</td>
+					<td>7,035</td>
+					<td>6,071</td>
+					<td>4,703</td>                
+                </tr>
+                <tr class="C_purple">
+                    <td class="itTT_first">부채총계</td>
+					<td>22,709</td>
+					<td>31,366</td>
+					<td>28,805</td>
+					<td>22,372</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first">유동부채</td>
+					<td>21,734</td>
+					<td>30,085</td>
+					<td>27,342</td>
+					<td>21,229</td>                    
+                </tr>
+                <tr>
+                    <td class="itTT_first">비유동부채</td>
+					<td>975</td>
+					<td>1,281</td>
+					<td>1,463</td>
+					<td>1,143</td>                 
+                </tr>
+                <tr class="C_purple">
+                    <td class="itTT_first">자본총계</td>
+					<td>51,317</td>
+					<td>54,854</td>
+					<td>55,791</td>
+					<td>52,164</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first">자본금</td>
+					<td>6,824</td>
+					<td>6,824</td>
+					<td>6,824</td>
+					<td>6,824</td>                  
+                </tr>
+                <tr>
+                    <td class="itTT_first">자본잉여금</td>
+					<td>3,062</td>
+					<td>3,062</td>
+					<td>3,062</td>
+					<td>3,062</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first">이익잉여금</td>
+					<td>45,882</td>
+					<td>46,912</td>
+					<td>45,906</td>
+					<td>42,278</td>
+                </tr>
+            </table>
+
+
+            <div class="ir_title_2">요약 손익계산서
+                <i>(단위:백만원)</i>
+            </div>
+            <table class="irTable_2">
+                <tr>
+                    <th class="itTT_first2">구분</th>
+					<th>27기<i>(2024.04 - 2025.03)</i></th>
+					<th>26기<i>(2024.03)</i></th>
+					<th>25기<i>(2023.03)</i></th>
+					<th>24기<i>(2022.03)</i></th>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">매출액</td>
+					<td>73,347</td>
+					<td>91,806</td>
+					<td>100,615</td>
+					<td>80,205</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">매출 총이익</td>
+					<td>12,266</td>
+					<td>16,142</td>
+					<td>18,324</td>
+					<td>17,467</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">영업이익</td>
+					<td>(2,692)</td>
+					<td>1,475</td>
+					<td>4,234</td>
+					<td>4,996</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">기타수익</td>
+					<td>40</td>
+					<td>56</td>
+					<td>104</td>
+					<td>127</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">기타비용</td>
+					<td>84</td>
+					<td>120</td>
+					<td>304</td>
+					<td>120</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">금융수익</td>
+					<td>1,513</td>
+					<td>1,450</td>
+					<td>1021</td>
+					<td>455</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">금융비용</td>
+					<td>218</td>
+					<td>92</td>
+					<td>238</td>
+					<td>57</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">법인세비용차감전순이익</td>
+					<td>(1,441)</td>
+					<td>2,768</td>
+					<td>4,817</td>
+					<td>5,401</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">법인세비용</td>
+					<td>(2,068)</td>
+					<td>141</td>
+					<td>175</td>
+					<td>153</td>
+                </tr>
+                <tr>
+                    <td class="itTT_first2">당기순이익</td>
+					<td>627</td>
+					<td>2,627</td>
+					<td>4,642</td>
+					<td>5,248</td>
+                </tr>
+            </table>
+
+
+        </div><!-- support_box -->
+<style>
+.ir_title_2{width: 978px; margin:0 auto;font-family:'NotoSansCJKkr-Regular',notokr-regular;font-size:19px; color:black; margin-bottom:11px; margin-top:75px; position:relative;}
+.ir_title_2 i{font-style:normal; position: absolute; right:0; font-size:15px;}
+.irTable_3 {width:978px; margin:0 auto; border-top:2px solid #595959;font-family:'NotoSansCJKkr-Regular',notokr-regular; font-size:14px; color:black;border-bottom:1px solid #d2d2d2; }
+.irTable_3 tr:hover td {background:#efeff4;}
+.irTable_3 tr a {color:#000; display:block; width:100%; height:100%; line-height:1.2; padding:12px 0;}
+.irTable_3 tr th{height:37px; background-color:#f9f9fb; font-size:16px; background:url('../images/kor/ir_bar.png') no-repeat 0 0;}
+.irTable_3 tr td{text-align:center; border-top:1px solid #d2d2d2; border-left:1px solid #d2d2d2;}
+.irTable_3 tr td:first-child {border-left:0;}
+.irTable_3 tr td.tit {width:60%;}
+.irTable_3 tr td.left {text-align:left; padding-left:15px;}
+.irTable_3 tr.C_purple2{background-color:#efeff4; }
+.irTable_3 .itTT_first2{background:none;}
+@media (max-width: 940px){
+.irTable_3 {width:100%; font-size:12px;}
+.irTable_3 tr th {font-size:14px;}
+.irTable_3 tr td.left {padding-left:5px;}
+}
+@media (max-width: 797px){
+.m_none {display:none;}
+}
+</style>
+		<div class="ir_title_2">공시·공고정보</div>
+			<table class="irTable_3">
+				<tr>
+					<th class="itTT_first2 m_none">번호</th>
+					<th>보고서명</th>
+					<th>제출인</th>
+					<th>접수일자</th>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20251114000637" target="_blank">10</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20251114000637" target="_blank">반기보고서</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20251114000637" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20251114000637" target="_blank">2025.11.14</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250814000563" target="_blank">9</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250814000563" target="_blank">분기보고서</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250814000563" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250814000563" target="_blank">2025.08.14</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250620900190" target="_blank">8</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250620900190" target="_blank">정기주주총회 결과</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250620900190" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250620900190" target="_blank">2025.06.20</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250612000209" target="_blank">7</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250612000209" target="_blank">사업보고서 (2025.03)</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250612000209" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250612000209" target="_blank">2025.06.12</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250611900418" target="_blank">6</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250611900418" target="_blank">감사보고서 제출</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250611900418" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250611900418" target="_blank">2025.06.11</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250605000045" target="_blank">5</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250605000045" target="_blank">주주총회소집공고</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250605000045" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250605000045" target="_blank">2025.06.05</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900136" target="_blank">4</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900136" target="_blank">매출액또는손익구조30%(대규모법인은15%)이상변동</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900136" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900136" target="_blank">2025.05.22</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900134" target="_blank">3</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900134" target="_blank">현금ㆍ현물배당 결정</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900134" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900134" target="_blank">2025.05.22</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900133" target="_blank">2</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900133" target="_blank">주주총회소집 결의</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900133" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250522900133" target="_blank">2025.05.22</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250502000101" target="_blank">1</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250502000101" target="_blank">신탁계약해지 결과보고서</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250502000101" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250502000101" target="_blank">2025.05.02</a></td>
+				</tr>
+				
+				<!-- <tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250429000340" target="_blank">5</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250429000340" target="_blank">주요사항보고서(자기주식취득신탁계약해지결정)</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250429000340" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250429000340" target="_blank">2025.04.29</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314900084" target="_blank">4</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314900084" target="_blank">주주명부폐쇄기간 또는 기준일 설정</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314900084" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314900084" target="_blank">2025.03.14</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250214000425" target="_blank">3</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250214000425" target="_blank">분기보고서 (2024.12)</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250214000425" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250214000425" target="_blank">2025.02.14</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250124000199" target="_blank">2</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250124000199" target="_blank">신탁계약에의한취득상황보고서</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250124000199" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250124000199" target="_blank">2025.01.24</a></td>
+				</tr>
+				<tr>
+					<td class="itTT_first2 m_none"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20241114000376" target="_blank">1</a></td>
+					<td class="left tit"><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20241114000376" target="_blank">	반기보고서 (2024.09)</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20241114000376" target="_blank">이씨에스</a></td>
+					<td><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20241114000376" target="_blank">2024.11.14</a></td>
+				</tr> -->
+
+				<tr>
+					<td class="itTT_first2 m_none"><a href="../pdf/ECS_protect.pdf" target="_blank">※</a></td>
+					<td class="left tit"><a href="../pdf/ECS_protect.pdf" target="_blank">전자증권 전환 대상 주권 권리자 보호를 위한 통지</a></td>
+					<td><a href="../pdf/ECS_protect.pdf" target="_blank">이씨에스</a></td>
+					<td><a href="../pdf/ECS_protect.pdf" target="_blank">2019.08.08</a></td>
+				</tr>
+				
+				<tr>
+					<td class="itTT_first2 m_none"><a href="../pdf/ECS_regulation.pdf" target="_blank">※</a></td>
+					<td class="left tit"><a href="../pdf/ECS_regulation.pdf" target="_blank">내부정보 관리규정</a></td>
+					<td><a href="../pdf/ECS_regulation.pdf" target="_blank">이씨에스</a></td>
+					<td><a href="../pdf/ECS_regulation.pdf" target="_blank">2017.05.23</a></td>
+				</tr>
+			</table>
+
+        </div><!-- support_box -->
+             
+              
+    </div>
+
+
+
+
+    <div class="subpage_copyright_gap">
+    </div>
+
+
+ <style>
+ .copyright {position:relative;}
+/*.copyright .btn {position:absolute; right:40px; top:30px;}*/
+.copyright .btn a {margin-top:15px; display:inline-block; font-size:13px; color:#a9a9a9; padding:5px 15px; border:1px solid rgba(255,255,255,.3);}
+
+.quick_contact {font-family: 'NotoSansCJKkr-Regular',notokr-regular;position:fixed; bottom:0; right:20px;width:280px;}
+.quick_contact .quick_btn{background:#102381;color:#fff;border-radius:10px 10px 0 0;text-align:center; padding:15px 0; font-size:20px;cursor:pointer;width:100%;letter-spacing:2px;font-weight:100;}
+.quick_contact .cnt {background:rgba(0,0,0,0.8);display:none;padding:5% 5%;}
+.quick_contact .cnt .input{width:98%;margin:2% 0;height:30px; border:1px solid #aaa;padding-left:2%;background:transparent;color:#aaa;font-size:14px;}
+.quick_contact .cnt .input::placeholder{color:#aaa;}
+.quick_contact .cnt .content::placeholder{color:#aaa;}
+.quick_contact .cnt .content{width:97%;margin:2% 0;border:1px solid #aaa;padding-left:2%;padding-top:2%;background:transparent;color:#aaa;font-size:14px;}
+.quick_contact .cnt #btn_submit{width:99%;margin:2% 0;height:45px; border:0;padding-left:2%;background:#102381;color:#fff;font-size:14px;font-family: 'NotoSansCJKkr-Regular',notokr-regular;letter-spacing:2px;cursor:pointer;}
+.quick_contact .cnt .txt{color:#fff;font-size:14px;}
+.quick_contact .cnt a{color:#fff;text-decoration:underline;margin-left:4px;font-size:14px;}
+ </style>
+    <div class="copyright">
+        서울특별시 서초구 반포대로 28길8(서초동 1543-1)일홍빌딩<br class="mobile_sh"> T. 02-3415-8300 F.02-3415-8338<br>
+<i>il-Hong Building 8, Banpo-daero 28-gil, Seocho-gu, Seoul, Korea</i>
+<p><!-- <img src="/NEW/images/kor/copyright.png" alt=""> -->copyrightⓒECS Telecom</p>
+		<div class="btn"><a href="javascript:GoPage('copy1')">개인정보처리방침</a></div>
+    </div>
+</div>
+</div>
+
+<div class="quick_contact">
+<div class="quick_btn">간편문의</div>
+  <form name=frm method=post action="/NEW/board/bbs/write_update.php" onsubmit="return checkFrm(this);">
+		<input type=hidden name=w        value="">
+		<input type=hidden name=bo_table value="rksvusansdml">
+		<input type=hidden name=wr_id    value="">
+		<input type=hidden name=sca      value="">
+		<input type=hidden name=sfl      value="">
+		<input type=hidden name=stx      value="">
+		<input type=hidden name=spt      value="">
+		<input type=hidden name=sst      value="">
+		<input type=hidden name=sod      value="">
+		<input type=hidden name=s    value="s">
+		<input type=hidden value='secret' name='secret'>
+		<input type=hidden name=wr_1    value="main">
+		
+	<ul class="cnt">
+		<li><input class="input name" placeholder="이름 *" name="wr_name" required itemname="이름"></li>
+		<li><input class="input com" placeholder="회사명 *" name="wr_subject" required itemname="회사명"></li>
+		<li><input class="input mail" placeholder="메일주소 *" name="wr_email" id="wr_email" required class="email" email itemname="메일주소"></li>
+		<li><input class="input com" placeholder="연락처" name="wr_2" itemname="연락처"></li>
+		<li><textarea  rows="5" class="content" placeholder="문의내용 *" name="wr_content" required itemname="문의내용"></textarea></li>
+		<li><input type="checkbox" class="chk" name=agree><span class="txt"> 개인정보 취급방침동의</span> <a href="javascript:GoPage('copy1')">전문보기</a></li>
+		<li><input type="submit" id="btn_submit" value="문의하기"></li>
+	</ul>
+</form>
+<iframe width=0 height=0 name='hiddenframe2' style='display:none;'></iframe>
+ 
+</div>
+<script>
+    $("document").ready(function(){            
+        $(".quick_contact .quick_btn").click(function(){
+            $(".quick_contact .cnt").slideToggle()
+        }) 
+    }) 
+</script>
+
+<script type="text/javascript">
+
+function checkFrm(obj) {
+
+		var email = document.getElementById("wr_email").value;
+		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+		if(exptext.test(email)==false){
+			alert("이 메일형식이 올바르지 않습니다.");
+			document.frm.wr_email.focus();
+			return false;
+		}
+
+
+	 if(obj.agree.checked == false) {
+	  alert('개인정보 취급방침 동의에 체크해주세요.');
+	  obj.agree.focus();
+	  return false;
+	 }
+	 document.frm.target ="hiddenframe2";
+
+}
+</script>
+	
+
+<div class="mobile_menu"> 
+    <div class="m_close">            
+        <p><a href="#"><img src="/NEW/images/common/mobile_x_btn.jpg" alt="닫기버튼"></a></p>
+    </div>
+    <div class="mm_language">
+        <a href="#">LANGUAGE - KOR</a>
+    </div>
+    <div class="nn_language">
+        <a href="/NEW/html/en_index.html">ENGLISH</a>
+    <!--     <a href="#">CHINESE</a> -->
+    </div>
+    <div class="mm_login">
+        <a href="/NEW/html/05_02location.html">LOCATION</a>
+ <!--        <a id="mo_Rev" href="#">RESERVATION</a> -->
+    </div>
+
+    <div class="menu1 mm">
+        <a href="#">COMPANY</a>
+    </div>
+    <div class="menu1_x nn">
+        <a href="/NEW/html/01_01mission.html" style="padding-top:2px;">- Mission & Values</a>
+        <a href="/NEW/html/01_02history.html">- History</a>
+        <a href="/NEW/html/01_03award.html">- Awards & Recognition</a> 
+    </div> 
+    <div class="menu2 mm">
+        <a href="#">SERVICES & SOLUTIONS</a>
+    </div>
+	<div class="menu2_x nn">
+        <a href="/NEW/html/02_02contact.html" style="padding-top:2px;">- Customer Success(CC)</a>
+        <a href="/NEW/html/02_01unified.html">- Digital Workplace(UC)</a>
+        <a href="/NEW/html/02_05maintain.html">- ETaaS</a>
+        <!-- <a href="/NEW/html/02_03si.html">- 시스템 통합</a>
+        <a href="/NEW/html/02_04tel.html">- 비디오</a>
+        <a href="/NEW/html/02_05maintain.html">- 고객맞춤형 서비스</a> -->
+    </div>
+    <!-- 2020-08-07 주석 <div class="menu2_x nn">
+        <a href="/NEW/html/02_02contact.html" style="padding-top:2px;">- 컨택센터</a>
+        <a href="/NEW/html/02_01unified.html">- 통합커뮤니케이션</a>
+        <a href="/NEW/html/02_02_ni.html">- 네트워크 통합</a>
+        <a href="/NEW/html/02_03si.html">- 시스템 통합</a>
+        <a href="/NEW/html/02_04tel.html">- 비디오</a>
+        <a href="/NEW/html/02_05maintain.html">- 고객맞춤형 서비스</a>
+    </div> -->
+    <div class="menu3 mm">
+        <a href="#">PARTNERS & CUSTOMERS</a>
+    </div>
+     <div class="menu3_x nn">
+        <a href="/NEW/html/03_01partners.html" style="padding-top:2px;">- Partners</a>
+        <a href="/NEW/html/03_02customers.html">- Customers</a>        
+    </div>
+    <div class="menu4 mm">
+        <a href="#">RECRUITMENT</a>
+    </div>
+   <div class="menu4_x nn">
+        <a href="/NEW/html/04_01injae.html" style="padding-top:2px;">- 인재상</a>
+         <a href="/NEW/html/04_02zikmu.html">- 직무소개</a>
+         <a href="/NEW/html/04_03welfare.html">- 복리후생제도</a>
+         <a href="/NEW/html/04_04edu.html">- 교육체계</a>
+<!--          <a href="/NEW/html/04_05ecsNow.html">- ECS Now</a> -->
+         <a href="/NEW/html/04_06ourCom.html">- 우리회사는요</a>
+         <a href="/NEW/html/04_07careerProcess.html">- 채용 프로세스</a>
+         <a href="/NEW/board/bbs/board.php?bo_table=career">- 채용 공고</a>
+    </div>
+    <div class="menu5 mm">
+        <a href="#">CONTACT US</a>
+    </div>
+    <div class="menu5_x nn">
+        <a href="/NEW/html/05_01support.html" style="padding-top:2px;">- Support</a>
+        <a href="/NEW/html/05_02location.html">- 찾아오시는 길</a>
+    </div>
+    <div class="menu6 mm">
+        <a href="#">ECS NOW</a>
+    </div>
+    <div class="menu6_x nn" style="border-bottom: 1px solid #2e2e2e;">
+        <a href="/NEW/html/06_01ir.html" style="padding-top:2px;">- 재무정보</a>
+        <a href="/NEW/pdf/ECSTelecom_Introduction_FY25.pdf" target="_blank">- 회사소개서</a>
+        <a href="/NEW/board/bbs/board.php?bo_table=notice">- ECS News</a>
+        <a href="/NEW/board/bbs/board.php?bo_table=Open_Archive">- ECS Open Archive</a>
+    </div>
+
+	<ul class="sns">
+		<li><a href="https://www.facebook.com/ecstel" target="_blank"><img src="/NEW/images/common/sns_fb.png" alt=""></a></li>
+		<li><a href="https://www.instagram.com/ecstelecom/" target="_blank"><img src="/NEW/images/common/sns_insta.png" alt=""></a></li>
+		<li><a href="http://ecstel.business.site/" target="_blank"><img src="/NEW/images/common/sns_gg.png" alt=""></a></li>
+		<li><a href="https://www.linkedin.com/company/482822/" target="_blank"><img src="/NEW/images/common/sns_in.png" alt=""></a></li>
+		<li><a href="https://www.youtube.com/channel/UCICHlAfNdW_Gl1WzduPTeQw/featured" target="_blank"><img src="/NEW/images/common/sns_yt.png" alt=""></a></li>
+	</ul>
+<style>
+.mobile_menu .sns{padding: 20px;position: relative;z-index: 50;}
+.mobile_menu .sns li{float: left;margin-right: 6px;}
+.mobile_menu .sns li img{width: 30px;}
+</style>
+    <div class="mm_back">       
+    </div>
+
+</div>
+<div class="black_cover"></div>
+
+
+
+
+
+<script type="text/javascript" src="../js/rolling.js"></script>
+<script type="text/javascript" src="../js/ecs.js"></script>
+<script type="text/javascript" src="../js/ecs_sub.js"></script>
+<script type="text/javascript" src="../js/mobile.js"></script>
+
+
+</body>
+</html>

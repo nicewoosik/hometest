@@ -1,0 +1,580 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>ECS | ECS텔레콤</title>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/ecs.css"> -->
+    <link rel="stylesheet" type="text/css" href="../css/ecs.css">
+    <link rel="stylesheet" type="text/css" href="../css/ecs_mobile.css">
+    <link rel="stylesheet" type="text/css" href="../css/font.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="icon" type="image/x-icon" href="/NEW/images/favicon.ico">
+    <script type="text/javascript" src="../js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="../js/jquery.bxslider.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content=">">
+    <meta name="keywords" content="" />
+    <meta name="robots" content="follow, all" />
+
+    <!--[if lte IE 8]>
+<style type="text/css">
+#bg ul li{background:none !important}
+#bg ul li img{position:static; left:0; top:0;}
+</style>
+<script type="text/javascript" src="js/minhyuk.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+    <div class="mobile_home_btn">
+  <a href="#"><img src="/NEW/images/common/mobile_btn.png" alt="모바일에서 메뉴열기"></a>
+</div><!-- Only Mobile -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111281995-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-111281995-1');
+</script>
+<!-- //Global site tag (gtag.js) - Google Analytics -->
+<!-- <script src="http://ecstel.co.kr/NEW/js/jquery.droppy.js"></script> -->
+
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+<script>
+$(function(){
+  let hoverTimer;
+
+  $('.pcGNB').on('mouseenter', function(){
+    clearTimeout(hoverTimer);
+    $('.nav_bg').stop(true, true).slideDown(250);
+    $('.gnb > li > ul').stop(true, true).slideDown(250);
+  });
+
+  $('.pcGNB').on('mouseleave', function(){
+    hoverTimer = setTimeout(() => {
+      $('.nav_bg').stop(true, true).slideUp(250);
+      $('.gnb > li > ul').stop(true, true).slideUp(250);
+      $('.gnb > li').removeClass('active');
+    }, 200);
+  });
+
+  $('.gnb > li').hover(
+    function(){
+      $('.gnb > li').removeClass('active');
+      $(this).addClass('active');
+    },
+    function(){
+      $(this).removeClass('active');
+    }
+  );
+});
+
+</script>
+
+<div class="wrap Mwrap">
+  <div class="bodys">
+
+    <div id="nav">
+      <div class="inner">
+
+        <div class="right_top">
+          <ul class="sns">
+            <li><a href="https://www.facebook.com/ecstel" target="_blank"><img src="/NEW/images/common/sns_fb.png"
+                  alt=""></a></li>
+            <li><a href="https://www.instagram.com/ecstelecom/" target="_blank"><img
+                  src="/NEW/images/common/sns_insta.png" alt=""></a></li>
+            <li><a href="http://ecstel.business.site/" target="_blank"><img src="/NEW/images/common/sns_gg.png"
+                  alt=""></a>
+            </li>
+            <li><a href="https://www.linkedin.com/company/482822/" target="_blank"><img
+                  src="/NEW/images/common/sns_in.png" alt=""></a></li>
+            <li><a href="https://www.youtube.com/channel/UCICHlAfNdW_Gl1WzduPTeQw/featured" target="_blank"><img
+                  src="/NEW/images/common/sns_yt.png" alt=""></a></li>
+          </ul>
+          <ul class="language">
+            <li><a href="/NEW/html/index.html"><img src="/NEW/images/common/kor_on.png" alt=""></a></li>
+            <li><a href="/NEW/html/en_index.html"><img src="/NEW/images/common/eng_off.png" alt=""></a></li>
+          </ul>
+        </div>
+
+
+        <div class="nav_body">
+          <div class="Gnb_btn"><a href="/NEW/html/index.html"><img src="/NEW/images/gnbK/newlogo.png" alt="뉴로고"></a>
+          </div>
+
+          <div class="pcGNB">
+            <ul class="gnb">
+              <li class="gnb01">
+                <a class="gnb01_a" href="#">COMPANY</a>
+                <ul>
+                  <li class="nb"><a class="gn0101" href="/NEW/html/01_01mission.html">Mission & Values</a></li>
+                  <li><a class="gn0102" href="/NEW/html/01_02history.html">History</a></li>
+                  <li><a class="gn0103" href="/NEW/html/01_03award.html">Awards & Recognition</a></li>
+                </ul>
+              </li>
+              <li class="gnb02">
+                <a class="gnb02_a" href="#">서비스&솔루션</a>
+                <ul>
+                  <li class="nb"><a class="gn0201" href="/NEW/html/02_02contact.html">Customer Success(CC)</a></li>
+                  <li><a class="gn0202" href="/NEW/html/02_01unified.html">Digital Workplace(UC)</a></li>
+                  <li><a class="gn0203" href="/NEW/html/02_05maintain.html">ETaaS</a></li>
+                  <!-- <li><a class="gn0204" href="/NEW/html/02_03si.html">시스템 통합</a></li>
+				  <li><a class="gn0205" href="/NEW/html/02_04tel.html">비디오</a></li>
+				  <li><a class="gn0206" href="/NEW/html/02_05maintain.html">고객맞춤형 서비스</a></li> -->
+                </ul>
+                <!-- 2020-08-07 주석 <ul>
+				  <li class="nb"><a class="gn0201" href="/NEW/html/02_02contact.html">컨택센터</a></li>
+				  <li><a class="gn0202" href="/NEW/html/02_01unified.html">통합커뮤니케이션</a></li>
+				  <li><a class="gn0203" href="/NEW/html/02_02_ni.html">네트워크 통합</a></li>
+				  <li><a class="gn0204" href="/NEW/html/02_03si.html">시스템 통합</a></li>
+				  <li><a class="gn0205" href="/NEW/html/02_04tel.html">비디오</a></li>
+				<li><a class="gn0206" href="/NEW/html/02_05maintain.html">고객맞춤형 서비스</a></li>
+			  </ul> -->
+              </li>
+              <li class="gnb03">
+                <a class="gnb03_a" href="#">파트너&고객사</a>
+                <ul>
+                  <li class="nb"><a class="gn0301" href="/NEW/html/03_01partners.html">Partners</a></li>
+                  <li><a class="gn0302" href="/NEW/html/03_02customers.html">Customers</a></li>
+
+                </ul>
+              </li>
+              <li class="gnb04">
+                <a class="gnb04_a" href="#">ECS ONE채용</a>
+                <ul>
+                  <li class="nb"><a class="gn0401" href="/NEW/html/04_01injae.html">인재상</a></li>
+                  <li><a class="gn0402" href="/NEW/html/04_02zikmu.html">직무소개</a></li>
+                  <li><a class="gn0403" href="/NEW/html/04_03welfare.html">복지 및 웰니스 프로그램</a></li>
+                  <li><a class="gn0404" href="/NEW/html/04_04edu.html">교육체계</a></li>
+                  <li><a class="gn0405" href="/NEW/html/04_06ourCom.html">우리회사는요</a></li>
+                  <li><a class="gn0406" href="/NEW/html/04_07careerProcess.html">채용 프로세스</a></li>
+                  <li><a class="gn0407" href="/NEW/board/bbs/board.php?bo_table=career">채용 공고</a></li>
+                </ul>
+              </li>
+              <li class="gnb05">
+                <a class="gnb05_a" href="#">CONTACT US</a>
+                <ul>
+                  <li class="mmEng nb"><a class="gn0501" href="/NEW/html/05_01support.html">Support</a></li>
+                  <li><a class="gn0502" href="/NEW/html/05_02location.html">찾아오시는 길</a></li>
+                </ul>
+              </li>
+              <li class="gnb06">
+                <a class="gnb06_a" href="#">ECS소식</a>
+                <ul>
+                  <li class="nb"><a class="gn0601" href="/NEW/html/06_01ir.html">재무/공시·공고정보</a></li>
+                  <li><a class="gn0602" href="/NEW/pdf/ECSTelecom_Introduction_FY25_f.pdf" target="_blank">회사소개서</a></li>
+                  <li class="mmEng"><a class="gn0603" href="/NEW/board/bbs/board.php?bo_table=notice">ECS News</a></li>
+                  <li><a class="gn0604" href="https://blog.naver.com/ecstelecom">ECS 블로그</a></li>
+                </ul>
+              </li>
+            </ul><!-- pcGNB_BOX -->
+          </div>
+        </div>
+		<h1></h1>
+
+
+        <div class="nav_bg"></div>
+      </div>
+    </div>
+    <h1></h1>
+    <!--     <style>
+    .right_top {
+      overflow: hidden;
+      position: absolute;
+      right: 30px;
+      top: 15px;
+      display: flex;
+    }
+  
+    .right_top .language {
+      position: relative;
+      right: auto;
+      top: 8px;
+    }
+  
+    .right_top .sns {
+      padding-right: 10px;
+    }
+  
+    .right_top .sns li {
+      float: left;
+      margin-right: 7px;
+    }
+  
+    .right_top .sns li img {
+      width: 25px;
+    }
+  
+    @media (max-width: 1196px) {
+      .right_top .sns {
+        display: none;
+      }
+    }
+  </style> -->
+    <div class="subpage_img">
+        <p>Customer Success(CC)</p>
+        <div><img src="../images/kor/top_e_02_01_new.jpg" alt=""></div>
+    </div>
+    <div class="subpage_cont">
+        <div class="locs">
+            <a href="#"><img src="../images/kor/icon_house.png"></a>
+            Services & Solutions <img src="../images/kor/icon_next.png">
+            Contact Center
+        </div>
+        <div class="service_box">
+            <!--<p class="serv_title"><img src="../images/kor/serv_title02.png" alt="Contact Center  (컨텍센터)">
+				<i>Contact Center<br>(컨텍센터)</i>
+			</p>-->
+            <p class="serv_title">컨택센터의 현재를 연결하고, 미래를 설계하는 것. 그것이 ECS텔레콤의 고객 성공 사업입니다.</p> <br><br>
+            <div class="servUni_con1">
+                고객은 전화, 메신저, 홈페이지, 챗봇 등 다양한 채널로 기업에 접근하지만, 응대는 여전히 분절되고 기다림은 길어집니다.<br class="nonBr850">
+                ECS텔레콤은 이를 해결하기 위해 모든 접점을 하나의 플랫폼으로 통합하고,<br class="nonBr850">
+                AI로 상담 품질을 높이며 클라우드로 운영의 효율과 유연성을 강화합니다.<br class="nonBr850">
+                <br>
+                IP 기반 멀티채널 인프라, AI 상담 시스템, 빠르게 도입 가능한 클라우드(CCaaS)까지.<br class="nonBr850">
+                ECS는 기술과 사람, 운영과 전략이 조화를 이루는 End-to-End 고객 경험 혁신을 제공합니다.<br class="nonBr850">
+            </div>
+        </div>
+        <div class="service_box">
+			<div class="img_box">
+				<a href="#cc_1"><img src="../images/kor/cc_01.png" alt=""></a>
+				<a href="#cc_2"><img src="../images/kor/cc_02.png" alt=""></a>
+				<a href="#cc_3"><img src="../images/kor/cc_03.png" alt=""></a>
+			</div>
+        </div>
+    </div>
+    <div class="subpage_cont" id="cc_1">
+        <div class="service_box">
+            <!--<p class="serv_title"><img src="../images/kor/serv_title02.png" alt="Contact Center  (컨텍센터)">
+                <i>Contact Center<br>(컨텍센터)</i>
+            </p>-->
+            <p class="serv_title">Contact Center (컨텍센터)</p>
+            <p class="serv_title_bar"><img src="../images/kor/serv_bar.png" alt=""></p>
+            <div class="servUni_con1">
+				 <span>전화만으로 응대하던 고객센터의 시대는 끝났습니다.</span>
+                “안녕하십니까? 고객님”이라는 익숙한 목소리. <br class="nonBr850">
+                하지만 연결되기까지의 기다림은 여전히 길고, 바쁜 센터의 현실은 고객의 기대와 어긋납니다.<br class="nonBr850">
+                고객은 이제 전화뿐 아니라 이메일, 채팅, 홈페이지, 앱, SNS 등 다양한 채널을 통해 기업과 소통합니다.<br class="nonBr850">
+                ECS텔레콤의 스마트 컨택센터는 이러한 복잡한 접점을 하나의 일관된 경험으로 연결합니다.<br class="nonBr850">
+            </div>
+        </div>
+        <div class="servCon_con2 icon1">
+            ECS는 교환기, IVR, 네트워크 등 콜 인프라 구축 기술력을 바탕으로<br class="nonBr850">
+            ESP-r(통계), ESP-m(멀티채널), Digital ASOptio(셀프서비스) 등<br class="nonBr850">
+            모든 고객 접점을 통합 관리할 수 있는 플랫폼을 제공합니다.<br class="nonBr850"> <br>
+            또한, 글로벌 벤더(Avaya, Cisco, NICE)와의 협업을 통해<br class="nonBr850">
+            컨택센터의 안정성과 확장성까지 함께 보장합니다.<br class="nonBr850">
+        </div>
+    </div>
+
+
+    <div class="subpage_cont" id="cc_2">
+        <div class="service_box">
+            <p class="serv_title">AICC (인공지능 컨택센터)</p>
+            <p class="serv_title_bar"><img src="../images/kor/serv_bar.png" alt=""></p>
+            <div class="servUni_con1">
+				<span>고객을 이해하는 인공지능의 시작, ECS 스마트 AICC</span>
+                ECS텔레콤의 AICC는 채널 통합 허브와 AI 기반 디지털 서비스를 결합한 차세대 지능형 컨택센터 플랫폼입니다.<br class="nonBr850">
+                STT, TTS, NLU, TA 등 다양한 AI 기술을 접목하여 <br class="nonBr850">
+                상담 생산성 향상, 고객 만족도 증대, 운영 효율성 극대화를 실현합니다.
+            </div>
+        </div>
+
+        <div class="servCon_con2 icon2">
+            <b>챗봇 · 콜봇 | 자동 응대와 상담지원</b>
+            STT, TTS, NLU, TA 등 핵심 AI 기술을 바탕으로<br class="nonBr850">
+            콜봇과 챗봇을 통해 반복적인 문의를 자동 처리하며,<br class="nonBr850">
+            상담사에게는 실시간 응답 추천, 대화 힌트 제공 등으로 상담 효율을 높입니다.
+        </div>
+
+        <div class="servCon_con3">
+            <b>음성봇 품질 평가 | 정량화된 AI 품질관리 체계</b>
+            ECS는 자체 개발한 VUI 기반 음성봇 품질 평가 지표를 통해 <br class="nonBr850">
+            음성봇(콜봇)의 상담 품질을 상담사처럼 정량적으로 평가 및 관리할 수 있도록 합니다.<br class="nonBr850">
+            이는 QA/QC 기준에 준하는 정확하고 일관된 품질관리 체계를 제공합니다.
+        </div>
+
+        <div class="servCon_con3">
+            <b>EPA · Generative AI | 확장 가능한 AI 상담의 미래</b>
+            EPA(ECS Packaged AI)는 기본형 AI 콜봇 서비스를 저비용·빠른 구축 방식으로 제공합니다.<br class="nonBr850">
+            또한, 고객의 요구에 따라 생성형 AI 기술을 활용한 콜봇 고도화 개발도 가능하며,
+            <br class="nonBr850"> 이를 통해 시나리오 자동 생성, 응답 문장 생성, 상담 요약 등 <br class="nonBr850"> 지능화된 응대 기능을 확장할 수 있습니다.
+        </div>
+
+    </div>
+
+    <div class="subpage_cont" id="cc_3">
+        <div class="service_box">
+            <p class="serv_title">클라우드 컨택센터</p>
+            <p class="serv_title_bar"><img src="../images/kor/serv_bar.png" alt=""></p>
+            <div class="servUni_con1">
+				<span>빠르게 도입하고, 유연하게 확장하는 컨택센터 환경</span>
+                급변하는 고객 환경과 IT 인프라 변화 속에서 클라우드 컨택센터(CCaaS)는 도입 속도, 유연성, 비용 효율성을 동시에 해결하는 최적의 선택입니다.<br class="nonBr850">
+                ECS의 CCaaS는 IPCC부터 녹취, AI, 옴니채널, WFM, 자동화까지 핵심 기능을 클라우드에서 통합 제공합니다. <br class="nonBr850">
+                또한 자체 개발한 ECP(ECS Cloud Portal)을 통해 운영관리, 셀프서비스, AICC 연동까지 지원하며 복잡한 운영을 간소화합니다.<br class="nonBr850">
+                산업군에 따라 Dedicated Cloud도 제공하며, 보안이 중요한 금융·공공·의료 분야에도 최적화된 환경과 기능을 지원합니다.
+            </div>
+        </div>
+
+        <div class="servCon_con2 icon3">
+            <b>CCaaS & Dedicated Cloud | 유연한 도입과 보안 특화까지 가능한 클라우드 컨택센터</b><br>
+            ECS의 클라우드 컨택센터(CCaaS)는 콜 인프라, AI, 옴니채널 등 <br class="nonBr850">
+            핵심 기능을 클라우드로 통합해 빠른 도입과 유연한 확장, 운영 효율성을 동시에 제공합니다. <br class="nonBr850">
+            퍼블릭 클라우드 기반으로 초기 투자 부담과 복잡성을 줄이고, <br class="nonBr850">
+            사용량 기반 과금으로 비용 효율까지 확보할 수 있습니다.<br class="nonBr850">
+            또한, 금융·공공 등 보안이 중요한 조직을 위한 전용 클라우드(CC for Dedicated Cloud)도 제공하여 <br class="nonBr850">
+            데이터 분리, 인프라 독립, 맞춤 기능 설계를 통해 산업별 요구에 맞는 안정적인 환경을 구현합니다.
+            <br><br>
+
+            <b>ECP | 통합 운영관리와 AI 연동까지 가능한 클라우드 컨택센터 포털</b><br>
+            ECP(ECS Cloud Portal)은 ECS가 자체 개발한 CCaaS 통합 운영 포털로,<br class="nonBr850">
+            클라우드 컨택센터의 복잡한 시스템을 하나의 플랫폼에서 손쉽게 관리할 수 있도록 지원합니다. <br class="nonBr850">
+            운영관리 기능뿐 아니라 디지털 셀프서비스, AICC 연동, 리소스 확장 관리까지 통합 제공되며, <br class="nonBr850">
+            멀티테넌트 아키텍처 기반으로 고객 맞춤형 구성이 가능해 클라우드 전환의 진입 장벽을 낮춰줍니다.
+            <br><br>
+
+			<b>ECP-AI | Agentic AI 기술 기반의 SaaS형 AICC 솔루션</b><br>
+            ECP-AI는 기존처럼 시나리오에 따라 단순 문의에 답변하는 수준을 넘어,<br class="nonBr850">
+            AI가 고객의 목표를 이해하고 스스로 계획(Plan)하고 실행(Act)하는 Agentic AI 기술을 기반으로 한 SaaS형 컨택센터 솔루션입니다. <br class="nonBr850">
+            콜봇·챗봇·상담어드바이저는 단순 지식 검색이 아니라 <br class="nonBr850">
+            업무 프로세스를 실제로 완료하는 행동형 AI로 진정한 ROI 향상과 고객경험 개선을 제공합니다. <br class="nonBr850">
+			또한 웹 기반의 직관적인 사용 환경을 통해 현업 관리자의 직원경험(EX) 또한 크게 높일 수 있습니다. <br class="nonBr850">
+			여기에 TA, QA, KMS 등 컨택센터 운영 필수 기능도 구독만으로 즉시 활용할 수 있어, <br class="nonBr850">
+			최신 Agentic AI 컨택센터를 합리적인 가격으로 구축할 수 있습니다. <br class="nonBr850">
+            <br><br>
+        </div>
+
+        <div class="servCon_con3">
+
+        </div>
+
+
+    </div>
+
+
+    <div class="subpage_copyright_gap">
+    </div>
+
+
+     <style>
+ .copyright {position:relative;}
+/*.copyright .btn {position:absolute; right:40px; top:30px;}*/
+.copyright .btn a {margin-top:15px; display:inline-block; font-size:13px; color:#a9a9a9; padding:5px 15px; border:1px solid rgba(255,255,255,.3);}
+
+.quick_contact {font-family: 'NotoSansCJKkr-Regular',notokr-regular;position:fixed; bottom:0; right:20px;width:280px;}
+.quick_contact .quick_btn{background:#102381;color:#fff;border-radius:10px 10px 0 0;text-align:center; padding:15px 0; font-size:20px;cursor:pointer;width:100%;letter-spacing:2px;font-weight:100;}
+.quick_contact .cnt {background:rgba(0,0,0,0.8);display:none;padding:5% 5%;}
+.quick_contact .cnt .input{width:98%;margin:2% 0;height:30px; border:1px solid #aaa;padding-left:2%;background:transparent;color:#aaa;font-size:14px;}
+.quick_contact .cnt .input::placeholder{color:#aaa;}
+.quick_contact .cnt .content::placeholder{color:#aaa;}
+.quick_contact .cnt .content{width:97%;margin:2% 0;border:1px solid #aaa;padding-left:2%;padding-top:2%;background:transparent;color:#aaa;font-size:14px;}
+.quick_contact .cnt #btn_submit{width:99%;margin:2% 0;height:45px; border:0;padding-left:2%;background:#102381;color:#fff;font-size:14px;font-family: 'NotoSansCJKkr-Regular',notokr-regular;letter-spacing:2px;cursor:pointer;}
+.quick_contact .cnt .txt{color:#fff;font-size:14px;}
+.quick_contact .cnt a{color:#fff;text-decoration:underline;margin-left:4px;font-size:14px;}
+ </style>
+    <div class="copyright">
+        서울특별시 서초구 반포대로 28길8(서초동 1543-1)일홍빌딩<br class="mobile_sh"> T. 02-3415-8300 F.02-3415-8338<br>
+<i>il-Hong Building 8, Banpo-daero 28-gil, Seocho-gu, Seoul, Korea</i>
+<p><!-- <img src="/NEW/images/kor/copyright.png" alt=""> -->copyrightⓒECS Telecom</p>
+		<div class="btn"><a href="javascript:GoPage('copy1')">개인정보처리방침</a></div>
+    </div>
+</div>
+</div>
+
+<div class="quick_contact">
+<div class="quick_btn">간편문의</div>
+  <form name=frm method=post action="/NEW/board/bbs/write_update.php" onsubmit="return checkFrm(this);">
+		<input type=hidden name=w        value="">
+		<input type=hidden name=bo_table value="rksvusansdml">
+		<input type=hidden name=wr_id    value="">
+		<input type=hidden name=sca      value="">
+		<input type=hidden name=sfl      value="">
+		<input type=hidden name=stx      value="">
+		<input type=hidden name=spt      value="">
+		<input type=hidden name=sst      value="">
+		<input type=hidden name=sod      value="">
+		<input type=hidden name=s    value="s">
+		<input type=hidden value='secret' name='secret'>
+		<input type=hidden name=wr_1    value="main">
+		
+	<ul class="cnt">
+		<li><input class="input name" placeholder="이름 *" name="wr_name" required itemname="이름"></li>
+		<li><input class="input com" placeholder="회사명 *" name="wr_subject" required itemname="회사명"></li>
+		<li><input class="input mail" placeholder="메일주소 *" name="wr_email" id="wr_email" required class="email" email itemname="메일주소"></li>
+		<li><input class="input com" placeholder="연락처" name="wr_2" itemname="연락처"></li>
+		<li><textarea  rows="5" class="content" placeholder="문의내용 *" name="wr_content" required itemname="문의내용"></textarea></li>
+		<li><input type="checkbox" class="chk" name=agree><span class="txt"> 개인정보 취급방침동의</span> <a href="javascript:GoPage('copy1')">전문보기</a></li>
+		<li><input type="submit" id="btn_submit" value="문의하기"></li>
+	</ul>
+</form>
+<iframe width=0 height=0 name='hiddenframe2' style='display:none;'></iframe>
+ 
+</div>
+<script>
+    $("document").ready(function(){            
+        $(".quick_contact .quick_btn").click(function(){
+            $(".quick_contact .cnt").slideToggle()
+        }) 
+    }) 
+</script>
+
+<script type="text/javascript">
+
+function checkFrm(obj) {
+
+		var email = document.getElementById("wr_email").value;
+		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+		if(exptext.test(email)==false){
+			alert("이 메일형식이 올바르지 않습니다.");
+			document.frm.wr_email.focus();
+			return false;
+		}
+
+
+	 if(obj.agree.checked == false) {
+	  alert('개인정보 취급방침 동의에 체크해주세요.');
+	  obj.agree.focus();
+	  return false;
+	 }
+	 document.frm.target ="hiddenframe2";
+
+}
+</script>
+	
+
+<div class="mobile_menu"> 
+    <div class="m_close">            
+        <p><a href="#"><img src="/NEW/images/common/mobile_x_btn.jpg" alt="닫기버튼"></a></p>
+    </div>
+    <div class="mm_language">
+        <a href="#">LANGUAGE - KOR</a>
+    </div>
+    <div class="nn_language">
+        <a href="/NEW/html/en_index.html">ENGLISH</a>
+    <!--     <a href="#">CHINESE</a> -->
+    </div>
+    <div class="mm_login">
+        <a href="/NEW/html/05_02location.html">LOCATION</a>
+ <!--        <a id="mo_Rev" href="#">RESERVATION</a> -->
+    </div>
+
+    <div class="menu1 mm">
+        <a href="#">COMPANY</a>
+    </div>
+    <div class="menu1_x nn">
+        <a href="/NEW/html/01_01mission.html" style="padding-top:2px;">- Mission & Values</a>
+        <a href="/NEW/html/01_02history.html">- History</a>
+        <a href="/NEW/html/01_03award.html">- Awards & Recognition</a> 
+    </div> 
+    <div class="menu2 mm">
+        <a href="#">SERVICES & SOLUTIONS</a>
+    </div>
+	<div class="menu2_x nn">
+        <a href="/NEW/html/02_02contact.html" style="padding-top:2px;">- Customer Success(CC)</a>
+        <a href="/NEW/html/02_01unified.html">- Digital Workplace(UC)</a>
+        <a href="/NEW/html/02_05maintain.html">- ETaaS</a>
+        <!-- <a href="/NEW/html/02_03si.html">- 시스템 통합</a>
+        <a href="/NEW/html/02_04tel.html">- 비디오</a>
+        <a href="/NEW/html/02_05maintain.html">- 고객맞춤형 서비스</a> -->
+    </div>
+    <!-- 2020-08-07 주석 <div class="menu2_x nn">
+        <a href="/NEW/html/02_02contact.html" style="padding-top:2px;">- 컨택센터</a>
+        <a href="/NEW/html/02_01unified.html">- 통합커뮤니케이션</a>
+        <a href="/NEW/html/02_02_ni.html">- 네트워크 통합</a>
+        <a href="/NEW/html/02_03si.html">- 시스템 통합</a>
+        <a href="/NEW/html/02_04tel.html">- 비디오</a>
+        <a href="/NEW/html/02_05maintain.html">- 고객맞춤형 서비스</a>
+    </div> -->
+    <div class="menu3 mm">
+        <a href="#">PARTNERS & CUSTOMERS</a>
+    </div>
+     <div class="menu3_x nn">
+        <a href="/NEW/html/03_01partners.html" style="padding-top:2px;">- Partners</a>
+        <a href="/NEW/html/03_02customers.html">- Customers</a>        
+    </div>
+    <div class="menu4 mm">
+        <a href="#">RECRUITMENT</a>
+    </div>
+   <div class="menu4_x nn">
+        <a href="/NEW/html/04_01injae.html" style="padding-top:2px;">- 인재상</a>
+         <a href="/NEW/html/04_02zikmu.html">- 직무소개</a>
+         <a href="/NEW/html/04_03welfare.html">- 복리후생제도</a>
+         <a href="/NEW/html/04_04edu.html">- 교육체계</a>
+<!--          <a href="/NEW/html/04_05ecsNow.html">- ECS Now</a> -->
+         <a href="/NEW/html/04_06ourCom.html">- 우리회사는요</a>
+         <a href="/NEW/html/04_07careerProcess.html">- 채용 프로세스</a>
+         <a href="/NEW/board/bbs/board.php?bo_table=career">- 채용 공고</a>
+    </div>
+    <div class="menu5 mm">
+        <a href="#">CONTACT US</a>
+    </div>
+    <div class="menu5_x nn">
+        <a href="/NEW/html/05_01support.html" style="padding-top:2px;">- Support</a>
+        <a href="/NEW/html/05_02location.html">- 찾아오시는 길</a>
+    </div>
+    <div class="menu6 mm">
+        <a href="#">ECS NOW</a>
+    </div>
+    <div class="menu6_x nn" style="border-bottom: 1px solid #2e2e2e;">
+        <a href="/NEW/html/06_01ir.html" style="padding-top:2px;">- 재무정보</a>
+        <a href="/NEW/pdf/ECSTelecom_Introduction_FY25.pdf" target="_blank">- 회사소개서</a>
+        <a href="/NEW/board/bbs/board.php?bo_table=notice">- ECS News</a>
+        <a href="/NEW/board/bbs/board.php?bo_table=Open_Archive">- ECS Open Archive</a>
+    </div>
+
+	<ul class="sns">
+		<li><a href="https://www.facebook.com/ecstel" target="_blank"><img src="/NEW/images/common/sns_fb.png" alt=""></a></li>
+		<li><a href="https://www.instagram.com/ecstelecom/" target="_blank"><img src="/NEW/images/common/sns_insta.png" alt=""></a></li>
+		<li><a href="http://ecstel.business.site/" target="_blank"><img src="/NEW/images/common/sns_gg.png" alt=""></a></li>
+		<li><a href="https://www.linkedin.com/company/482822/" target="_blank"><img src="/NEW/images/common/sns_in.png" alt=""></a></li>
+		<li><a href="https://www.youtube.com/channel/UCICHlAfNdW_Gl1WzduPTeQw/featured" target="_blank"><img src="/NEW/images/common/sns_yt.png" alt=""></a></li>
+	</ul>
+<style>
+.mobile_menu .sns{padding: 20px;position: relative;z-index: 50;}
+.mobile_menu .sns li{float: left;margin-right: 6px;}
+.mobile_menu .sns li img{width: 30px;}
+</style>
+    <div class="mm_back">       
+    </div>
+
+</div>
+<div class="black_cover"></div>
+
+
+
+
+    </div>
+
+	<script>
+	  $(function(){
+		var headerOffset = 80; // 고정 헤더 높이에 맞게 조절
+		$('a[href^="#"]').on('click', function(e){
+		  var id = this.getAttribute('href');
+		  if (id.length > 1) {
+			var $t = $(id);
+			if ($t.length){
+			  e.preventDefault();
+			  $('html, body').animate({ scrollTop: $t.offset().top - headerOffset }, 500);
+			}
+		  }
+		});
+	  });
+	</script>
+
+    <script type="text/javascript" src="../js/rolling.js"></script>
+    <script type="text/javascript" src="../js/ecs.js"></script>
+    <script type="text/javascript" src="../js/ecs_sub.js"></script>
+    <script type="text/javascript" src="../js/mobile.js"></script>
+
+
+</body>
+
+</html>

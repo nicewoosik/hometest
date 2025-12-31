@@ -1,0 +1,802 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECS | ECS텔레콤</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css">
+<link rel="stylesheet" type="text/css" href="../css/ecs.css">
+<link rel="stylesheet" type="text/css" href="../css/ecs_mobile.css">
+<link rel="stylesheet" type="text/css" href="../css/font.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+<link rel="icon" type="image/x-icon" href="/NEW/images/favicon.ico">
+<script type="text/javascript" src="../js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
+<script type="text/javascript" src="../js/jquery.bxslider.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content=">">
+<meta name="keywords" content="" />
+
+<!--[if lte IE 8]>
+<style type="text/css">
+#bg ul li{background:none !important}
+#bg ul li img{position:static; left:0; top:0;}
+</style>
+<script type="text/javascript" src="js/minhyuk.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+
+<div class="mobile_home_btn">
+  <a href="#"><img src="/NEW/images/common/mobile_btn.png" alt="모바일에서 메뉴열기"></a>
+</div><!-- Only Mobile -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111281995-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-111281995-1');
+</script>
+<!-- //Global site tag (gtag.js) - Google Analytics -->
+<!-- <script src="http://ecstel.co.kr/NEW/js/jquery.droppy.js"></script> -->
+
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+<script>
+$(function(){
+  let hoverTimer;
+
+  $('.pcGNB').on('mouseenter', function(){
+    clearTimeout(hoverTimer);
+    $('.nav_bg').stop(true, true).slideDown(250);
+    $('.gnb > li > ul').stop(true, true).slideDown(250);
+  });
+
+  $('.pcGNB').on('mouseleave', function(){
+    hoverTimer = setTimeout(() => {
+      $('.nav_bg').stop(true, true).slideUp(250);
+      $('.gnb > li > ul').stop(true, true).slideUp(250);
+      $('.gnb > li').removeClass('active');
+    }, 200);
+  });
+
+  $('.gnb > li').hover(
+    function(){
+      $('.gnb > li').removeClass('active');
+      $(this).addClass('active');
+    },
+    function(){
+      $(this).removeClass('active');
+    }
+  );
+});
+
+</script>
+
+<div class="wrap Mwrap">
+  <div class="bodys">
+
+    <div id="nav">
+      <div class="inner">
+
+        <div class="right_top">
+          <ul class="sns">
+            <li><a href="https://www.facebook.com/ecstel" target="_blank"><img src="/NEW/images/common/sns_fb.png"
+                  alt=""></a></li>
+            <li><a href="https://www.instagram.com/ecstelecom/" target="_blank"><img
+                  src="/NEW/images/common/sns_insta.png" alt=""></a></li>
+            <li><a href="http://ecstel.business.site/" target="_blank"><img src="/NEW/images/common/sns_gg.png"
+                  alt=""></a>
+            </li>
+            <li><a href="https://www.linkedin.com/company/482822/" target="_blank"><img
+                  src="/NEW/images/common/sns_in.png" alt=""></a></li>
+            <li><a href="https://www.youtube.com/channel/UCICHlAfNdW_Gl1WzduPTeQw/featured" target="_blank"><img
+                  src="/NEW/images/common/sns_yt.png" alt=""></a></li>
+          </ul>
+          <ul class="language">
+            <li><a href="/NEW/html/index.html"><img src="/NEW/images/common/kor_on.png" alt=""></a></li>
+            <li><a href="/NEW/html/en_index.html"><img src="/NEW/images/common/eng_off.png" alt=""></a></li>
+          </ul>
+        </div>
+
+
+        <div class="nav_body">
+          <div class="Gnb_btn"><a href="/NEW/html/index.html"><img src="/NEW/images/gnbK/newlogo.png" alt="뉴로고"></a>
+          </div>
+
+          <div class="pcGNB">
+            <ul class="gnb">
+              <li class="gnb01">
+                <a class="gnb01_a" href="#">COMPANY</a>
+                <ul>
+                  <li class="nb"><a class="gn0101" href="/NEW/html/01_01mission.html">Mission & Values</a></li>
+                  <li><a class="gn0102" href="/NEW/html/01_02history.html">History</a></li>
+                  <li><a class="gn0103" href="/NEW/html/01_03award.html">Awards & Recognition</a></li>
+                </ul>
+              </li>
+              <li class="gnb02">
+                <a class="gnb02_a" href="#">서비스&솔루션</a>
+                <ul>
+                  <li class="nb"><a class="gn0201" href="/NEW/html/02_02contact.html">Customer Success(CC)</a></li>
+                  <li><a class="gn0202" href="/NEW/html/02_01unified.html">Digital Workplace(UC)</a></li>
+                  <li><a class="gn0203" href="/NEW/html/02_05maintain.html">ETaaS</a></li>
+                  <!-- <li><a class="gn0204" href="/NEW/html/02_03si.html">시스템 통합</a></li>
+				  <li><a class="gn0205" href="/NEW/html/02_04tel.html">비디오</a></li>
+				  <li><a class="gn0206" href="/NEW/html/02_05maintain.html">고객맞춤형 서비스</a></li> -->
+                </ul>
+                <!-- 2020-08-07 주석 <ul>
+				  <li class="nb"><a class="gn0201" href="/NEW/html/02_02contact.html">컨택센터</a></li>
+				  <li><a class="gn0202" href="/NEW/html/02_01unified.html">통합커뮤니케이션</a></li>
+				  <li><a class="gn0203" href="/NEW/html/02_02_ni.html">네트워크 통합</a></li>
+				  <li><a class="gn0204" href="/NEW/html/02_03si.html">시스템 통합</a></li>
+				  <li><a class="gn0205" href="/NEW/html/02_04tel.html">비디오</a></li>
+				<li><a class="gn0206" href="/NEW/html/02_05maintain.html">고객맞춤형 서비스</a></li>
+			  </ul> -->
+              </li>
+              <li class="gnb03">
+                <a class="gnb03_a" href="#">파트너&고객사</a>
+                <ul>
+                  <li class="nb"><a class="gn0301" href="/NEW/html/03_01partners.html">Partners</a></li>
+                  <li><a class="gn0302" href="/NEW/html/03_02customers.html">Customers</a></li>
+
+                </ul>
+              </li>
+              <li class="gnb04">
+                <a class="gnb04_a" href="#">ECS ONE채용</a>
+                <ul>
+                  <li class="nb"><a class="gn0401" href="/NEW/html/04_01injae.html">인재상</a></li>
+                  <li><a class="gn0402" href="/NEW/html/04_02zikmu.html">직무소개</a></li>
+                  <li><a class="gn0403" href="/NEW/html/04_03welfare.html">복지 및 웰니스 프로그램</a></li>
+                  <li><a class="gn0404" href="/NEW/html/04_04edu.html">교육체계</a></li>
+                  <li><a class="gn0405" href="/NEW/html/04_06ourCom.html">우리회사는요</a></li>
+                  <li><a class="gn0406" href="/NEW/html/04_07careerProcess.html">채용 프로세스</a></li>
+                  <li><a class="gn0407" href="/NEW/board/bbs/board.php?bo_table=career">채용 공고</a></li>
+                </ul>
+              </li>
+              <li class="gnb05">
+                <a class="gnb05_a" href="#">CONTACT US</a>
+                <ul>
+                  <li class="mmEng nb"><a class="gn0501" href="/NEW/html/05_01support.html">Support</a></li>
+                  <li><a class="gn0502" href="/NEW/html/05_02location.html">찾아오시는 길</a></li>
+                </ul>
+              </li>
+              <li class="gnb06">
+                <a class="gnb06_a" href="#">ECS소식</a>
+                <ul>
+                  <li class="nb"><a class="gn0601" href="/NEW/html/06_01ir.html">재무/공시·공고정보</a></li>
+                  <li><a class="gn0602" href="/NEW/pdf/ECSTelecom_Introduction_FY25_f.pdf" target="_blank">회사소개서</a></li>
+                  <li class="mmEng"><a class="gn0603" href="/NEW/board/bbs/board.php?bo_table=notice">ECS News</a></li>
+                  <li><a class="gn0604" href="https://blog.naver.com/ecstelecom">ECS 블로그</a></li>
+                </ul>
+              </li>
+            </ul><!-- pcGNB_BOX -->
+          </div>
+        </div>
+		<h1></h1>
+
+
+        <div class="nav_bg"></div>
+      </div>
+    </div>
+    <h1></h1>
+    <!--     <style>
+    .right_top {
+      overflow: hidden;
+      position: absolute;
+      right: 30px;
+      top: 15px;
+      display: flex;
+    }
+  
+    .right_top .language {
+      position: relative;
+      right: auto;
+      top: 8px;
+    }
+  
+    .right_top .sns {
+      padding-right: 10px;
+    }
+  
+    .right_top .sns li {
+      float: left;
+      margin-right: 7px;
+    }
+  
+    .right_top .sns li img {
+      width: 25px;
+    }
+  
+    @media (max-width: 1196px) {
+      .right_top .sns {
+        display: none;
+      }
+    }
+  </style> -->
+
+    <div class="subpage_img">
+        <p>Our Company</p>        
+        <div><img src="../images/kor/top_e_04_new.jpg" alt=""></div>
+    </div>
+    <div class="subpage_cont">
+        <div class="locs">
+            <a href="#"><img src="../images/kor/icon_house.png"></a>
+            Recruitment <img src="../images/kor/icon_next.png">
+            Our Company
+        </div>
+        <div class="service_box">
+            <p class="serv_title"><img src="../images/kor/serv_title12.png" alt="Our Company">
+                <i>우리회사는요</i>
+            </p>
+            <p class="serv_title_bar"><img src="../images/kor/serv_bar.png" alt=""></p>    
+        </div>
+             
+       <div class="ourComBox">
+            <ul class="peopleUL">
+                <li class="peoulliFis">
+                    <!-- <a class="peopleBtn1" href="#">
+                        <img src="../images/kor/our_pic09_g_.png" alt="">
+                        <p>
+                            <span class="ouCBRspan">‘고객 성공이 회사의 성공이고,<br class="peobrNon"> 곧 나의 성공이다’</span>
+                            <b class="ouCTT">김한상 부장(PM)</b>
+                        </p>
+                    </a> -->
+					<a class="peopleBtn1" href="#">
+                        <img src="../images/kor/our_pic11_g_.png" alt="">
+                        <p>
+                            <span class="ouCBRspan">'고객 성공, 곧 나의 성공'</span>
+                            <b class="ouCTT">배명준 부장(PM)</b>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a class="peopleBtn2" href="#">
+                        <img src="../images/kor/our_pic02_g_.png" alt="">
+                        <p>
+                            <span>‘하루하루 업무에서 성취감을 느낀다’</span>
+                            <b>임종순 부장(개발)</b>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a class="peopleBtn3" href="#">
+                        <img src="../images/kor/our_pic12_g_.png" alt="">
+                        <p>
+                            <span class="ouCBRspan">‘AI 컨택센터의 해답을 제시하다’</span>
+                            <b class="ouCTT">함정민 과장(PS)</b>
+                        </p>
+                    </a>
+                </li>
+                <li class="nonMMM">
+                    <a class="peopleBtn8" href="#">
+                        <img src="../images/kor/our_pic08_g_.png" alt="">
+                        <p>
+                            <span>‘엔지니어, <br class="peobrNon">그 이상의 가치를 만드는 전문가’</span>
+                            <b class="ouCTT">김성윤 과장(CE)</b>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a class="peopleBtn5" href="#">
+                        <img src="../images/kor/our_pic10_g_.png" alt="">
+                        <p>
+                            <span class="ouCBRspan">‘고객성공을 돕는 전문가’</span>
+                            <b class="ouCTT">박정후 과장(기술영업)</b>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a class="peopleBtn7" href="#">
+                        <img src="../images/kor/our_pic07_g_.png" alt="">
+                        <p>
+                            <span class="ouCBRspan">‘오늘보다 내일 더 기대되는 ECS’</span>
+                            <b class="ouCTT">임은지 과장(인사기획)</b>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+       </div>        
+    </div>
+
+	<div class="wel_video">
+		<iframe src="https://www.youtube.com/embed/kKDBYeBdtGo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+
+
+    <div class="subpage_copyright_gap">
+    </div>
+
+
+ <style>
+ .copyright {position:relative;}
+/*.copyright .btn {position:absolute; right:40px; top:30px;}*/
+.copyright .btn a {margin-top:15px; display:inline-block; font-size:13px; color:#a9a9a9; padding:5px 15px; border:1px solid rgba(255,255,255,.3);}
+
+.quick_contact {font-family: 'NotoSansCJKkr-Regular',notokr-regular;position:fixed; bottom:0; right:20px;width:280px;}
+.quick_contact .quick_btn{background:#102381;color:#fff;border-radius:10px 10px 0 0;text-align:center; padding:15px 0; font-size:20px;cursor:pointer;width:100%;letter-spacing:2px;font-weight:100;}
+.quick_contact .cnt {background:rgba(0,0,0,0.8);display:none;padding:5% 5%;}
+.quick_contact .cnt .input{width:98%;margin:2% 0;height:30px; border:1px solid #aaa;padding-left:2%;background:transparent;color:#aaa;font-size:14px;}
+.quick_contact .cnt .input::placeholder{color:#aaa;}
+.quick_contact .cnt .content::placeholder{color:#aaa;}
+.quick_contact .cnt .content{width:97%;margin:2% 0;border:1px solid #aaa;padding-left:2%;padding-top:2%;background:transparent;color:#aaa;font-size:14px;}
+.quick_contact .cnt #btn_submit{width:99%;margin:2% 0;height:45px; border:0;padding-left:2%;background:#102381;color:#fff;font-size:14px;font-family: 'NotoSansCJKkr-Regular',notokr-regular;letter-spacing:2px;cursor:pointer;}
+.quick_contact .cnt .txt{color:#fff;font-size:14px;}
+.quick_contact .cnt a{color:#fff;text-decoration:underline;margin-left:4px;font-size:14px;}
+ </style>
+    <div class="copyright">
+        서울특별시 서초구 반포대로 28길8(서초동 1543-1)일홍빌딩<br class="mobile_sh"> T. 02-3415-8300 F.02-3415-8338<br>
+<i>il-Hong Building 8, Banpo-daero 28-gil, Seocho-gu, Seoul, Korea</i>
+<p><!-- <img src="/NEW/images/kor/copyright.png" alt=""> -->copyrightⓒECS Telecom</p>
+		<div class="btn"><a href="javascript:GoPage('copy1')">개인정보처리방침</a></div>
+    </div>
+</div>
+</div>
+
+<div class="quick_contact">
+<div class="quick_btn">간편문의</div>
+  <form name=frm method=post action="/NEW/board/bbs/write_update.php" onsubmit="return checkFrm(this);">
+		<input type=hidden name=w        value="">
+		<input type=hidden name=bo_table value="rksvusansdml">
+		<input type=hidden name=wr_id    value="">
+		<input type=hidden name=sca      value="">
+		<input type=hidden name=sfl      value="">
+		<input type=hidden name=stx      value="">
+		<input type=hidden name=spt      value="">
+		<input type=hidden name=sst      value="">
+		<input type=hidden name=sod      value="">
+		<input type=hidden name=s    value="s">
+		<input type=hidden value='secret' name='secret'>
+		<input type=hidden name=wr_1    value="main">
+		
+	<ul class="cnt">
+		<li><input class="input name" placeholder="이름 *" name="wr_name" required itemname="이름"></li>
+		<li><input class="input com" placeholder="회사명 *" name="wr_subject" required itemname="회사명"></li>
+		<li><input class="input mail" placeholder="메일주소 *" name="wr_email" id="wr_email" required class="email" email itemname="메일주소"></li>
+		<li><input class="input com" placeholder="연락처" name="wr_2" itemname="연락처"></li>
+		<li><textarea  rows="5" class="content" placeholder="문의내용 *" name="wr_content" required itemname="문의내용"></textarea></li>
+		<li><input type="checkbox" class="chk" name=agree><span class="txt"> 개인정보 취급방침동의</span> <a href="javascript:GoPage('copy1')">전문보기</a></li>
+		<li><input type="submit" id="btn_submit" value="문의하기"></li>
+	</ul>
+</form>
+<iframe width=0 height=0 name='hiddenframe2' style='display:none;'></iframe>
+ 
+</div>
+<script>
+    $("document").ready(function(){            
+        $(".quick_contact .quick_btn").click(function(){
+            $(".quick_contact .cnt").slideToggle()
+        }) 
+    }) 
+</script>
+
+<script type="text/javascript">
+
+function checkFrm(obj) {
+
+		var email = document.getElementById("wr_email").value;
+		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+		if(exptext.test(email)==false){
+			alert("이 메일형식이 올바르지 않습니다.");
+			document.frm.wr_email.focus();
+			return false;
+		}
+
+
+	 if(obj.agree.checked == false) {
+	  alert('개인정보 취급방침 동의에 체크해주세요.');
+	  obj.agree.focus();
+	  return false;
+	 }
+	 document.frm.target ="hiddenframe2";
+
+}
+</script>
+	
+
+<div class="mobile_menu"> 
+    <div class="m_close">            
+        <p><a href="#"><img src="/NEW/images/common/mobile_x_btn.jpg" alt="닫기버튼"></a></p>
+    </div>
+    <div class="mm_language">
+        <a href="#">LANGUAGE - KOR</a>
+    </div>
+    <div class="nn_language">
+        <a href="/NEW/html/en_index.html">ENGLISH</a>
+    <!--     <a href="#">CHINESE</a> -->
+    </div>
+    <div class="mm_login">
+        <a href="/NEW/html/05_02location.html">LOCATION</a>
+ <!--        <a id="mo_Rev" href="#">RESERVATION</a> -->
+    </div>
+
+    <div class="menu1 mm">
+        <a href="#">COMPANY</a>
+    </div>
+    <div class="menu1_x nn">
+        <a href="/NEW/html/01_01mission.html" style="padding-top:2px;">- Mission & Values</a>
+        <a href="/NEW/html/01_02history.html">- History</a>
+        <a href="/NEW/html/01_03award.html">- Awards & Recognition</a> 
+    </div> 
+    <div class="menu2 mm">
+        <a href="#">SERVICES & SOLUTIONS</a>
+    </div>
+	<div class="menu2_x nn">
+        <a href="/NEW/html/02_02contact.html" style="padding-top:2px;">- Customer Success(CC)</a>
+        <a href="/NEW/html/02_01unified.html">- Digital Workplace(UC)</a>
+        <a href="/NEW/html/02_05maintain.html">- ETaaS</a>
+        <!-- <a href="/NEW/html/02_03si.html">- 시스템 통합</a>
+        <a href="/NEW/html/02_04tel.html">- 비디오</a>
+        <a href="/NEW/html/02_05maintain.html">- 고객맞춤형 서비스</a> -->
+    </div>
+    <!-- 2020-08-07 주석 <div class="menu2_x nn">
+        <a href="/NEW/html/02_02contact.html" style="padding-top:2px;">- 컨택센터</a>
+        <a href="/NEW/html/02_01unified.html">- 통합커뮤니케이션</a>
+        <a href="/NEW/html/02_02_ni.html">- 네트워크 통합</a>
+        <a href="/NEW/html/02_03si.html">- 시스템 통합</a>
+        <a href="/NEW/html/02_04tel.html">- 비디오</a>
+        <a href="/NEW/html/02_05maintain.html">- 고객맞춤형 서비스</a>
+    </div> -->
+    <div class="menu3 mm">
+        <a href="#">PARTNERS & CUSTOMERS</a>
+    </div>
+     <div class="menu3_x nn">
+        <a href="/NEW/html/03_01partners.html" style="padding-top:2px;">- Partners</a>
+        <a href="/NEW/html/03_02customers.html">- Customers</a>        
+    </div>
+    <div class="menu4 mm">
+        <a href="#">RECRUITMENT</a>
+    </div>
+   <div class="menu4_x nn">
+        <a href="/NEW/html/04_01injae.html" style="padding-top:2px;">- 인재상</a>
+         <a href="/NEW/html/04_02zikmu.html">- 직무소개</a>
+         <a href="/NEW/html/04_03welfare.html">- 복리후생제도</a>
+         <a href="/NEW/html/04_04edu.html">- 교육체계</a>
+<!--          <a href="/NEW/html/04_05ecsNow.html">- ECS Now</a> -->
+         <a href="/NEW/html/04_06ourCom.html">- 우리회사는요</a>
+         <a href="/NEW/html/04_07careerProcess.html">- 채용 프로세스</a>
+         <a href="/NEW/board/bbs/board.php?bo_table=career">- 채용 공고</a>
+    </div>
+    <div class="menu5 mm">
+        <a href="#">CONTACT US</a>
+    </div>
+    <div class="menu5_x nn">
+        <a href="/NEW/html/05_01support.html" style="padding-top:2px;">- Support</a>
+        <a href="/NEW/html/05_02location.html">- 찾아오시는 길</a>
+    </div>
+    <div class="menu6 mm">
+        <a href="#">ECS NOW</a>
+    </div>
+    <div class="menu6_x nn" style="border-bottom: 1px solid #2e2e2e;">
+        <a href="/NEW/html/06_01ir.html" style="padding-top:2px;">- 재무정보</a>
+        <a href="/NEW/pdf/ECSTelecom_Introduction_FY25.pdf" target="_blank">- 회사소개서</a>
+        <a href="/NEW/board/bbs/board.php?bo_table=notice">- ECS News</a>
+        <a href="/NEW/board/bbs/board.php?bo_table=Open_Archive">- ECS Open Archive</a>
+    </div>
+
+	<ul class="sns">
+		<li><a href="https://www.facebook.com/ecstel" target="_blank"><img src="/NEW/images/common/sns_fb.png" alt=""></a></li>
+		<li><a href="https://www.instagram.com/ecstelecom/" target="_blank"><img src="/NEW/images/common/sns_insta.png" alt=""></a></li>
+		<li><a href="http://ecstel.business.site/" target="_blank"><img src="/NEW/images/common/sns_gg.png" alt=""></a></li>
+		<li><a href="https://www.linkedin.com/company/482822/" target="_blank"><img src="/NEW/images/common/sns_in.png" alt=""></a></li>
+		<li><a href="https://www.youtube.com/channel/UCICHlAfNdW_Gl1WzduPTeQw/featured" target="_blank"><img src="/NEW/images/common/sns_yt.png" alt=""></a></li>
+	</ul>
+<style>
+.mobile_menu .sns{padding: 20px;position: relative;z-index: 50;}
+.mobile_menu .sns li{float: left;margin-right: 6px;}
+.mobile_menu .sns li img{width: 30px;}
+</style>
+    <div class="mm_back">       
+    </div>
+
+</div>
+<div class="black_cover"></div>
+
+
+<div class="prj_1Step">
+    <div class="gall_close"><a href="#"><img src="../images/kor/btn_gall_close.png" alt="close"></a></div>        
+    <!-- <div class="interVBOX">
+        <ul class="TTPP">
+            <li class="TTPP_L">
+                <i><p>김한상 부장(PM)</p></i>
+                <b><img src="../images/kor/dums.png" alt=""></b>
+            </li>
+            <li class="TTPP_R"><img src="../images/kor/ourP9.png" alt="김한상차장사진"></li>
+        </ul>
+        <p class="people_P">
+            안녕하세요. 2022년 6월 ECS Telecom에 경력직으로 입사한 Project Manager팀 김한상입니다. 저는 ECS Telecom에 합류하기 전 SI 개발 및 ERP 운영, 제약사 프로젝트 PM 등 다양한 프로젝트 업무를 20여년간 수행하였습니다.<br class="non860"> PM으로서 저는 고객사, 팀원 및 협력 업체간 의견을 조율하고 일정 및 이슈를 관리하며, 프로젝트가 성공적으로 마무리될 수 있도록 시작부터 끝까지 모든 관리 업무를 총괄, 지휘하는 책임자 역할을 하고 있습니다.
+        </p>
+        <h4 class="people_Title">  '공동 운명체'</h4>
+    		<p class="people_P">
+    			PM이 어떤 일을 하는지 궁금해하실 것 같아 보다 상세히 설명 드리겠습니다.<br class="non860">
+    			PM은 신규 사업을 발굴하기 위해 영업 활동 지원을 하며, 고객이 발주한 사업에 대해 각 팀(영업, Pre-Sales, PMO, 엔지니어, 개발, 협력업체 등)과 협력하여 제안서 작성을 합니다. 이후 제안발표를 하여 수주가 확정되면 사전 협상 및 계약을 지원하기 위해 업무 및 소통 방식 등을 정립하며, 성공적인 사업 수행을 위해 프로젝트 준비 단계(투입인력 계획, 사업 수행계획 등)에 돌입합니다. 프로젝트를 진행하면서 주요 보고(주간, 월간, 착수, 중간, 종료 등)를 하며, 발생할 수 있는 다양한 이슈를 최소화하기 위해 투입된 인력과 원활하게 의사소통을 합니다. 최종 검수를 받아 프로젝트를 종료하게 되면 앞으로 있을 유지보수에도 문제가 없도록 서비스 PM에게 인수인계를 합니다. 이처럼 PM은 하나의 프로젝트의 생성부터 종료까지 함께하는 프로젝트 공동 운명체입니다. 
+    		</p>
+        <h4 class="people_Title"> '아는 것이 힘이다'</h4>
+        <p class="people_P">
+           ECS Telecom은 업무상 필요한 내/외부 교육을 제한없이 지원해줍니다. 내부에서는 프로젝트 종료 후 lessons learned를 진행하여 회고의 시간을 갖고, 다음 프로젝트 준비에 필요한 도움을 주고받고 있습니다. 또한 매주 금요일 진행되는 ECS-Campus(내부 교육)는 회사 사업에 대한 이해를 돕고, 부족한 부분을 채울 수 있게 해 줍니다. 교육뿐만 아니라 자격증 취득에도 적극 지원을 해주는데, 저도 회사 지원을 받아 교육을 듣고 PMP 자격증을 취득하였습니다.
+        </p>
+        <h4 class="people_Title"> 'Fun한 회사'</h4>
+        <p class="people_P">
+           회사는 직원들에게 사내 동호회 활동을 권장하며, 친목 및 취미활동에 대한 지원을 하고 있습니다. 저는 골프를 좋아하여 골프 동호회에 가입해 활동하고 있으며, 매년 2~3회의 정기 라운딩과 때때로 번개 라운딩을 나갑니다. 그리고 회사에서 매년 가을 골프대회를 진행하는데, 이때 숨은 실력자를 발견하기도 합니다.</p>
+    		<h4 class="people_Title"> '나 = ECS Telecom'</h4>
+        <p class="people_P">
+           ECS Telecom은 Nortel 교환기에서부터 현재 Avaya, Cisco, Alvaria, Zoom에 이르기까지 콜 인프라 시스템 구축을 기반으로 AI, 챗봇, STT/TA 등 다양한 IT 솔루션을 결합하여 스마트 컨택센터의 해답을 제시하고, Digital Workplace 사업을 통해 영상회의, 통합커뮤니케이션 등 업무 효율성의 극대화를 통해 고객을 성공의 길로 인도하고 있습니다. '고객 성공이 회사의 성공이고, 곧 나의 성공이다' 라는 사명 아래 모든 직원들은 자부심을 갖고 성장해 나가고 있습니다. 각 분야의 전문가들이 함께 이끌어가는 ECS Telecom에서 뜨거운 열정을 같이 나누실 분은 지원하세요. 함께 하고 싶습니다!</p>
+    </div> -->
+	
+	<div class="interVBOX">
+        <ul class="TTPP">
+            <li class="TTPP_L">
+                <i><p>배명준 부장(PM)</p></i>
+                <b><img src="../images/kor/dums.png" alt=""></b>
+            </li>
+            <li class="TTPP_R"><img src="../images/kor/ourP11.png" alt="배명준부장사진"></li>
+        </ul>
+        <p class="people_P">
+            안녕하세요. 저는 ECS텔레콤에서 프로젝트 매니저(PM) 업무를 맡고 있는 배명준 부장입니다.
+        </p>
+        <h4 class="people_Title">  '고객 성공, 곧 나의 성공'</h4>
+		<p class="people_P">
+			제가 맡고 있는 직무는 우리나라 대부분의 유수 기업이 운영하는 고객센터 등의 콜 인프라를 구축하고 운영하는 비교적 큰 SI(System Integration) 사업에서 프로젝트 매니저로서 업무를 수행하는 것입니다.
+			<br class="non860">
+			PM의 핵심 역할은 주어진 프로젝트 기간 동안 고객이 요구하는 목표를 성공적으로 달성하는 것입니다. 저는 일정을 체계적으로 관리하고, 계획된 물적 자원과 인적 자원을 적절히 배분하고 활용하여 고객이 만족할 수 있는 결과물을 이끌어냅니다. 즉, 고객 성공을 목표로 모든 관리 업무를 총괄, 지휘하는 책임자 역할을 하고 있습니다.
+		</p>
+        <h4 class="people_Title"> PM에게 요구되는 3가지 핵심 역량</h4>
+        <p class="people_P">
+          프로젝트를 성공적으로 이끌기 위해 PM에게는 다음과 같은 역량이 중요하다고 생각합니다.<br class="non860">
+		1.	긍정적인 커뮤니케이션 능력: 프로젝트는 다양한 회사와 사람들이 공동의 목표를 달성해 나가는 과정입니다. 많은 이해관계자들 간에 공감과 소통, 그리고 긍정적인 커뮤니케이션을 이끌어낼 수 있는 역량이 필수적입니다.<br class="non860">
+		2.	문서 작성 및 프레젠테이션: 내가 가진 개념과 생각을 체계적인 글로 정리하고 도식화하여 상대방이 이해할 수 있을 만큼의 문서로 만드는 능력, 더 나아가 이를 효과적으로 표현하고 전달하는 프레젠테이션 능력이 중요합니다.<br class="non860">
+		3.	적극적인 문제 해결 자세: 어떠한 일을 하더라도 어려움은 닥치기 마련입니다. 이럴 때 회피나 방관하는 자세가 아닌, 일을 해결하기 위한 적극적인 자세가 필요합니다. 아울러 PM은 주변 사람과 환경에 귀 기울여 보다 긍정적인 분위기를 만들어낼 수 있는 것도 좋은 덕목입니다.
+        </p>
+        <h4 class="people_Title"> '아낌없는 투자, 성장의 발판'</h4>
+        <p class="people_P">
+           ECS텔레콤은 직원들의 성장을 위해 아낌없이 투자하고 지원합니다.<br class="non860">
+			•	교육 및 자격증 지원: ECS는 교육과 자격증 취득에 매우 적극적입니다. 매달 사내 교육 프로그램이 운영되며, 직원들의 영어 실력 향상을 위해 원어민 영어 선생님께서 항상 사무실에 상주하고 계십니다.<br class="non860">
+			•	인상적인 복지: 인기 있는 아이템만을 모아놓은 듯한 스낵바가 있으며, 업무 관련 주차비 지원은 물론이고 헬스장 지원도 됩니다. 워크샵과 같은 사내 공식 행사에서도 직원들에 대한 아낌없는 투자가 매우 인상 깊습니다.<br class="non860">
+		   </p>
+		<h4 class="people_Title">'자신감 있는 면접의 기술'</h4>
+        <p class="people_P">
+          PM 직무에 지원하고자 하는 분들에게 면접 팁을 드린다면, 다음과 같습니다.<br class="non860">
+			자신이 수행했던 업무와 역할, 그리고 성과에 대해서 체계적으로 설명할 수 있어야 합니다. 더불어, 어려움이 닥쳤을 때 그 일을 어떻게 해결해 나갔는지에 대한 과정을 잘 이야기할 수 있다면 좋은 면접 결과를 얻을 수 있을 것이라고 생각합니다.
+			<br class="non860">
+			각 분야의 전문가들이 함께 이끌어가는 ECS 텔레콤에서 뜨거운 열정을 같이 나누실 분은 지원하세요. 함께 하고 싶습니다!
+		</p>
+    </div><!-- interVBOX -->
+</div><!-- prj_1Step -->
+
+<div class="prj_2Step">
+    <div class="gall_close"><a href="#"><img src="../images/kor/btn_gall_close.png" alt="close"></a></div>        
+    <div class="interVBOX">
+        <ul class="TTPP">
+            <li class="TTPP_L">
+                <i><img src="../images/kor/name_im.png" alt="임종순차장"></i>
+                <b><img src="../images/kor/dums.png" alt=""></b>
+            </li>
+            <li class="TTPP_R"><img src="../images/kor/ourP2.png" alt="임종순차장사진"></li>
+        </ul>
+        <h4 class="people_Title">‘하루하루 업무에서 성취감을 느낀다’</h4>
+        <p class="people_P">
+            저는 2004년 대학졸업과 동시에 Enterprise Voice Solution 시장을 선도하는 ECS에 입사하여 현재 만 12년째 소프트웨어 개발<br class="non860"> 엔지니어로서 전화, 메일, 채팅 등의 수단을 통해 기업과 고객이 소통할 수 있도록 하는 프로그램을 개발하고 있습니다. 저는 이 업무를<br class="non860"> 통해 고객의 이야기를 듣고, 고객이 원하고 고객에게 필요한 프로그램을 가장 빨리 전달하기 위해 노력합니다. 또한 UC, IP Telephony, Contact Center Solution 분야에서 최고의 기술력을 가진 회사 ECS에서 개발자로서의 하루하루 업무에서 성취감을 느끼며 더 큰 꿈을 키워가고 있습니다
+        </p>
+        <h4 class="people_Title">‘2번의 전 직원 해외여행’</h4>
+        <p class="people_P">
+            사람은 모두 꿈을 꾸며 살아갑니다. 나 자신이 성공하고 행복해지는 꿈, 나의 가족과 이웃을 행복하게 해주는 꿈, 더 나아가 희망 있는 <br class="non860">사회를 만들어가는데 공헌하고픈 꿈. ECS는 그런 꿈을 실현할 수 있는 곳입니다. ECS에서는 서로의 이마에 흘린 땀방울을 닦아주며 <br class="non860">성취의 보람과 꿈의 결실을 동료와 함께 맛볼 수 있습니다. 
+어느 여행사에서 모든 직원에게 해외여행을 선물해 주었다는 기사를 본 적이 <br class="non860">있습니다. 그 기사에는 부러움이 가득한 댓글이 많이 달려 있었습니다. 이는 회사 대표가 직원들이 열심히 일하는 것에 대해 고마워하며 <br class="non860">그에 대해 보상해주는 것을 부러워한 것이 아닌가 생각합니다. 우리 ECS에서는 뉴스에 나온 이런 일이 2번이나 있었습니다. 회사보다 <br class="non860">직원을 먼저 생각할 줄 아는 곳, 회사와 직원이 함께 성장하는 것을 목표로 하는 곳. 그 곳이 바로 ECS입니다.
+
+        </p>
+        <h4 class="people_Title">‘한계를 깨고 나와 새로운 세상에 도전하라’</h4>
+        <p class="people_P">
+           스스로 혹은 남들이 만든 잣대에 기대어 스스로의 한계를 단정짓는 사람이 되기 보다 한계를 깨고 나와 새로운 세상에 도전했으면 합니다. “인생에서의 가장 큰 기쁨은 다른 사람들이 할 수 없다는 것을 했을 때이다.” 라는 말이 있습니다. 인생의 가장 큰 기쁨을 누릴 수 있는 <br class="non860">기회에 도전해 보세요. 모든 의지와 노력을 다하여, 스스로의 한계를 극복하고, 힘차게 전진하는 도전적인 삶을 이 곳, ECS에서 함께하길 바랍니다. 
+        </p>
+    </div><!-- interVBOX -->
+</div><!-- prj_2Step -->
+
+<div class="prj_3Step">
+    <div class="gall_close"><a href="#"><img src="../images/kor/btn_gall_close.png" alt="close"></a></div>        
+    <!-- <div class="interVBOX">
+        <ul class="TTPP">
+            <li class="TTPP_L">
+    				<i><p>김영균 차장(PLM)</p></i>
+                <b><img src="../images/kor/dums.png" alt=""></b>
+            </li>
+            <li class="TTPP_R"><img src="../images/kor/ourP3.png" alt="김영균과장사진"></li>
+        </ul>
+        <h4 class="people_Title">‘누구보다 폭넓은 시야를 가진 엔지니어로 성장할 수 있는 환경’</h4>
+        <p class="people_P">
+            안녕하세요 2011년 경력직으로 ECS에서 입사하여 네트워크 PLM업무를 담당하고 있는 김영균 과장입니다.<br>
+            PLM이라는 업무는 다른 회사에 없는 직책이라 다소 생소하실 텐데요. 특정 분야의 Product를 주도적으로 담당하여 해당분야의 <br class="non860">전문가로서 신기술을 앞서 적용하고 영업 및 기술지원 사이트에서 발생하는 다양한 이슈를 해결하는 일입니다. ECS에는 제가 담당하는 <br class="non860">네트워크뿐만 아니라 IPT, IPCC, IVR 등 여러 분야의 PLM이 있습니다. 그리고 이런 업무들을 완벽히 수행할 수 있도록 ECS는 PLM들에게 그 어떤 회사보다 훌륭한 LAB 환경을 제공하고 있습니다.<br><br>
+            저는 ECS에 네트워크 엔지니어 경력을 가지고 입사했지만 ECS에서 PLM 업무를 진행하면서 자연히 네트워크 기반 위에서 구성되는 <br class="non860">대부분의 IT 솔루션들을 다양하게 접할 수 있었고 네트워크 장비들뿐만 아니라 데이터센터 스위치에서 구동되는 가상화 서버, 그 위에 <br class="non860">올라가는 Collaboration(IPT, Video, FMC) 솔루션, 그 외 3rd party 솔루션 등과 연동해가며 각종 사이트 이슈 해결을 하다 보니 <br class="non860">자연스레 누구보다 폭넓은 시야를 가진 엔지니어로 성장할 수 있었다고 생각합니다.
+        </p>
+        <h4 class="people_Title">‘고객신뢰의 ECS’</h4>
+        <p class="people_P">
+            ECS는 Cisco, Avaya, Aspect의 국내 넘버원 파트너로서 앞서도 언급했지만 웬만한 기업의 데이터센터 규모보다 큰 최고의 LAB System을 가지고 있습니다.<br>
+    LAB System에 과감히 투자하는 ECS의 이런 환경은 PLM들이 철저한 사전 검증을 하고 실제 사이트 장애 시 빠른 해결이 가능하도록하여 수많은 고객들로부터 무한한 신뢰를 받을 수 있었습니다. 또한 자체 개발팀을 보유하고 벤더에서 지원하지 않는 기능들을 자체 개발을 <br class="non860">통하여 펌웨어를 만들어 불가능해 보였던 기능을 구현했던 다수의 일화들도 고객에게 신뢰받는 넘버원 ECS의 이유중의 하나일 것입니다.
+    
+    
+        </p>
+        <h4 class="people_Title">‘보장된 교육기회’</h4>
+        <p class="people_P">
+           제가 다양한 분야에 도전해보고 시야를 넓히는 경험을 쌓을 수 있었던 큰 이유중의 하나는 보장된 교육기회입니다.<br>
+    ECS는 1년에 최소 2회, 본인이 원하는 외부 교육을 수강할 수 있는 기회를 의무적으로 부여하고 있으며 업무마다 조금씩 다르겠지만 <br class="non860">필요로 하는 교육이 해외에서 진행될 경우 다수의 엔지니어들이 교육을 위해 해외에 나가기도 합니다. 이런 외부 교육뿐 아니라 직원들이 필요로 하는 주제에 대하여 직원들이 직접 강사가 되어 핵심내용을 교육하고 현장 경험을 전하며 그에 따른 강사료도 받을 수 있게 체계화된 내부교육 시스템이 있어 직원들간의 지식공유 및 기술역량 강화에 큰 도움이 되고 있습니다.
+    
+        </p>
+        <h4 class="people_Title">‘직원과 함께 성장하는 회사’</h4>
+        <p class="people_P">
+           기업이 좋은 직원을 채용하기 위해 서류심사를 하고 면접을 보듯이 구직자들도 좋은 회사를 선택해서 구직활동을 하는 것이 중요한 일일 것입니다. 구직활동을 하는 사회 초년생으로서는 좋은 회사에 대한 기준이 단순히 대기업, 고액연봉, 사회인지도 등 일 수도 있을 텐데요. <br class="non860">한마디로 모든걸 정의할 순 없겠지만 급변하는 IT환경에서 직장생활을 해오면서 이직도 해봤고 주변 지인들을 보아온, 8년차 직장인인 <br class="non860">제가 느끼는 좋은 회사란 ‘직원과 함께 성장하는 회사’라 생각합니다.<br>
+    제가 위 짧은 글로 모든걸 표현할 순 없겠지만 제 글을 보시는 예비 지원자 분들께 감히 말씀드릴 수 있습니다. ECS는 개인의 만족과 회사가 함께 성장해 나가는 “좋은 회사”임에 틀림 없습니다.
+    ECS에 도전하세요!
+        </p>
+    </div> -->
+	
+	
+	<div class="interVBOX">
+        <ul class="TTPP">
+            <li class="TTPP_L">
+				<i><p>함정민 과장(PS)</p></i>
+                <b><img src="../images/kor/dums.png" alt=""></b>
+            </li>
+            <li class="TTPP_R"><img src="../images/kor/ourP12.png" alt="함정민과장사진"></li>
+        </ul>
+        <h4 class="people_Title">‘'AI 컨택센터의 해답을 제시하다’</h4>
+        <p class="people_P">
+            제가 하고 있는 핵심 업무는 AI 컨택센터 구축과 고도화에 관련한 전반적인 기술 영업 지원입니다. 고객과 접점에서 AI 컨택센터 동향을 소개하고, 프로젝트에 필요한 제안서를 작성하거나 발표하는 일을 주도합니다.<br class="non860">
+			또한, 고객이 원하는 시스템을 구체화하기 위해 현황을 분석하고 목표 시스템 구성도를 설계하는 컨설팅 업무도 수행합니다. 영업 단계에서부터 기술적 이해를 바탕으로 고객에게 최적의 해답을 제시하여 프로젝트 수주에 기여하는 것이 저의 역할입니다.
+        </p>
+        <h4 class="people_Title">‘업무의 결(Tone & Manner)이 맞는 곳’</h4>
+        <p class="people_P">
+          제가 이직을 결정할 때 가장 중요하게 고려했던 부분은 '업무의 결이 맞아야 한다'는 것이었습니다. 이전에 수행했던 일과 비슷해야 한다는 물리적인 측면을 넘어, 일을 고민하고 해결해나가는 과정과 방식이 저와 맞아야 한다는 생각을 가지고 이직을 준비했습니다.<br class="non860">
+		마침 ECS텔레콤에서 구하는 AI 프리세일즈 직무가 제가 추구하던 업무의 방향성과 완벽하게 일치했기 때문에 망설임 없이 지원하게 되었고, 현재 만족스럽게 업무를 수행하고 있습니다.
+        </p>
+        <h4 class="people_Title">‘성장을 위한 아낌없는 투자’</h4>
+        <p class="people_P">
+           ECS 텔레콤은 직원들이 스스로 성장할 수 있도록 지원하는 회사입니다. 이직 후 배우고 공부해야 할 새로운 것들이 많았는데, ECS 텔레콤에서는 이러한 직원 교육에 아낌없이 투자를 해준다는 점이 매우 인상 깊고 만족스러웠습니다. <br>
+			내가 일한 만큼 인정받고 싶다면, 그리고 스스로 끊임없이 성장하고 싶다면 ECS 텔레콤이라는 회사가 여러분께 좋은 기회가 될 수 있다고 확신합니다. 망설이지 마시고 입사 지원해보세요! 함께 하고 싶습니다!
+        </p>
+    </div><!-- interVBOX -->
+</div><!-- prj_3Step -->
+
+
+<div class="prj_8Step">
+    <div class="gall_close"><a href="#"><img src="../images/kor/btn_gall_close.png" alt="close"></a></div>        
+    <div class="interVBOX">
+        <ul class="TTPP">
+            <li class="TTPP_L">
+				<i><p>김성윤 과장(CE)</p></i>
+                <b><img src="../images/kor/dums.png" alt=""></b>
+            </li>
+            <li class="TTPP_R"><img src="../images/kor/ourP8.png" alt="김성윤과장사진"></li>
+        </ul>
+        <h4 class="people_Title">‘엔지니어, 그 이상의 가치를 만드는 전문가’</h4>
+        <p class="people_P">
+            저는 2022년 9월에 입사하여 현재 Customer Care Expert팀에서 근무 중인 김성윤 과장입니다. Customer Care Expert팀은 우리가 흔히 알고 있는 FE(필드 엔지니어)의 업무와 더불어 ‘고객 성공’을 위해 고객사 현장에서 고객과 직접 소통하며 서비스 분석하고, 시스템을 설계/구축/구성하여 기업 커뮤니케이션의 해답을 제시하는 일을 하고 있습니다
+        </p>
+        <h4 class="people_Title">‘콜 시스템의 편리한 사용을 위하여…’</h4>
+        <p class="people_P">
+            우리는 고객이 원하는 최신 기술을 적용하기 위해 본인이 담당하는 시스템을 설치할 뿐만 아니라 그 외 여러 다양한 시스템과 잘 연동되어 고객의 업무가 원활히 흘러갈 수 있도록 구성합니다. 때문에 우리 팀에서는 시스템 연동 작업을 통해 다양한 솔루션을 경험하고 이해하는 기회를 가질 수 있습니다.
+			<br><br>
+			우리가 구축하는 시스템은 콜센터(금융, 홈쇼핑 등), 공공기관 등 많은 곳에 사용됩니다. 고객의 고객을 위한 콜센터는 단지 고객사 내부를 위한 것이 아닌 대국민 서비스의 한 부분이라 할 수 있습니다. 그렇다 보니 프로젝트를 마무리한 후 실제 대고객 서비스가 오픈되면 가족, 친구, 지인 등 다양하고 많은 사람들이 이용하게 되는데, 사용자 편리에 내가 기여했다는 뿌듯함을 느낍니다.
+        </p>
+        <h4 class="people_Title">‘자부심을 느끼게 해주는 우리 팀’</h4>
+        <p class="people_P">
+            앞서 말씀드린 바와 같이 다양한 시스템이 연동되어야 하는 환경 때문에 각 시스템 ‘담당자 간 협업’은 필수이자 프로젝트 완성을 위한 핵심 요소입니다. 때문에 저는 회사 생활에 있어서 일(업무) 이전에 그 주체가 되는 사람이 가장 중요하다고 생각합니다. 우리 팀은 고객센터에 필수 요소인 PBX, CTI, IVR, PDS 엔지니어들이 하나의 팀으로 구성되어 프로젝트를 수행하면서 어려운 일이 있을 때 우리의 일, 나의 일처럼 같이 고민해줍니다.
+			<br><br>
+			같은 팀원뿐만 아니라 타 부서와 협업할 때도 적극적이고, 협조적인 동료가 많음을 느끼는데, 좋은 동료들 덕분에 든든하고, 어떤 어려운 업무와 프로젝트라도 해낼 수 있다는 자신감이 생깁니다.
+        </p>
+        <h4 class="people_Title">‘직원을 끊임없이 생각하고 변화해가는 회사’</h4>
+        <p class="people_P">
+			앞으로 다닐 회사를 고를 때 연봉, 근무지, 회사 규모 등 기준은 저마다 다르지만, 저는 업무에 집중할 수 있게 해주는 회사의 복지제도가 중요하다고 생각합니다. 우리 회사에는 여느 회사들처럼 다양하고 좋은 복지들이 이미 있지만 (제가 입사한 지 2년 차밖에 되지 않았음에도 불구하고 그 사이에) 추가로 자녀 학자금 지원, 반반차(휴가) 제도 도입, 고충상담실 개설 등 제도들이 계속 생겼습니다. 이를 보며 회사가 직원들이 편하게 일할 수 있는 환경을 제공해 주기위해 끊임없이 노력한다는 것을 느끼게 되었습니다.<br>
+			그리고 우리 회사에서는 ‘ECS Campus’라는 내부 교육이 매월 2회 이상 진행되는데, 각 부서의 선배들(전문가)이 직접 들려주는 실제 업무 이야기를 통해 보다 빠르고 쉽게 회사의 일을 이해할 수 있게 도와줍니다. 지금까지 제가 느낀 바로는 회사는 개인의 성장을 지원하고 응원해 주며, 개인의 성취 또한 인정해 주고 보상해 주었습니다.
+			<br><br>
+			수많은 회사가 있겠지만 저와 같은 생각을 가진 지원자 분들이 있다면 제 진심을 담은 이 글이 여러분의 고민과 선택에 도움이 되길 바랍니다! 감사합니다.
+        </p>
+    </div><!-- interVBOX -->
+</div><!-- prj_8Step -->
+
+<div class="prj_5Step">
+    <div class="gall_close"><a href="#"><img src="../images/kor/btn_gall_close.png" alt="close"></a></div>        
+    <div class="interVBOX">
+        <ul class="TTPP">
+            <li class="TTPP_L">
+				<i><p>박정후 과장(기술영업)</p></i>
+                <b><img src="../images/kor/dums.png" alt=""></b>
+            </li>
+            <li class="TTPP_R"><img src="../images/kor/ourP10.png" alt="박정후사원사진"></li>
+        </ul>
+        <h4 class="people_Title">‘ECS의 영업대표’</h4>
+        <p class="people_P">
+			안녕하세요. 저는 2019년 ECS텔레콤에 입사하여 지금까지 열심히 뛰고 있는 6년 차 “영업 대표” 박정후 과장입니다.<br class="non860">
+			대학 시절 IT경영학을 전공하며 진로를 고민하던 차 IT 업계에서 높은 회사 신인도와 좋은 처우, 복지로 알려진 ECS텔레콤 기술영업 <br class="non860">직무 신입 공채에 지원하여 ECS의 가족이 되었습니다.
+			<br class="non860">
+			ECS의 기술영업이 다루는 분야는 크게 ‘IPCC’와 ‘AI’, 이외 IPT, Application, Network 등이 있습니다.
+			기술영업은 고객사 내 구매, <br class="non860">총무, IT, 현업 등 우리의 솔루션을 필요로 하는 다양한 업무 담당자를 만나 그들이 필요로 하는 부분을 캐치 업하고 때론 함께 고민하며, 결과적으로 고객이 그들의 비즈니스에서 좀 더 나은 방향, 좀 더 발전할 수 있도록 이끌어가는 직무입니다.
+        </p>
+        <h4 class="people_Title">‘고객성공을 돕는 전문가’</h4>
+        <p class="people_P">
+            저는 보험, 유통, O2O 등 다양한 사업 군의 고객을 담당하며 고객의 비즈니스와 업무를 이해하고, 우리 솔루션을 도입하여 기대할 수 있는 도입 효과 측면에서, 고객 성공을 위한 업무를 수행하고 있습니다. 
+			<br class="non860">
+			좀 더 쉽게 설명 드리면 콜센터에 전화를 걸면 콜봇이 전화를 대신 받아 고객은 대기 없이 편리하게 업무를 처리하고, 상담원은 고객과 통화 중 문의사항을 실시간 상담 화면에서 가이드를 받고 응대하여 콜 당 소요되는 시간을 절감합니다. 결과적으로 고객사는 AICC를 도입하여 업무 효율성 향상 및 리소스 절감을 통한 투자 대비 높은 이익률을 달성할 수 있습니다.
+
+
+        </p>
+        <h4 class="people_Title">‘잊지 못할 하와이 워크샵’</h4>
+        <p class="people_P">
+            입사 첫 해, 회사 창립 20주년 기념으로 하와이로 전 직원 워크샵을 다녀왔습니다.
+			입사한지 몇 개월 되지 않았지만, 회사 선후배, 동료들과 함께 편한 분위기 속 와이키키 해변 앞에서 유람선을 타고 석양을 바라보며 즐겼던 선상 파티는 아직도 머릿속에 못 잊을 즐거운 기억으로 남아있습니다.
+			ECS는 매년 가을 워크샵으로 국내 또는 해외 명소를 다니며 평상시엔 열심히 일하고 워크샵 때는 쌓인 업무 스트레스를 해소하며 다시 한번 refresh하고 동기부여하는 자리를 갖고 있습니다. 
+        </p>
+        <h4 class="people_Title">‘기술영업인으로서 핵심역량’</h4>
+        <p class="people_P">
+            기술영업의 중요한 핵심 역량은 “스터디”와 “협업”이라고 생각합니다. <br>
+		    ECS는 IPCC, AICC를 포함한 다양한 분야에서 사업을 하고 있고, 시장에는 챗GPT와 같은 새로운 기술이 쏟아지고 있습니다. 고객 니즈에 맞추어 ECS는 새로운 기술을 가장 먼저 접하며 우리의 비즈니스 측면에서 그 기술을 활용한 사업화, 상품화를 합니다.<br>
+      		때문에 기술영업인으로서 기술에 대한 전문성은 물론이고 트렌드에 뒤떨어지지 않는 꾸준한 스터디와 자기개발이 매우 중요합니다.
+			<br>
+		    또 사업을 수주하고 회사의 매출로 이어지기까지는 영업 외에도 PM, PS, 엔지니어, 개발자, 재무 등 수많은 지원 부서가 함께 일하게 됩니다.
+			이에 업무 요청에 있어서는 요청할 바를 명확히 하고 불필요한 리소스를 줄이며, 각 부서와 협업하고 협조하는 부분이 굉장히 중요하기 때문에 각 부서의 업무 역할을 정확히 이해하고 서로의 분야에서 최선을 다하여 최대의 시너지를 내는 것이 중요하다고 생각합니다.
+        </p>
+		<h4 class="people_Title">‘ECS ONE이 되실 여러분에게’</h4>
+        <p class="people_P">
+            노력하는 만큼 결과는 항상 따라온다고 생각합니다.
+			저도 업무 할 때에 당장 결과가 눈에 보이지 않아 초조할 때가 있습니다. <br>하지만 그것을 극복할 수 있는 유일한 방법은 내 자신을 믿고 할 수 있는 최선의 노력을 다하는 것입니다. 그리고 그 과정과 결과에 따른 성취감은 나를 발전시킨다고 생각합니다.
+			앞으로 ECS 가족이 되실 여러분들도 최선을 다해 원하는 목표를 이루셨으면 좋겠습니다. 
+        </p>
+    </div><!-- interVBOX -->
+</div><!-- prj_5Step -->
+
+<div class="prj_7Step">
+    <div class="gall_close"><a href="#"><img src="../images/kor/btn_gall_close.png" alt="close"></a></div>        
+    <div class="interVBOX">
+        <ul class="TTPP">
+            <li class="TTPP_L">
+                <i><p>임은지 과장(인사기획)</p></i>
+                <b><img src="../images/kor/dums.png" alt=""></b>
+            </li>
+            <li class="TTPP_R"><img src="../images/kor/ourP7.png" alt="임은지사원사진"></li>
+        </ul>
+		<!--<p class="people_P">
+			안녕하세요? 올해 ECS텔레콤의 가족이 된, 신입사원 김효현입니다. 저는 현재 인사관리팀 소속으로 교육,복리후생, 그리고 일반 관리<br class="non860">
+			업무를 담당하고 있습니다.  ECS텔레콤의 인사관리팀을 한마디로 정의 내린다면, 우리 회사를 ‘직원들의 행복감과 만족도가 높은 일터’로 만들기 위해 항상 고민하는 팀이라고 말씀 드리고 싶습니다. 
+
+        </p>-->
+        <h4 class="people_Title">‘오늘보다 내일 더 기대되는 ECS’</h4>
+        <p class="people_P">
+            안녕하세요, ECS텔레콤 인사기획팀에서 교육, 복리후생, 급여 업무를 담당하고 있는 임은지 과장입니다. <br class="non860">
+			제약회사 인사팀에서 근무하다가 지난 2022년 ECS의 매력적인 복리후생 제도와 체계적인 교육 프로그램, 잡플래닛의 좋은 후기를 보고 이직을 결심하게 되었습니다. 
+            제가 속한 ECS텔레콤의 인사기획팀을 한마디로 정의한다면 ‘일하기 좋은 회사’를 만들기 위해 항상 고민하는 팀이라고 말씀드리고 싶습니다.
+        </p>
+        <h4 class="people_Title">'일하기 좋은 회사 ECS!’</h4>
+        <p class="people_P">
+            ECS텔레콤은 2021년 일하기 좋은 기업 ‘Great Place To Work’에 선정되었습니다. GPTW는 현직자의 회사에 대한 신뢰도, 업무 만족도 등을 설문하여 ‘일하기 좋은 회사’을 선정하는 세계적인 권위 기관으로 우리 회사는 모든 질문에 대해 80% 이상의 긍정적인 답변을 받아 ‘일하기 좋은 기업’으로 선정되었습니다.
+			제가 입사해 GPTW 설문 결과를 확인하고서는 정말 놀라웠습니다. 회사에 90%가 넘는 직원이 참여한 설문 조사에 ‘회사에 대한 자부심’, ‘경영진에 대한 믿음’, ‘공평한 대우’에 대한 평가 부분 응답에서 80% 이상의 직원이 만족스럽다고 답변한 점이요! 이 결과는 직원 모두가 ECS텔레콤은 ‘일하기 좋은 회사’임을 인정하고 있다고 증명합니다. 
+			저 역시 입사 후 ECS에서 근무한다는 것에 큰 자부심을 느끼고 있습니다. 앞으로도 ECS텔레콤의 일원, 인사기획팀으로서 직원들의 소리에 귀 기울이며 직원들의 행복과 만족도가 높은 일터를 만들기 위해 고민하고 최선을 다하겠습니다.
+ 
+        </p>
+        <h4 class="people_Title">‘나의 성장은 곧 회사의 성장, 직원의 성장을 위한 지원이 넘치는 ECS’</h4>
+        <p class="people_P">
+			우리 회사에는 많은 복지제도가 있지만 가장 자랑하고 싶은 복지는 교육 관련 제도입니다. <br class="non860">
+			첫 번째, 전 직원의 영어 실력 향상을 위해 상주 원어민 강사를 채용하여 매일 영어 수업을 진행합니다. <br class="non860">
+			입사 초 영어로 대화하는 것에 두려움이 있었던 저에게 회사에서 하는 꾸준한 영어 수업 참여는 원어민 강사와 자연스러운 일상 대화에 자신감을 불어넣어 주었습니다.<br class="non860">
+			두 번째, 업무에 필요한 교육은 한도없이 지원합니다. 한달에 1~3회 베테랑 내부강사들이 진행하는 내부 교육을 하고 있지만 그 외 필요한 교육은 외부 교육을 들을 수 있도록 지원합니다. 
+			교육 담당자인 저의 경우 외부 교육기관에서 ‘HRD 실무 담당자 입문과정’을 수료하였습니다.
+			전 직장에서 HRD보다는 HRM에 업무가 치중되어 있어 처음 맡아보는 교육 담당자에 역할에 대한 고민과 걱정이 많았는데 회사의 폭넓은 교육지원으로 전보다 성장할 수 있었습니다.
+			끊임없는 성장의 여정 속에서 노력하고 배우는 것에 최선을 다한다면 나 자신, 회사는 함께 발전할 것이라고 분명하게 믿고 있습니다.
+        </p>
+        <h4 class="people_Title">‘자랑하고 싶은 우리회사 ECS텔레콤’</h4>
+		<p class="people_P">
+			ECS텔레콤은 사명감, 자부심, 열정이 넘치는 구성원들과 함께하는 회사이며, 뛰어난 역량과 비전을 통해 국내 동종업계 1위의 자리를 지키고 있습니다.
+			지속적인 성장과 발전을 추구하는 회사에서 저는 회사가 가진 성취에 자부심을 느낄 뿐만 아니라 그 일원으로서 자랑스럽게 일하고 있습니다.
+			ECS ONE이 되신다면 ‘누구에게나 자랑하고 싶은 우리 회사’가 될 것이라고 자부합니다.
+		</p>
+    </div><!-- interVBOX -->
+</div><!-- prj_7Step -->
+
+
+
+<script type="text/javascript" src="../js/rolling.js"></script>
+<script type="text/javascript" src="../js/ecs.js"></script>
+<script type="text/javascript" src="../js/ecs_sub.js"></script>
+<script type="text/javascript" src="../js/mobile.js"></script>
+
+
+</body>
+</html>
