@@ -121,13 +121,16 @@ export default async function handler(req, res) {
       urlPath = '/' + urlPath
     }
     
-    // CSS, JS, Images 경로 매핑 (로컬 serve.js와 동일하게)
-    if (urlPath.startsWith('/css/') || urlPath.startsWith('/js/') || urlPath.startsWith('/images/')) {
+    // CSS, JS, Images, Font 경로 매핑 (로컬 serve.js와 동일하게)
+    if (urlPath.startsWith('/css/') || 
+        urlPath.startsWith('/js/') || 
+        urlPath.startsWith('/images/') ||
+        urlPath.startsWith('/font/')) {
       urlPath = '/NEW' + urlPath
     }
     
-    // font 경로 매핑
-    if (urlPath.startsWith('/font/')) {
+    // board 경로 매핑 (board/js/, board/css/ 등)
+    if (urlPath.startsWith('/board/')) {
       urlPath = '/NEW' + urlPath
     }
     
