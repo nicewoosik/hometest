@@ -17,8 +17,9 @@
     "download-missing": "./download_missing.sh",
     "serve": "python3 -m http.server 8000",
     "dev": "node serve.js",
-    "build": "echo 'Build complete'",
-    "start": "node serve.js"
+    "build": "echo 'No build needed - using static files'",
+    "start": "node serve.js",
+    "vercel-build": "echo 'Vercel build - dist folder already contains static files'"
   },
   "keywords": ["ecstel", "clone", "crawler"],
   "author": "",
