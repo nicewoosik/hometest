@@ -3,19 +3,20 @@
 <head>
 <title>ECS | ECS텔레콤</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<link rel="stylesheet" type="text/css" href="../css/reset.css">
-<link rel="stylesheet" type="text/css" href="../css/ecs.css">
-<!-- <link rel="stylesheet" type="text/css" href="../css/ecs_251016"> -->
-<link rel="stylesheet" type="text/css" href="../css/ecs_mobile.css">
-<link rel="stylesheet" type="text/css" href="../css/font.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/ecs.css">
+<!-- <link rel="stylesheet" type="text/css" href="/css/ecs_251016"> -->
+<link rel="stylesheet" type="text/css" href="/css/ecs_mobile.css">
+<link rel="stylesheet" type="text/css" href="/css/font.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery.bxslider.css">
 <link rel="icon" type="image/x-icon" href="/NEW/images/favicon.ico">
 
-<script type="text/javascript" src="../js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
-<script type="text/javascript" src="../js/jquery.bxslider.min.js"></script>
-<script type="text/javascript" src="../js/default.js"></script>
+<script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="/js/default.js"></script>
+<script type="text/javascript" src="/js/inquiry.js"></script>
 <meta name="google-site-verification" content="8SBIsLN9SsWHPiZxSGzYQTTAR5R-meu_OhewP2XESTw" />
 
 <script type="application/ld+json">
@@ -559,7 +560,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <div class="quick_contact">
 <div class="quick_btn">간편문의</div>
-  <form name=frm method=post action="/NEW/board/bbs/write_update.php" onsubmit="return checkFrm(this);">
+  <form name=frm method=post action="/NEW/board/bbs/write_update.php" onsubmit="return handleInquirySubmit(event);">
 		<input type=hidden name=w        value="">
 		<input type=hidden name=bo_table value="rksvusansdml">
 		<input type=hidden name=wr_id    value="">
@@ -722,10 +723,10 @@ function checkFrm(obj) {
 
 
 
-<script type="text/javascript" src="../js/ecs.js"></script>
-<script type="text/javascript" src="../js/rolling.js"></script>
-<script type="text/javascript" src="../js/mobile.js"></script>
-<script type="text/javascript" src="../board/js/move_layer.js"></script>
+<script type="text/javascript" src="/js/ecs.js"></script>
+<script type="text/javascript" src="/js/rolling.js"></script>
+<script type="text/javascript" src="/js/mobile.js"></script>
+<script type="text/javascript" src="/board/js/move_layer.js"></script>
  
 
 </body>
