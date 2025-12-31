@@ -36,20 +36,69 @@ const server = http.createServer(async (req, res) => {
   
   let filePath = null
   
-  // PHP 파일 쿼리 파라미터 처리 (board.php)
-  if (queryString && urlPath.includes('board.php')) {
+  // PHP 파일 쿼리 파라미터 처리 (board.php, download.php)
+  if (queryString && (urlPath.includes('board.php') || urlPath.includes('download.php'))) {
     const params = new URLSearchParams(queryString)
     const boTable = params.get('bo_table')
-    // career 페이지는 별도로 크롤링한 HTML 파일 사용
-    if (boTable === 'career') {
-      const careerHtmlPath = path.join(DIST_DIR, 'NEW/board/bbs/board_career.html')
-      try {
-        const stat = await fs.stat(careerHtmlPath)
-        if (stat.isFile()) {
-          filePath = careerHtmlPath
+    const wrId = params.get('wr_id')
+    const no = params.get('no')
+    
+    // download.php 처리 - 실제 첨부파일 찾기
+    if (urlPath.includes('download.php')) {
+      if (boTable === 'career' && wrId && no) {
+        // 채용공고 첨부파일 경로 시도
+        const possiblePaths = [
+          path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}`),
+          path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.docx`),
+          path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.pdf`),
+          path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.doc`),
+          path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.xlsx`),
+          path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.xls`),
+        ]
+        
+        for (const possiblePath of possiblePaths) {
+          try {
+            const stat = await fs.stat(possiblePath)
+            if (stat.isFile()) {
+              filePath = possiblePath
+              break
+            }
+          } catch {
+            // 파일이 없으면 계속 시도
+          }
         }
-      } catch {
-        // 파일이 없으면 기존 board.php 사용
+        
+        // 파일을 찾지 못하면 404 반환
+        if (!filePath) {
+          res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' })
+          res.end(`<h1>404 - File Not Found</h1><p>다운로드 파일을 찾을 수 없습니다: bo_table=${boTable}, wr_id=${wrId}, no=${no}</p>`)
+          return
+        }
+      }
+    } else if (boTable === 'career') {
+      // board.php 처리 - career 페이지
+      if (wrId) {
+        // wr_id가 있으면 상세 페이지 HTML 파일 사용
+        const detailHtmlPath = path.join(DIST_DIR, `NEW/board/bbs/board_career_${wrId}.html`)
+        try {
+          const stat = await fs.stat(detailHtmlPath)
+          if (stat.isFile()) {
+            filePath = detailHtmlPath
+          }
+        } catch {
+          // 상세 페이지 파일이 없으면 board.php 사용
+        }
+      } else {
+        // 목록 페이지 HTML 파일 사용
+        const careerHtmlPath = path.join(DIST_DIR, 'NEW/board/bbs/board_career.html')
+        try {
+          const stat = await fs.stat(careerHtmlPath)
+          if (stat.isFile()) {
+            filePath = careerHtmlPath
+          }
+        } catch {
+          // 파일이 없으면 기존 board.php 사용
+        }
       }
     }
   }
@@ -90,7 +139,14 @@ const server = http.createServer(async (req, res) => {
     const ext = path.extname(filePath).toLowerCase()
     const contentType = mimeTypes[ext] || 'application/octet-stream'
     
-    res.writeHead(200, { 'Content-Type': contentType })
+    // download.php인 경우 다운로드 헤더 추가
+    const headers = { 'Content-Type': contentType }
+    if (urlPath.includes('download.php')) {
+      const fileName = path.basename(filePath)
+      headers['Content-Disposition'] = `attachment; filename="${fileName}"`
+    }
+    
+    res.writeHead(200, headers)
     res.end(content)
   } catch (error) {
     res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' })

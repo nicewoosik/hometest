@@ -41,14 +41,48 @@ export default async function handler(req, res) {
     
     let filePath = null
     
-    // PHP 파일 쿼리 파라미터 처리 (board.php)
-    if (queryString && urlPath.includes('board.php')) {
+    // PHP 파일 쿼리 파라미터 처리 (board.php, download.php)
+    if (queryString && (urlPath.includes('board.php') || urlPath.includes('download.php'))) {
       const params = new URLSearchParams(queryString)
       const boTable = params.get('bo_table')
       const wrId = params.get('wr_id')
+      const no = params.get('no')
       
-      // bo_table 파라미터가 있으면 PHP 파일을 읽어서 동적으로 수정
-      if (boTable) {
+      // download.php 처리 - 실제 첨부파일 찾기
+      if (urlPath.includes('download.php')) {
+        if (boTable === 'career' && wrId && no) {
+          // 채용공고 첨부파일 경로 시도
+          const possiblePaths = [
+            path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}`),
+            path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.docx`),
+            path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.pdf`),
+            path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.doc`),
+            path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.xlsx`),
+            path.join(DIST_DIR, `NEW/board/data/file/career/${wrId}_${no}.xls`),
+          ]
+          
+          for (const possiblePath of possiblePaths) {
+            try {
+              await fs.access(possiblePath)
+              filePath = possiblePath
+              break
+            } catch {
+              // 파일이 없으면 계속 시도
+            }
+          }
+          
+          // 파일을 찾지 못하면 404 반환
+          if (!filePath) {
+            res.status(404).json({ 
+              error: 'File Not Found', 
+              message: `Download file not found: bo_table=${boTable}, wr_id=${wrId}, no=${no}`,
+              triedPaths: possiblePaths.map(p => p.replace(DIST_DIR, ''))
+            })
+            return
+          }
+        }
+      } else if (boTable) {
+        // board.php 처리
         // 나중에 파일을 읽을 때 bo_table 값을 사용하기 위해 req 객체에 저장
         req._boTable = boTable
         req._wrId = wrId
@@ -140,6 +174,12 @@ export default async function handler(req, res) {
     }
     
     const contentType = mimeTypes[ext] || 'application/octet-stream'
+    
+    // download.php인 경우 다운로드 헤더 추가
+    if (urlPath.includes('download.php')) {
+      const fileName = path.basename(filePath)
+      res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`)
+    }
     
     res.setHeader('Content-Type', contentType)
     res.setHeader('Cache-Control', 'public, max-age=3600')
