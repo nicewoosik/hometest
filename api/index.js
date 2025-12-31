@@ -47,6 +47,20 @@ export default async function handler(req, res) {
       if (boTable) {
         // 나중에 파일을 읽을 때 bo_table 값을 사용하기 위해 req 객체에 저장
         req._boTable = boTable
+        
+        // career 페이지는 별도로 크롤링한 HTML 파일이 있으면 사용
+        if (boTable === 'career') {
+          const careerHtmlPath = path.join(DIST_DIR, 'NEW/board/bbs/board_career.html')
+          try {
+            await fs.access(careerHtmlPath)
+            filePath = careerHtmlPath
+            // 파일 경로를 설정했으므로 나중에 읽을 때 이 경로 사용
+            req._useCareerHtml = true
+          } catch {
+            // 파일이 없으면 기존 board.php 사용
+            req._useCareerHtml = false
+          }
+        }
       }
     }
     
@@ -69,7 +83,10 @@ export default async function handler(req, res) {
     }
     urlPath = '/' + normalized.join('/')
     
-    let filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath)
+    // career HTML 파일을 사용하는 경우가 아니면 기본 경로 사용
+    if (!req._useCareerHtml) {
+      filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath)
+    }
     
     // 디렉토리인 경우 index.html 찾기
     try {
@@ -83,7 +100,8 @@ export default async function handler(req, res) {
         error: 'File Not Found', 
         path: urlPath,
         requested: req.url,
-        distDir: DIST_DIR
+        distDir: DIST_DIR,
+        filePath: filePath
       })
       return
     }
@@ -93,7 +111,7 @@ export default async function handler(req, res) {
     const ext = path.extname(filePath).toLowerCase()
     
     // PHP 파일이고 bo_table 파라미터가 있으면 동적으로 수정
-    if (ext === '.php' && req._boTable) {
+    if (ext === '.php' && req._boTable && !req._useCareerHtml) {
       const contentStr = content.toString('utf-8')
       // g4_bo_table 변수를 쿼리 파라미터 값으로 변경
       const modifiedContent = contentStr.replace(
