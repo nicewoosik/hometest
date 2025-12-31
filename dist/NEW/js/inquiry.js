@@ -1,11 +1,16 @@
 // 간편문의 Supabase 제출 스크립트
 
-// Supabase 설정
-const SUPABASE_URL = 'https://qzymoraaukwicqlhjbsy.supabase.co'
-const SUPABASE_ANON_KEY = 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr'
+// Supabase 설정 (전역 변수 사용 - index.html에서 이미 선언됨)
+// SUPABASE_URL과 SUPABASE_ANON_KEY는 index.html에서 전역 변수로 선언되어 있음
 
 // 간편문의 폼 제출 함수
 async function submitInquiry(formData) {
+  // 전역 변수 확인
+  if (typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_ANON_KEY === 'undefined') {
+    console.error('Supabase 설정이 로드되지 않았습니다.')
+    throw new Error('Supabase 설정 오류')
+  }
+  
   try {
     const response = await fetch(`${SUPABASE_URL}/rest/v1/inquiries`, {
       method: 'POST',
