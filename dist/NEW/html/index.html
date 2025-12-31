@@ -604,15 +604,23 @@ var SUPABASE_ANON_KEY = 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr'
 function submitInquiry(formData) {
   console.log('문의 제출 시작:', formData)
   
-  // 전송할 데이터 준비
+  // 전송할 데이터 준비 (테이블 스키마에 맞게)
   var requestData = {
-    name: formData.wr_name || '',
-    company: formData.wr_subject || '',
-    email: formData.wr_email || '',
-    phone: formData.wr_2 || '',
-    content: formData.wr_content || '',
-    status: 'new'
+    name: formData.wr_name || null,
+    company: formData.wr_subject || null,
+    email: formData.wr_email || null,
+    phone: formData.wr_2 || null,
+    content: formData.wr_content || null,
+    status: 'new',
+    created_at: new Date().toISOString()
   }
+  
+  // null 값 제거 (선택적 필드인 경우)
+  Object.keys(requestData).forEach(function(key) {
+    if (requestData[key] === '') {
+      requestData[key] = null
+    }
+  })
   
   console.log('전송할 데이터:', requestData)
   console.log('Supabase URL:', SUPABASE_URL + '/rest/v1/inquiries')
