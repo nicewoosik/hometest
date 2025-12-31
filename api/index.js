@@ -30,10 +30,30 @@ export default async function handler(req, res) {
   try {
     // Vercel의 요청 URL 가져오기
     let urlPath = req.url || req.path || '/'
+    let queryString = ''
     
-    // 쿼리 스트링 제거
+    // 쿼리 스트링 분리 (PHP 파일 처리 전에)
     if (urlPath.includes('?')) {
-      urlPath = urlPath.split('?')[0]
+      const parts = urlPath.split('?')
+      urlPath = parts[0]
+      queryString = parts[1] || ''
+    }
+    
+    // PHP 파일 쿼리 파라미터 처리 (채용 공고 링크)
+    if (queryString && urlPath.includes('board.php')) {
+      const params = new URLSearchParams(queryString)
+      const boTable = params.get('bo_table')
+      // 채용 공고는 HTML 파일로 리다이렉트
+      if (boTable === 'career') {
+        const careerPage = path.join(DIST_DIR, 'NEW/html/04_07careerProcess.html')
+        try {
+          await fs.access(careerPage)
+          urlPath = '/NEW/html/04_07careerProcess.html'
+        } catch {
+          // 파일이 없으면 메인으로
+          urlPath = '/NEW/html/index.html'
+        }
+      }
     }
     
     // 경로가 /로 시작하지 않으면 추가
