@@ -39,20 +39,14 @@ export default async function handler(req, res) {
       queryString = parts[1] || ''
     }
     
-    // PHP 파일 쿼리 파라미터 처리 (채용 공고 링크)
+    // PHP 파일 쿼리 파라미터 처리 (board.php)
     if (queryString && urlPath.includes('board.php')) {
       const params = new URLSearchParams(queryString)
       const boTable = params.get('bo_table')
-      // 채용 공고는 HTML 파일로 리다이렉트
-      if (boTable === 'career') {
-        const careerPage = path.join(DIST_DIR, 'NEW/html/04_07careerProcess.html')
-        try {
-          await fs.access(careerPage)
-          urlPath = '/NEW/html/04_07careerProcess.html'
-        } catch {
-          // 파일이 없으면 메인으로
-          urlPath = '/NEW/html/index.html'
-        }
+      // bo_table 파라미터가 있으면 PHP 파일을 읽어서 동적으로 수정
+      if (boTable) {
+        // 나중에 파일을 읽을 때 bo_table 값을 사용하기 위해 req 객체에 저장
+        req._boTable = boTable
       }
     }
     
@@ -95,8 +89,20 @@ export default async function handler(req, res) {
     }
     
     // 파일 읽기
-    const content = await fs.readFile(filePath)
+    let content = await fs.readFile(filePath)
     const ext = path.extname(filePath).toLowerCase()
+    
+    // PHP 파일이고 bo_table 파라미터가 있으면 동적으로 수정
+    if (ext === '.php' && req._boTable) {
+      const contentStr = content.toString('utf-8')
+      // g4_bo_table 변수를 쿼리 파라미터 값으로 변경
+      const modifiedContent = contentStr.replace(
+        /var g4_bo_table\s*=\s*"[^"]*";/,
+        `var g4_bo_table = "${req._boTable}";`
+      )
+      content = Buffer.from(modifiedContent, 'utf-8')
+    }
+    
     const contentType = mimeTypes[ext] || 'application/octet-stream'
     
     res.setHeader('Content-Type', contentType)
