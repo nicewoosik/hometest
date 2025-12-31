@@ -16,7 +16,6 @@
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
 <script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="/js/default.js"></script>
-<script type="text/javascript" src="/js/inquiry.js"></script>
 <meta name="google-site-verification" content="8SBIsLN9SsWHPiZxSGzYQTTAR5R-meu_OhewP2XESTw" />
 
 <script type="application/ld+json">
@@ -603,34 +602,94 @@ var SUPABASE_ANON_KEY = 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr'
 
 // 간편문의 폼 제출 함수
 function submitInquiry(formData) {
+  console.log('문의 제출 시작:', formData)
+  
+  // 전송할 데이터 준비
+  var requestData = {
+    name: formData.wr_name || '',
+    company: formData.wr_subject || '',
+    email: formData.wr_email || '',
+    phone: formData.wr_2 || '',
+    content: formData.wr_content || '',
+    status: 'new'
+  }
+  
+  console.log('전송할 데이터:', requestData)
+  console.log('Supabase URL:', SUPABASE_URL + '/rest/v1/inquiries')
+  console.log('Supabase Key:', SUPABASE_ANON_KEY.substring(0, 20) + '...')
+  
+  // 요청 헤더 준비
+  var headers = {
+    'Content-Type': 'application/json',
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+    'Prefer': 'return=representation'
+  }
+  
+  console.log('요청 URL:', SUPABASE_URL + '/rest/v1/inquiries')
+  console.log('요청 헤더:', headers)
+  console.log('요청 본문:', requestData)
+  
   return fetch(SUPABASE_URL + '/rest/v1/inquiries', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': SUPABASE_ANON_KEY,
-      'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-      'Prefer': 'return=representation'
-    },
-    body: JSON.stringify({
-      name: formData.wr_name,
-      company: formData.wr_subject,
-      email: formData.wr_email,
-      phone: formData.wr_2 || null,
-      content: formData.wr_content,
-      status: 'new'
-    })
+    headers: headers,
+    body: JSON.stringify(requestData)
   })
   .then(function(response) {
+    console.log('=== Supabase 응답 정보 ===')
+    console.log('응답 상태:', response.status, response.statusText)
+    console.log('응답 헤더:', Object.fromEntries(response.headers.entries()))
+    console.log('응답 URL:', response.url)
+    
     if (!response.ok) {
-      return response.json().catch(function() { return {} }).then(function(errorData) {
-        throw new Error(errorData.message || '문의 접수 실패')
+      return response.text().then(function(text) {
+        console.error('=== Supabase 에러 상세 ===')
+        console.error('응답 본문 (텍스트):', text)
+        console.error('응답 상태 코드:', response.status)
+        console.error('응답 상태 텍스트:', response.statusText)
+        
+        var errorData
+        try {
+          errorData = JSON.parse(text)
+          console.error('응답 본문 (JSON):', errorData)
+          console.error('에러 코드:', errorData.code)
+          console.error('에러 메시지:', errorData.message)
+          console.error('에러 힌트:', errorData.hint)
+          console.error('에러 상세:', errorData.details)
+        } catch (e) {
+          errorData = { message: text || '문의 접수 실패', hint: response.statusText }
+          console.error('JSON 파싱 실패:', e)
+        }
+        
+        // RLS 정책 오류인 경우 상세 정보 출력
+        if (response.status === 403 || response.status === 401) {
+          console.error('=== RLS 정책 오류 진단 ===')
+          console.error('1. Supabase 프로젝트의 RLS가 활성화되어 있는지 확인')
+          console.error('2. inquiries 테이블에 anon 역할에 대한 INSERT 정책이 있는지 확인')
+          console.error('3. 정책의 WITH CHECK 조건이 true인지 확인')
+          console.error('4. API 키가 올바른지 확인 (anon key 사용 중)')
+          throw new Error('권한 오류 (RLS): ' + (errorData.message || '') + ' (상태: ' + response.status + ', 코드: ' + (errorData.code || 'N/A') + ')')
+        }
+        
+        throw new Error(errorData.message || errorData.hint || errorData.details || '문의 접수 실패 (상태: ' + response.status + ')')
       })
     }
     return response.json()
   })
   .catch(function(error) {
     console.error('문의 접수 오류:', error)
-    throw error
+    console.error('에러 스택:', error.stack)
+    
+    if (error.message) {
+      throw error
+    }
+    
+    // 네트워크 오류인 경우
+    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+      throw new Error('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.')
+    }
+    
+    throw new Error('알 수 없는 오류가 발생했습니다: ' + error.toString())
   })
 }
 
@@ -668,7 +727,7 @@ function checkFrm(obj) {
 
   // Supabase에 제출
   submitInquiry(formData)
-    .then(function() {
+    .then(function(result) {
       alert('문의가 접수되었습니다.\n빠른 시일 내에 답변드리겠습니다.')
       obj.reset()
       
@@ -678,8 +737,14 @@ function checkFrm(obj) {
       }
     })
     .catch(function(error) {
-      alert('문의 접수 중 오류가 발생했습니다.\n다시 시도해주세요.')
-      console.error('문의 접수 오류:', error)
+      console.error('문의 접수 오류 상세:', error)
+      var errorMessage = '문의 접수 중 오류가 발생했습니다.\n다시 시도해주세요.'
+      
+      if (error.message) {
+        errorMessage += '\n\n오류: ' + error.message
+      }
+      
+      alert(errorMessage)
     })
     .finally(function() {
       submitBtn.disabled = false
