@@ -54,17 +54,29 @@ export default async function handler(req, res) {
         req._wrId = wrId
         
         // career 페이지는 별도로 크롤링한 HTML 파일이 있으면 사용
-        // 단, wr_id가 있으면 상세 페이지이므로 board.php 사용
-        if (boTable === 'career' && !wrId) {
-          const careerHtmlPath = path.join(DIST_DIR, 'NEW/board/bbs/board_career.html')
-          try {
-            await fs.access(careerHtmlPath)
-            filePath = careerHtmlPath
-            // 파일 경로를 설정했으므로 나중에 읽을 때 이 경로 사용
-            req._useCareerHtml = true
-          } catch {
-            // 파일이 없으면 기존 board.php 사용
-            req._useCareerHtml = false
+        if (boTable === 'career') {
+          if (wrId) {
+            // wr_id가 있으면 상세 페이지 HTML 파일 사용
+            const detailHtmlPath = path.join(DIST_DIR, `NEW/board/bbs/board_career_${wrId}.html`)
+            try {
+              await fs.access(detailHtmlPath)
+              filePath = detailHtmlPath
+              req._useCareerHtml = true
+            } catch {
+              // 상세 페이지 파일이 없으면 board.php 사용
+              req._useCareerHtml = false
+            }
+          } else {
+            // 목록 페이지 HTML 파일 사용
+            const careerHtmlPath = path.join(DIST_DIR, 'NEW/board/bbs/board_career.html')
+            try {
+              await fs.access(careerHtmlPath)
+              filePath = careerHtmlPath
+              req._useCareerHtml = true
+            } catch {
+              // 파일이 없으면 기존 board.php 사용
+              req._useCareerHtml = false
+            }
           }
         }
       }
