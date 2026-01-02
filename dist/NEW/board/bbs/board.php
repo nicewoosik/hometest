@@ -700,85 +700,112 @@ function checkFrm(obj) {
 
 <!-- 채용공고 상세 페이지 동적 로드 -->
 <script>
+// 즉시 실행하여 ECS News 내용 숨기기 및 초기 설정
 (function() {
-  // 즉시 실행하여 ECS News 내용 숨기기
-  (function() {
-    const urlParams = new URLSearchParams(window.location.search)
-    const boTable = urlParams.get('bo_table')
-    const wrId = urlParams.get('wr_id')
-    
-    if (boTable === 'career' && wrId) {
-      // 즉시 ECS News 내용 숨기기
-      const newsContent = document.querySelector('.ourComBox')
-      if (newsContent) {
-        newsContent.style.display = 'none'
-      }
-      
-      // 페이지 제목 및 배너 즉시 변경
-      const subpageImg = document.querySelector('.subpage_img')
-      if (subpageImg) {
-        const title = subpageImg.querySelector('p')
-        if (title) title.textContent = 'Job Openings'
-        const img = subpageImg.querySelector('img')
-        if (img) img.src = '/NEW/images/kor/top_e_04_new.jpg'
-      }
-      
-      // breadcrumb 즉시 변경
-      const locs = document.querySelector('.locs')
-      if (locs) {
-        locs.innerHTML = '<a href="#"><img src="/NEW/images/kor/icon_house.png"></a> Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings'
-      }
-      
-      // 서비스 박스를 careerProcess_box로 변경하고 초기 구조 준비
-      const serviceBox = document.querySelector('.service_box')
-      if (serviceBox) {
-        // service_box를 careerProcess_box로 변경
-        serviceBox.className = 'careerProcess_box'
-        // 초기 구조만 설정 (career-detail-supabase.js가 나중에 내용을 채움)
-        serviceBox.innerHTML = `
-          <p class="serv_title">
-            <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
-            <i>채용 프로세스</i>
-          </p>
-          <p class="serv_title_bar"><img src="/NEW/images/kor/serv_bar.png" alt=""></p>
-          <div class="servUni_con1">
-            Join the Winning Team<br class="nonBr850">
-            Discover our Potential! Discover your Potential!
-          </div>
-          <div class="careerView">
-            <div class="careV_Box">
-              <div id="career-detail-loading" style="padding: 20px; text-align: center;">
-                <p>채용공고 정보를 불러오는 중...</p>
-              </div>
-            </div>
-          </div>
-        `
-      }
-    }
-  })()
-  
-  // 채용공고 상세 페이지인 경우 스크립트 로드
   const urlParams = new URLSearchParams(window.location.search)
   const boTable = urlParams.get('bo_table')
   const wrId = urlParams.get('wr_id')
   
-  console.log('board.php 스크립트 로드 체크:', { boTable, wrId })
+  console.log('board.php 즉시 실행:', { boTable, wrId, search: window.location.search })
   
   if (boTable === 'career' && wrId) {
-    console.log('career-detail-supabase.js 로드 시작')
-    // career-detail-supabase.js 로드
-    const script = document.createElement('script')
-    script.src = '/NEW/js/career-detail-supabase.js'
-    script.async = false // 동기 로드로 변경하여 순서 보장
-    script.onload = function() {
-      console.log('career-detail-supabase.js 로드 완료')
+    console.log('채용공고 상세 페이지 감지됨')
+    
+    // 즉시 ECS News 내용 숨기기
+    const newsContent = document.querySelector('.ourComBox')
+    if (newsContent) {
+      newsContent.style.display = 'none'
     }
-    script.onerror = function() {
-      console.error('career-detail-supabase.js 로드 실패')
+    
+    // 페이지 제목 및 배너 즉시 변경
+    const subpageImg = document.querySelector('.subpage_img')
+    if (subpageImg) {
+      const title = subpageImg.querySelector('p')
+      if (title) title.textContent = 'Job Openings'
+      const img = subpageImg.querySelector('img')
+      if (img) img.src = '/NEW/images/kor/top_e_04_new.jpg'
     }
-    document.head.appendChild(script)
+    
+    // breadcrumb 즉시 변경
+    const locs = document.querySelector('.locs')
+    if (locs) {
+      locs.innerHTML = '<a href="#"><img src="/NEW/images/kor/icon_house.png"></a> Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings'
+    }
+    
+    // 서비스 박스를 careerProcess_box로 변경하고 초기 구조 준비
+    const serviceBox = document.querySelector('.service_box')
+    if (serviceBox) {
+      console.log('서비스 박스 찾음, 초기 구조 설정')
+      // service_box를 careerProcess_box로 변경
+      serviceBox.className = 'careerProcess_box'
+      // 초기 구조만 설정 (career-detail-supabase.js가 나중에 내용을 채움)
+      serviceBox.innerHTML = `
+        <p class="serv_title">
+          <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
+          <i>채용 프로세스</i>
+        </p>
+        <p class="serv_title_bar"><img src="/NEW/images/kor/serv_bar.png" alt=""></p>
+        <div class="servUni_con1">
+          Join the Winning Team<br class="nonBr850">
+          Discover our Potential! Discover your Potential!
+        </div>
+        <div class="careerView">
+          <div class="careV_Box">
+            <div id="career-detail-loading" style="padding: 20px; text-align: center;">
+              <p>채용공고 정보를 불러오는 중...</p>
+            </div>
+          </div>
+        </div>
+      `
+    } else {
+      console.error('서비스 박스를 찾을 수 없습니다')
+    }
+  }
+})()
+</script>
+
+<!-- 채용공고 상세 페이지 스크립트 로드 -->
+<script>
+(function() {
+  function loadCareerDetailScript() {
+    const urlParams = new URLSearchParams(window.location.search)
+    const boTable = urlParams.get('bo_table')
+    const wrId = urlParams.get('wr_id')
+    
+    console.log('loadCareerDetailScript 실행:', { boTable, wrId })
+    
+    if (boTable === 'career' && wrId) {
+      console.log('career-detail-supabase.js 로드 시작')
+      
+      // 이미 로드되었는지 확인
+      if (document.querySelector('script[src="/NEW/js/career-detail-supabase.js"]')) {
+        console.log('career-detail-supabase.js 이미 로드됨')
+        return
+      }
+      
+      // career-detail-supabase.js 로드
+      const script = document.createElement('script')
+      script.src = '/NEW/js/career-detail-supabase.js'
+      script.async = false
+      script.onload = function() {
+        console.log('career-detail-supabase.js 로드 완료')
+      }
+      script.onerror = function(error) {
+        console.error('career-detail-supabase.js 로드 실패:', error)
+        console.error('스크립트 경로:', script.src)
+      }
+      document.head.appendChild(script)
+    } else {
+      console.log('채용공고 상세 페이지가 아닙니다:', { boTable, wrId })
+    }
+  }
+  
+  // DOM 로드 후 실행
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadCareerDetailScript)
   } else {
-    console.log('채용공고 상세 페이지가 아닙니다:', { boTable, wrId })
+    // 이미 로드된 경우 즉시 실행
+    setTimeout(loadCareerDetailScript, 100)
   }
 })()
 </script>
