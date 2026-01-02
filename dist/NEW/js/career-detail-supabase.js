@@ -1,5 +1,9 @@
 // 채용공고 상세 페이지를 Supabase에서 가져와서 동적으로 렌더링
+console.log('career-detail-supabase.js 로드됨')
+
 (function() {
+  console.log('career-detail-supabase.js 실행 시작')
+  
   // URL 파라미터 추출 함수
   function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
@@ -12,9 +16,11 @@
   const postingId = getUrlParameter('wr_id')
   const boTable = getUrlParameter('bo_table')
   
+  console.log('URL 파라미터 확인:', { postingId, boTable, search: location.search })
+  
   // 채용공고 상세 페이지가 아니면 실행하지 않음
   if (!postingId || boTable !== 'career') {
-    console.log('채용공고 상세 페이지가 아닙니다.')
+    console.log('채용공고 상세 페이지가 아닙니다. postingId:', postingId, 'boTable:', boTable)
     return
   }
   

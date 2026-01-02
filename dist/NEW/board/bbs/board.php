@@ -762,12 +762,23 @@ function checkFrm(obj) {
   const boTable = urlParams.get('bo_table')
   const wrId = urlParams.get('wr_id')
   
+  console.log('board.php 스크립트 로드 체크:', { boTable, wrId })
+  
   if (boTable === 'career' && wrId) {
+    console.log('career-detail-supabase.js 로드 시작')
     // career-detail-supabase.js 로드
     const script = document.createElement('script')
     script.src = '/NEW/js/career-detail-supabase.js'
-    script.async = true
+    script.async = false // 동기 로드로 변경하여 순서 보장
+    script.onload = function() {
+      console.log('career-detail-supabase.js 로드 완료')
+    }
+    script.onerror = function() {
+      console.error('career-detail-supabase.js 로드 실패')
+    }
     document.head.appendChild(script)
+  } else {
+    console.log('채용공고 상세 페이지가 아닙니다:', { boTable, wrId })
   }
 })()
 </script>
