@@ -153,13 +153,28 @@
 (function() {
     'use strict';
     
+    console.log('채용공고 스크립트 시작');
+    
+    // Supabase 라이브러리 로드 확인
+    if (typeof supabase === 'undefined') {
+        console.error('Supabase 라이브러리가 로드되지 않았습니다.');
+        document.getElementById('career_list_tbody').innerHTML = 
+            '<tr><td colspan="5" class="career-error">Supabase 라이브러리를 불러올 수 없습니다. 페이지를 새로고침해주세요.</td></tr>';
+        return;
+    }
+    
     // Supabase 설정
     const SUPABASE_URL = 'https://qzymoraaukwicqlhjbsy.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr';
     
     // Supabase 클라이언트 생성
     function getSupabaseClient() {
-        return supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        try {
+            return supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        } catch (error) {
+            console.error('Supabase 클라이언트 생성 오류:', error);
+            throw error;
+        }
     }
     
     // HTML 이스케이프 함수
