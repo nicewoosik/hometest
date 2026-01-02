@@ -617,19 +617,35 @@
     console.log('채용공고 페이지 초기화, id:', wrId);
     
     function initializePage() {
-        if (wrId) {
-            console.log('상세 페이지 로드');
-            showCareerDetail(wrId);
-        } else {
-            console.log('목록 페이지 로드');
-            loadJobPostings();
+        console.log('페이지 초기화 함수 실행');
+        try {
+            if (wrId) {
+                console.log('상세 페이지 로드');
+                showCareerDetail(wrId);
+            } else {
+                console.log('목록 페이지 로드');
+                loadJobPostings();
+            }
+        } catch (error) {
+            console.error('페이지 초기화 중 오류:', error);
+            const tbody = document.getElementById('career_list_tbody');
+            if (tbody) {
+                tbody.innerHTML = '<tr><td colspan="5" class="career-error">페이지 로드 중 오류가 발생했습니다: ' + error.message + '</td></tr>';
+            }
         }
     }
     
+    // DOM이 준비되면 실행
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializePage);
+        console.log('DOM 로딩 중, DOMContentLoaded 이벤트 대기');
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded 이벤트 발생');
+            initializePage();
+        });
     } else {
-        initializePage();
+        console.log('DOM 이미 로드됨, 즉시 실행');
+        // 약간의 지연을 두어 DOM이 완전히 준비되도록 함
+        setTimeout(initializePage, 100);
     }
     
 })();
