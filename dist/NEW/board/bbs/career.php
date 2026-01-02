@@ -317,6 +317,7 @@
     // 채용공고 상세 정보 렌더링
     function renderJobPostingDetail(posting) {
         console.log('채용공고 상세 정보 렌더링 시작:', posting);
+        console.log('렌더링할 모든 필드:', posting);
         
         // 접수기한 포맷팅
         let deadlineText = '채용시 마감';
@@ -328,65 +329,133 @@
                 day: 'numeric'
             });
         }
-        
+
+        // 상세 내용 HTML 생성
+        let detailHtml = '';
+
+        // 상세 설명
+        if (posting.description) {
+            detailHtml += `<p class="carInTXT">${posting.description}</p>`;
+        }
+
+        // 주요업무
+        if (posting.main_duties || posting.work_experience) {
+            detailHtml += `<div class="carInTXT_title"><img src="/NEW/images/kor/Y_1.png" alt="수행직무"></div>`;
+            if (posting.main_duties) {
+                detailHtml += `<div class="carInTXT">${posting.main_duties}</div>`;
+            }
+        }
+
+        // 필수요건 및 우대사항
+        if (posting.required_qualifications || posting.preferred_qualifications) {
+            let jobDescHtml = '';
+            if (posting.required_qualifications) {
+                jobDescHtml += posting.required_qualifications;
+            }
+            if (posting.preferred_qualifications) {
+                if (jobDescHtml) jobDescHtml += '<br /><br />';
+                jobDescHtml += posting.preferred_qualifications;
+            }
+            if (jobDescHtml) {
+                detailHtml += `<div class="carInTXT">${jobDescHtml}</div>`;
+            }
+        }
+
+        // 지원서 다운로드
+        if (posting.attachment_url) {
+            detailHtml += `
+                <div class="carInTXT_title"><img src="/NEW/images/kor/Y_4.png" alt="지원서다운"></div>
+                <p class="carInTXT">
+                    <a href="${escapeHtml(posting.attachment_url)}" target="_blank" title='지원서'><img src="/NEW/images/kor/Y_down_btn.png" alt="지원서다운"></a>
+                </p>
+            `;
+        }
+
+        // 전형일정
+        if (posting.recruitment_process) {
+            detailHtml += `
+                <div class="carInTXT_title"><img src="/NEW/images/kor/Y_5.png" alt="전형일정"></div>
+                <p class="carInTXT">${posting.recruitment_process}</p>
+            `;
+        }
+
+        // 지원문의
+        if (posting.contact_email || posting.contact_phone) {
+            let contactHtml = '';
+            if (posting.contact_email) {
+                contactHtml += escapeHtml(posting.contact_email);
+            }
+            if (posting.contact_phone) {
+                if (contactHtml) contactHtml += '<br />';
+                contactHtml += escapeHtml(posting.contact_phone);
+            }
+            detailHtml += `
+                <div class="carInTXT_title"><img src="/NEW/images/kor/Y_6.png" alt="지원문의"></div>
+                <p class="carInTXT">${contactHtml}</p>
+            `;
+        }
+
+        // 전체 HTML 생성 (기존 board.php와 동일한 구조)
         let html = `
             <p class="serv_title">
                 <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
                 <i>채용 프로세스</i>
             </p>
             <p class="serv_title_bar"><img src="/NEW/images/kor/serv_bar.png" alt=""></p>
-            
+            <div class="servUni_con1">
+                Join the Winning Team<br class="nonBr850">
+                Discover our Potential! Discover your Potential!
+            </div>
             <div class="careerView">
-                <div class="career_content">
-                    <h2 style="font-size: 24px; margin-bottom: 20px; color: #333;">${escapeHtml(posting.title)}</h2>
-                    
-                    <table class="career_info_table" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                <div class="careV_Box">
+                    <table class="carV_Table">
                         <tr>
-                            <td style="padding: 10px; background: #f5f5f5; font-weight: bold; width: 150px;">모집부문</td>
-                            <td style="padding: 10px;">${escapeHtml(posting.department || '-')}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">직무</td>
-                            <td style="padding: 10px;">${escapeHtml(posting.job_type || '-')}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">지원대상</td>
-                            <td style="padding: 10px;">${escapeHtml(posting.target_audience || '-')}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">지역</td>
-                            <td style="padding: 10px;">${escapeHtml(posting.location || '-')}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">직급</td>
-                            <td style="padding: 10px;">${escapeHtml(posting.position_level || '-')}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">모집인원</td>
-                            <td style="padding: 10px;">${posting.recruitment_count ? posting.recruitment_count + '명' : '-'}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; background: #f5f5f5; font-weight: bold;">접수기한</td>
-                            <td style="padding: 10px;">${deadlineText}</td>
+                            <td class="carV_title">제목</td>
+                            <td class="carV_title_C">${escapeHtml(posting.title)}</td>
+                            <td class="carV_date">접수기한</td>
+                            <td class="carV_date_C">${deadlineText}</td>
+                            <td class="carV_hit">조회</td>
+                            <td class="carV_hit_C">${posting.view_count || 0}</td>
                         </tr>
                     </table>
-                    
-                    ${posting.description ? `<div style="margin-bottom: 30px;"><h3 style="margin-bottom: 10px;">상세 내용</h3><div>${posting.description}</div></div>` : ''}
-                    
-                    ${posting.main_duties ? `<div style="margin-bottom: 30px;"><h3 style="margin-bottom: 10px;">주요 업무</h3><div>${posting.main_duties}</div></div>` : ''}
-                    
-                    ${posting.required_qualifications ? `<div style="margin-bottom: 30px;"><h3 style="margin-bottom: 10px;">필수 자격요건</h3><div>${posting.required_qualifications}</div></div>` : ''}
-                    
-                    ${posting.preferred_qualifications ? `<div style="margin-bottom: 30px;"><h3 style="margin-bottom: 10px;">우대 사항</h3><div>${posting.preferred_qualifications}</div></div>` : ''}
-                    
-                    ${posting.recruitment_process ? `<div style="margin-bottom: 30px;"><h3 style="margin-bottom: 10px;">전형 일정</h3><div>${posting.recruitment_process}</div></div>` : ''}
-                    
-                    ${posting.attachment_url ? `<div style="margin-bottom: 30px;"><a href="${escapeHtml(posting.attachment_url)}" target="_blank" style="color: #1976d2; text-decoration: underline;">지원서 양식 다운로드</a></div>` : ''}
+                    <div class="career_content">
+                        <table class="carInside_Table">
+                            <tr>
+                                <th class="carInside_Ta_1">모집부문</th>
+                                <th class="carInside_Ta_2">지원대상</th>
+                                <th class="carInside_Ta_3">직무</th>
+                                <th class="carInside_Ta_4">지역</th>
+                                <th class="carInside_Ta_5">직급</th>
+                                <th class="carInside_Ta_6">모집인원</th>
+                            </tr>
+                            <tr>
+                                <td>${escapeHtml(posting.department || '')}</td>
+                                <td>${escapeHtml(posting.target_audience || '')}</td>
+                                <td>${escapeHtml(posting.job_type || '')}</td>
+                                <td>${escapeHtml(posting.location || '')}</td>
+                                <td>${escapeHtml(posting.position_level || '')}</td>
+                                <td>${posting.recruitment_count ? posting.recruitment_count + '명' : ''}</td>
+                            </tr>
+                        </table>
+                        ${detailHtml}
+                    </div>
+                    <div class="carBotBars"></div>
+                    <div class="caree_btns">
+                        <a href="#" onclick="showApplicationForm('${posting.id}'); return false;">
+                            <img src="/NEW/images/kor/btn_jiwon.png" alt="지원하기">
+                        </a>
+                        &nbsp;<a href="/NEW/board/bbs/board.php?bo_table=apply&career=${posting.id}">
+                            <img src="/NEW/images/kor/btn_jiwonhyun.png" alt="지원현황">
+                        </a>&nbsp;
+                        <a href="career.php">
+                            <img src="/NEW/images/kor/btn_list.png" alt="목록">
+                        </a>
+                    </div>
                 </div>
             </div>
             
-            <!-- 지원 폼 -->
-            <div class="application-form" id="application_form">
+            <!-- 지원 폼 (기존 구조와 동일하게) -->
+            <div class="application-form" id="application_form" style="display: none;">
                 <h3>지원하기</h3>
                 <form id="applicationForm" onsubmit="submitApplication(event, '${posting.id}'); return false;">
                     <div class="form-group">
@@ -413,10 +482,6 @@
                     <div class="success-message" id="successMessage">지원이 완료되었습니다. 감사합니다!</div>
                 </form>
             </div>
-            
-            <div style="margin-top: 30px; text-align: center;">
-                <a href="career.php" style="display: inline-block; padding: 10px 20px; background: #666; color: white; text-decoration: none; border-radius: 4px;">목록으로</a>
-            </div>
         `;
         
         document.getElementById('career_detail_box').innerHTML = html;
@@ -434,6 +499,17 @@
         window.history.pushState({ id: jobId }, '', newUrl);
         
         loadJobPostingDetail(jobId);
+    };
+    
+    // 지원 폼 표시
+    window.showApplicationForm = function(jobId) {
+        const form = document.getElementById('application_form');
+        if (form) {
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            if (form.style.display === 'block') {
+                form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
     };
     
     // 지원서 제출
