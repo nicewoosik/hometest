@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href="/NEW/css/jquery.bxslider.css">
 <script type="text/javascript" src="/NEW/js/jquery-1.12.3.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script type="text/javascript" src="/NEW/js/jquery.bxslider.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -51,7 +51,7 @@ var g4_is_gecko  = navigator.userAgent.toLowerCase().indexOf("gecko") != -1;
 var g4_is_ie     = navigator.userAgent.toLowerCase().indexOf("msie") != -1;
 </script>
 <!-- <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script> -->
-<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="/NEW/board/js/common.js"></script>
 <body topmargin="0" leftmargin="0" >
 
 
@@ -777,7 +777,7 @@ function html_auto_br(obj)
 <script type="text/javascript" src="../js/board.js"></script>
 <script type="text/javascript"> window.onload=function() { drawFont(); } </script>
 <script type='text/javascript' src='../js/md5.js'></script>
-<br /><script type="text/javascript" src="../js/wrest.js"></script>
+<br /><script type="text/javascript" src="/NEW/board/js/wrest.js"></script>
 
 <!-- 새창 대신 사용하는 iframe -->
 <iframe width=0 height=0 name='hiddenframe' style='display:none;'></iframe>
