@@ -260,6 +260,13 @@ $(function(){
             <span id="breadcrumb_path">ECS NOW <img src="/NEW/images/kor/icon_next.png"> ECS NEWS</span>
         </div>
         
+        <!-- 채용공고 상세 영역 -->
+        <div id="career_detail_container" style="display: none;">
+            <div class="service_box" id="career_detail_box">
+                <!-- 상세 내용이 여기에 동적으로 로드됩니다 -->
+            </div>
+        </div>
+        
         <!-- 채용공고 목록 영역 -->
         <div id="career_list_container" style="display: none;">
             <div class="service_box">
@@ -746,6 +753,7 @@ function checkFrm(obj) {
     }
 
     const boTable = getUrlParameter('bo_table');
+    const wrId = getUrlParameter('wr_id');
     
     // 채용공고 페이지가 아니면 실행하지 않음
     if (boTable !== 'career') {
@@ -757,9 +765,17 @@ function checkFrm(obj) {
     document.getElementById('subpage_banner').src = '/NEW/images/kor/top_e_04_new.jpg';
     document.getElementById('breadcrumb_path').innerHTML = 'Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings';
     
-    // ECS News 숨기고 채용공고 목록 표시
+    // ECS News 숨기기
     document.getElementById('news_container').style.display = 'none';
-    document.getElementById('career_list_container').style.display = 'block';
+    
+    // wr_id가 있으면 상세 페이지, 없으면 목록 페이지
+    if (wrId) {
+        document.getElementById('career_list_container').style.display = 'none';
+        document.getElementById('career_detail_container').style.display = 'block';
+    } else {
+        document.getElementById('career_list_container').style.display = 'block';
+        document.getElementById('career_detail_container').style.display = 'none';
+    }
 
     // Supabase 설정
     const SUPABASE_URL = 'https://qzymoraaukwicqlhjbsy.supabase.co';
@@ -863,16 +879,210 @@ function checkFrm(obj) {
         }
     }
 
+    // 채용공고 상세 정보 로드
+    async function loadJobPostingDetail() {
+        console.log('채용공고 상세 정보 로드 시작, wr_id:', wrId);
+        try {
+            const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            
+            console.log('데이터베이스에서 채용공고 상세 정보 조회 시작...');
+            const { data, error } = await supabaseClient
+                .from('job_postings')
+                .select('*')
+                .eq('id', wrId)
+                .single();
+
+            console.log('데이터베이스 조회 결과:', { data, error });
+
+            if (error) {
+                console.error('채용공고 상세 로드 오류:', error);
+                document.getElementById('career_detail_box').innerHTML = 
+                    '<p style="text-align: center; padding: 20px; color: red;">채용공고를 불러오는 중 오류가 발생했습니다: ' + escapeHtml(error.message) + '</p>';
+                return;
+            }
+
+            if (!data) {
+                console.warn('채용공고를 찾을 수 없습니다.');
+                document.getElementById('career_detail_box').innerHTML = 
+                    '<p style="text-align: center; padding: 20px;">채용공고를 찾을 수 없습니다.</p>';
+                return;
+            }
+
+            console.log('채용공고 상세 데이터:', data);
+            renderJobPostingDetail(data);
+        } catch (error) {
+            console.error('채용공고 상세 로드 중 오류:', error);
+            document.getElementById('career_detail_box').innerHTML = 
+                '<p style="text-align: center; padding: 20px; color: red;">채용공고를 불러오는 중 오류가 발생했습니다: ' + escapeHtml(error.message) + '</p>';
+        }
+    }
+
+    // 채용공고 상세 정보 렌더링
+    function renderJobPostingDetail(posting) {
+        console.log('채용공고 상세 정보 렌더링 시작:', posting);
+        
+        // 접수기한 포맷팅
+        let deadlineText = '채용시 마감';
+        if (posting.deadline) {
+            const deadline = new Date(posting.deadline);
+            deadlineText = deadline.toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // 상세 내용 HTML 생성
+        let detailHtml = '';
+
+        // 상세 설명
+        if (posting.description) {
+            detailHtml += `<p class="carInTXT">${posting.description}</p>`;
+        }
+
+        // 주요업무
+        if (posting.main_duties || posting.work_experience) {
+            detailHtml += `<div class="carInTXT_title"><img src="/NEW/images/kor/Y_1.png" alt="수행직무"></div>`;
+            if (posting.main_duties) {
+                detailHtml += `<div class="carInTXT">${posting.main_duties}</div>`;
+            }
+        }
+
+        // 필수요건 및 우대사항
+        if (posting.required_qualifications || posting.preferred_qualifications) {
+            let jobDescHtml = '';
+            if (posting.required_qualifications) {
+                jobDescHtml += posting.required_qualifications;
+            }
+            if (posting.preferred_qualifications) {
+                if (jobDescHtml) jobDescHtml += '<br /><br />';
+                jobDescHtml += posting.preferred_qualifications;
+            }
+            if (jobDescHtml) {
+                detailHtml += `<div class="carInTXT">${jobDescHtml}</div>`;
+            }
+        }
+
+        // 지원서 다운로드
+        if (posting.attachment_url) {
+            detailHtml += `
+                <div class="carInTXT_title"><img src="/NEW/images/kor/Y_4.png" alt="지원서다운"></div>
+                <p class="carInTXT">
+                    <a href="${escapeHtml(posting.attachment_url)}" target="_blank" title='지원서'><img src="/NEW/images/kor/Y_down_btn.png" alt="지원서다운"></a>
+                </p>
+            `;
+        }
+
+        // 전형일정
+        if (posting.recruitment_process) {
+            detailHtml += `
+                <div class="carInTXT_title"><img src="/NEW/images/kor/Y_5.png" alt="전형일정"></div>
+                <p class="carInTXT">${posting.recruitment_process}</p>
+            `;
+        }
+
+        // 지원문의
+        if (posting.contact_email || posting.contact_phone) {
+            let contactHtml = '';
+            if (posting.contact_email) {
+                contactHtml += escapeHtml(posting.contact_email);
+            }
+            if (posting.contact_phone) {
+                if (contactHtml) contactHtml += '<br />';
+                contactHtml += escapeHtml(posting.contact_phone);
+            }
+            detailHtml += `
+                <div class="carInTXT_title"><img src="/NEW/images/kor/Y_6.png" alt="지원문의"></div>
+                <p class="carInTXT">${contactHtml}</p>
+            `;
+        }
+
+        // 전체 HTML 생성
+        const html = `
+            <p class="serv_title">
+                <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
+                <i>채용 프로세스</i>
+            </p>
+            <p class="serv_title_bar"><img src="/NEW/images/kor/serv_bar.png" alt=""></p>
+            <div class="servUni_con1">
+                Join the Winning Team<br class="nonBr850">
+                Discover our Potential! Discover your Potential!
+            </div>
+            <div class="careerView">
+                <div class="careV_Box">
+                    <table class="carV_Table">
+                        <tr>
+                            <td class="carV_title">제목</td>
+                            <td class="carV_title_C">${escapeHtml(posting.title)}</td>
+                            <td class="carV_date">접수기한</td>
+                            <td class="carV_date_C">${deadlineText}</td>
+                            <td class="carV_hit">조회</td>
+                            <td class="carV_hit_C">${posting.view_count || 0}</td>
+                        </tr>
+                    </table>
+                    <div class="career_content">
+                        <table class="carInside_Table">
+                            <tr>
+                                <th class="carInside_Ta_1">모집부문</th>
+                                <th class="carInside_Ta_2">지원대상</th>
+                                <th class="carInside_Ta_3">직무</th>
+                                <th class="carInside_Ta_4">지역</th>
+                                <th class="carInside_Ta_5">직급</th>
+                                <th class="carInside_Ta_6">모집인원</th>
+                            </tr>
+                            <tr>
+                                <td>${escapeHtml(posting.department || '')}</td>
+                                <td>${escapeHtml(posting.target_audience || '')}</td>
+                                <td>${escapeHtml(posting.job_type || '')}</td>
+                                <td>${escapeHtml(posting.location || '')}</td>
+                                <td>${escapeHtml(posting.position_level || '')}</td>
+                                <td>${posting.recruitment_count ? posting.recruitment_count + '명' : ''}</td>
+                            </tr>
+                        </table>
+                        ${detailHtml}
+                    </div>
+                    <div class="carBotBars"></div>
+                    <div class="caree_btns">
+                        <a href="/NEW/board/bbs/write.php?bo_table=apply&career=${posting.id}">
+                            <img src="/NEW/images/kor/btn_jiwon.png" alt="지원하기">
+                        </a>
+                        &nbsp;<a href="/NEW/board/bbs/board.php?bo_table=apply&career=${posting.id}">
+                            <img src="/NEW/images/kor/btn_jiwonhyun.png" alt="지원현황">
+                        </a>&nbsp;
+                        <a href="/NEW/board/bbs/board.php?bo_table=career">
+                            <img src="/NEW/images/kor/btn_list.png" alt="목록">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('career_detail_box').innerHTML = html;
+        console.log('채용공고 상세 정보 렌더링 완료');
+    }
+
     // 페이지 로드 시 실행
-    console.log('채용공고 스크립트 초기화, bo_table:', boTable);
+    console.log('채용공고 스크립트 초기화, bo_table:', boTable, 'wr_id:', wrId);
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM 로드 완료, 채용공고 목록 로드 시작');
-            loadJobPostings();
+            console.log('DOM 로드 완료');
+            if (wrId) {
+                console.log('상세 페이지 로드 시작');
+                loadJobPostingDetail();
+            } else {
+                console.log('목록 페이지 로드 시작');
+                loadJobPostings();
+            }
         });
     } else {
-        console.log('DOM 이미 로드됨, 채용공고 목록 로드 시작');
-        loadJobPostings();
+        console.log('DOM 이미 로드됨');
+        if (wrId) {
+            console.log('상세 페이지 로드 시작');
+            loadJobPostingDetail();
+        } else {
+            console.log('목록 페이지 로드 시작');
+            loadJobPostings();
+        }
     }
 })();
 </script>
