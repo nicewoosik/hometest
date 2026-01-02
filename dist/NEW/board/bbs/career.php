@@ -342,12 +342,12 @@
         // 상세 내용 HTML 생성
         let detailHtml = '';
 
-        // 상세 설명
+        // 상세 설명 (HTML 형식일 수 있으므로 그대로 렌더링)
         if (posting.description) {
             detailHtml += `<p class="carInTXT">${posting.description}</p>`;
         }
 
-        // 주요업무
+        // 주요업무 (HTML 형식일 수 있으므로 그대로 렌더링)
         if (posting.main_duties || posting.work_experience) {
             detailHtml += `<div class="carInTXT_title"><img src="/NEW/images/kor/Y_1.png" alt="수행직무"></div>`;
             if (posting.main_duties) {
@@ -355,7 +355,7 @@
             }
         }
 
-        // 필수요건 및 우대사항
+        // 필수요건 및 우대사항 (HTML 형식일 수 있으므로 그대로 렌더링)
         if (posting.required_qualifications || posting.preferred_qualifications) {
             let jobDescHtml = '';
             if (posting.required_qualifications) {
@@ -380,11 +380,17 @@
             `;
         }
 
-        // 전형일정
+        // 전형일정 (HTML 형식일 수 있으므로 그대로 렌더링, 줄바꿈 처리)
         if (posting.recruitment_process) {
+            // 줄바꿈을 <br>로 변환하고 HTML 그대로 렌더링
+            let processHtml = posting.recruitment_process;
+            // 이미 HTML 태그가 있으면 그대로 사용, 없으면 줄바꿈 처리
+            if (!processHtml.includes('<') && !processHtml.includes('>')) {
+                processHtml = processHtml.replace(/\n/g, '<br>');
+            }
             detailHtml += `
                 <div class="carInTXT_title"><img src="/NEW/images/kor/Y_5.png" alt="전형일정"></div>
-                <p class="carInTXT">${posting.recruitment_process}</p>
+                <p class="carInTXT">${processHtml}</p>
             `;
         }
 
