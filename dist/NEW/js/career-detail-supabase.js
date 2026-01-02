@@ -1,50 +1,5 @@
 // 채용공고 상세 페이지를 Supabase에서 가져와서 동적으로 렌더링
 (function() {
-  // Supabase 클라이언트가 로드될 때까지 대기 (최대 10초)
-  function waitForSupabase(callback, maxAttempts = 100) {
-    if (typeof supabase !== 'undefined') {
-      callback()
-    } else if (maxAttempts > 0) {
-      setTimeout(() => waitForSupabase(callback, maxAttempts - 1), 100)
-    } else {
-      console.error('Supabase 클라이언트를 로드할 수 없습니다.')
-      // Supabase 없이도 직접 초기화 시도
-      if (typeof window.supabase === 'undefined') {
-        console.log('Supabase 클라이언트를 직접 초기화합니다.')
-        const SUPABASE_URL = 'https://qzymoraaukwicqlhjbsy.supabase.co'
-        const SUPABASE_ANON_KEY = 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr'
-        // Supabase가 로드되지 않았으면 직접 fetch 사용
-        loadWithFetch()
-        return
-      }
-      callback()
-    }
-  }
-  
-  // Fetch API를 사용하여 직접 데이터 로드 (Supabase 클라이언트가 없을 때)
-  async function loadWithFetch() {
-    const postingId = getUrlParameter('wr_id')
-    if (!postingId) return
-    
-    try {
-      const response = await fetch(
-        `https://qzymoraaukwicqlhjbsy.supabase.co/rest/v1/job_postings?id=eq.${postingId}&select=*`,
-        {
-          headers: {
-            'apikey': 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr',
-            'Authorization': 'Bearer sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr'
-          }
-        }
-      )
-      const data = await response.json()
-      if (data && data.length > 0) {
-        renderJobPostingDetail(data[0])
-      }
-    } catch (error) {
-      console.error('Fetch로 데이터 로드 실패:', error)
-    }
-  }
-  
   // URL 파라미터 추출 함수
   function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
@@ -53,7 +8,27 @@
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
   }
   
-  // 채용공고 상세 정보를 렌더링하는 함수 (전역으로 사용)
+  // URL 파라미터 확인
+  const postingId = getUrlParameter('wr_id')
+  const boTable = getUrlParameter('bo_table')
+  
+  // 채용공고 상세 페이지가 아니면 실행하지 않음
+  if (!postingId || boTable !== 'career') {
+    console.log('채용공고 상세 페이지가 아닙니다.')
+    return
+  }
+  
+  console.log('채용공고 ID:', postingId)
+  
+  // HTML 이스케이프 함수
+  function escapeHtml(text) {
+    if (!text) return ''
+    const div = document.createElement('div')
+    div.textContent = text
+    return div.innerHTML
+  }
+  
+  // 채용공고 상세 정보를 렌더링하는 함수
   function renderJobPostingDetail(posting) {
     console.log('채용공고 상세 데이터 렌더링:', posting)
     
@@ -86,161 +61,185 @@
     
     // 서비스 박스 내용 교체
     const serviceBox = document.getElementById('service_box') || document.querySelector('.service_box')
-    if (serviceBox) {
-      // 상세 내용 HTML 생성
-      let detailHtml = ''
-      
-      if (posting.description) {
-        detailHtml += `<div class="detail-section" style="margin: 20px 0;">${posting.description}</div>`
-      }
-      
-      if (posting.main_duties) {
-        detailHtml += `
-          <div class="detail-section" style="margin: 20px 0;">
-            <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">주요업무</h3>
-            <div>${posting.main_duties}</div>
-          </div>
-        `
-      }
-      
-      if (posting.required_qualifications) {
-        detailHtml += `
-          <div class="detail-section" style="margin: 20px 0;">
-            <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">필수요건</h3>
-            <div>${posting.required_qualifications}</div>
-          </div>
-        `
-      }
-      
-      if (posting.preferred_qualifications) {
-        detailHtml += `
-          <div class="detail-section" style="margin: 20px 0;">
-            <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">우대사항</h3>
-            <div>${posting.preferred_qualifications}</div>
-          </div>
-        `
-      }
-      
-      if (posting.recruitment_process) {
-        detailHtml += `
-          <div class="detail-section" style="margin: 20px 0;">
-            <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">전형일정</h3>
-            <div>${posting.recruitment_process}</div>
-          </div>
-        `
-      }
-      
-      if (posting.contact_email || posting.contact_phone) {
-        detailHtml += `
-          <div class="detail-section" style="margin: 20px 0;">
-            <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">지원문의</h3>
-            ${posting.contact_email ? `<p>이메일: ${escapeHtml(posting.contact_email)}</p>` : ''}
-            ${posting.contact_phone ? `<p>전화: ${escapeHtml(posting.contact_phone)}</p>` : ''}
-          </div>
-        `
-      }
-      
-      if (posting.attachment_url) {
-        detailHtml += `
-          <div class="detail-section" style="margin: 20px 0;">
-            <a href="${escapeHtml(posting.attachment_url)}" target="_blank" style="display: inline-block; padding: 10px 20px; background: #102381; color: white; text-decoration: none; border-radius: 5px;">
-              지원서 다운로드
-            </a>
-          </div>
-        `
-      }
-      
-      // 서비스 박스 전체 내용 교체
-      serviceBox.innerHTML = `
-        <p class="serv_title">
-          <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
-          <i>채용 프로세스</i>
-        </p>
-        <p class="serv_title_bar"><img src="/NEW/images/kor/serv_bar.png" alt=""></p>
-        <div class="servUni_con1">
-          Join the Winning Team<br class="nonBr850">
-          Discover our Potential! Discover your Potential!
-        </div>
-        <div class="careerView">
-          <div class="careV_Box">
-            <table class="carV_Table" style="width: 100%; margin-bottom: 20px;">
-              <tr>
-                <td class="carV_title">제목</td>
-                <td class="carV_title_C">${escapeHtml(posting.title)}</td>
-                <td class="carV_date">접수기한</td>
-                <td class="carV_date_C">${posting.deadline ? new Date(posting.deadline).toLocaleDateString('ko-KR') : '채용시 마감'}</td>
-                <td class="carV_hit">조회</td>
-                <td class="carV_hit_C">${posting.view_count || 0}</td>
-              </tr>
-            </table>
-            <div class="career_content">
-              <table class="carInside_Table" style="width: 100%; margin-bottom: 20px;">
-                <tr>
-                  <th class="carInside_Ta_1">모집부문</th>
-                  <th class="carInside_Ta_2">지원대상</th>
-                  <th class="carInside_Ta_3">직무</th>
-                  <th class="carInside_Ta_4">지역</th>
-                  <th class="carInside_Ta_5">직급</th>
-                  <th class="carInside_Ta_6">모집인원</th>
-                </tr>
-                <tr>
-                  <td>${escapeHtml(posting.department || '')}</td>
-                  <td>${escapeHtml(posting.target_audience || '')}</td>
-                  <td>${escapeHtml(posting.job_type || '')}</td>
-                  <td>${escapeHtml(posting.location || '')}</td>
-                  <td>${escapeHtml(posting.position_level || '')}</td>
-                  <td>${posting.recruitment_count ? `${posting.recruitment_count}명` : ''}</td>
-                </tr>
-              </table>
-              <div class="supabase-dynamic-content">
-                ${detailHtml}
-              </div>
-            </div>
-          </div>
-        </div>
-      `
-    }
-  }
-  
-  // HTML 이스케이프 함수
-  function escapeHtml(text) {
-    if (!text) return ''
-    const div = document.createElement('div')
-    div.textContent = text
-    return div.innerHTML
-  }
-  
-  waitForSupabase(function() {
-    const postingId = getUrlParameter('wr_id')
-    const boTable = getUrlParameter('bo_table')
-    
-    // 채용공고 상세 페이지가 아니면 실행하지 않음
-    if (!postingId || boTable !== 'career') {
-      console.log('채용공고 상세 페이지가 아닙니다.')
+    if (!serviceBox) {
+      console.error('서비스 박스를 찾을 수 없습니다.')
       return
     }
     
-    console.log('채용공고 ID:', postingId)
+    // 상세 내용 HTML 생성
+    let detailHtml = ''
     
-    // Supabase 설정
+    if (posting.description) {
+      detailHtml += `<div class="detail-section" style="margin: 20px 0;">${posting.description}</div>`
+    }
+    
+    if (posting.main_duties) {
+      detailHtml += `
+        <div class="detail-section" style="margin: 20px 0;">
+          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">주요업무</h3>
+          <div>${posting.main_duties}</div>
+        </div>
+      `
+    }
+    
+    if (posting.required_qualifications) {
+      detailHtml += `
+        <div class="detail-section" style="margin: 20px 0;">
+          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">필수요건</h3>
+          <div>${posting.required_qualifications}</div>
+        </div>
+      `
+    }
+    
+    if (posting.preferred_qualifications) {
+      detailHtml += `
+        <div class="detail-section" style="margin: 20px 0;">
+          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">우대사항</h3>
+          <div>${posting.preferred_qualifications}</div>
+        </div>
+      `
+    }
+    
+    if (posting.recruitment_process) {
+      detailHtml += `
+        <div class="detail-section" style="margin: 20px 0;">
+          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">전형일정</h3>
+          <div>${posting.recruitment_process}</div>
+        </div>
+      `
+    }
+    
+    if (posting.contact_email || posting.contact_phone) {
+      detailHtml += `
+        <div class="detail-section" style="margin: 20px 0;">
+          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">지원문의</h3>
+          ${posting.contact_email ? `<p>이메일: ${escapeHtml(posting.contact_email)}</p>` : ''}
+          ${posting.contact_phone ? `<p>전화: ${escapeHtml(posting.contact_phone)}</p>` : ''}
+        </div>
+      `
+    }
+    
+    if (posting.attachment_url) {
+      detailHtml += `
+        <div class="detail-section" style="margin: 20px 0;">
+          <a href="${escapeHtml(posting.attachment_url)}" target="_blank" style="display: inline-block; padding: 10px 20px; background: #102381; color: white; text-decoration: none; border-radius: 5px;">
+            지원서 다운로드
+          </a>
+        </div>
+      `
+    }
+    
+    // 서비스 박스 전체 내용 교체
+    serviceBox.innerHTML = `
+      <p class="serv_title">
+        <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
+        <i>채용 프로세스</i>
+      </p>
+      <p class="serv_title_bar"><img src="/NEW/images/kor/serv_bar.png" alt=""></p>
+      <div class="servUni_con1">
+        Join the Winning Team<br class="nonBr850">
+        Discover our Potential! Discover your Potential!
+      </div>
+      <div class="careerView">
+        <div class="careV_Box">
+          <table class="carV_Table" style="width: 100%; margin-bottom: 20px;">
+            <tr>
+              <td class="carV_title">제목</td>
+              <td class="carV_title_C">${escapeHtml(posting.title)}</td>
+              <td class="carV_date">접수기한</td>
+              <td class="carV_date_C">${posting.deadline ? new Date(posting.deadline).toLocaleDateString('ko-KR') : '채용시 마감'}</td>
+              <td class="carV_hit">조회</td>
+              <td class="carV_hit_C">${posting.view_count || 0}</td>
+            </tr>
+          </table>
+          <div class="career_content">
+            <table class="carInside_Table" style="width: 100%; margin-bottom: 20px;">
+              <tr>
+                <th class="carInside_Ta_1">모집부문</th>
+                <th class="carInside_Ta_2">지원대상</th>
+                <th class="carInside_Ta_3">직무</th>
+                <th class="carInside_Ta_4">지역</th>
+                <th class="carInside_Ta_5">직급</th>
+                <th class="carInside_Ta_6">모집인원</th>
+              </tr>
+              <tr>
+                <td>${escapeHtml(posting.department || '')}</td>
+                <td>${escapeHtml(posting.target_audience || '')}</td>
+                <td>${escapeHtml(posting.job_type || '')}</td>
+                <td>${escapeHtml(posting.location || '')}</td>
+                <td>${escapeHtml(posting.position_level || '')}</td>
+                <td>${posting.recruitment_count ? `${posting.recruitment_count}명` : ''}</td>
+              </tr>
+            </table>
+            <div class="supabase-dynamic-content">
+              ${detailHtml}
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }
+  
+  // Fetch API를 사용하여 직접 데이터 로드 (Supabase 클라이언트가 없을 때)
+  async function loadWithFetch() {
+    try {
+      console.log('Fetch API로 채용공고 상세 정보 로드 시작:', postingId)
+      const response = await fetch(
+        `https://qzymoraaukwicqlhjbsy.supabase.co/rest/v1/job_postings?id=eq.${postingId}&select=*`,
+        {
+          headers: {
+            'apikey': 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr',
+            'Authorization': 'Bearer sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr'
+          }
+        }
+      )
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      const data = await response.json()
+      console.log('Fetch로 받은 데이터:', data)
+      
+      if (data && data.length > 0) {
+        renderJobPostingDetail(data[0])
+      } else {
+        console.error('채용공고 데이터를 찾을 수 없습니다.')
+      }
+    } catch (error) {
+      console.error('Fetch로 데이터 로드 실패:', error)
+    }
+  }
+  
+  // Supabase 클라이언트가 로드될 때까지 대기 (최대 5초)
+  function waitForSupabase(callback, maxAttempts = 50) {
+    if (typeof supabase !== 'undefined') {
+      callback()
+    } else if (maxAttempts > 0) {
+      setTimeout(() => waitForSupabase(callback, maxAttempts - 1), 100)
+    } else {
+      console.warn('Supabase 클라이언트를 로드할 수 없습니다. Fetch API를 사용합니다.')
+      loadWithFetch()
+    }
+  }
+  
+  // 데이터 로드 함수
+  function loadJobPostingDetail() {
     const SUPABASE_URL = 'https://qzymoraaukwicqlhjbsy.supabase.co'
     const SUPABASE_ANON_KEY = 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr'
     
-    // Supabase 클라이언트 초기화
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     
-    // 채용공고 상세 정보를 가져오는 함수
-    async function loadJobPostingDetail() {
-      try {
-        console.log('채용공고 상세 정보 로드 시작:', postingId)
-        const { data, error } = await supabaseClient
-          .from('job_postings')
-          .select('*')
-          .eq('id', postingId)
-          .single()
-        
+    supabaseClient
+      .from('job_postings')
+      .select('*')
+      .eq('id', postingId)
+      .single()
+      .then(({ data, error }) => {
         if (error) {
           console.error('채용공고 상세 로드 오류:', error)
+          // 에러 발생 시 Fetch API로 재시도
+          loadWithFetch()
           return
         }
         
@@ -248,19 +247,27 @@
           console.log('채용공고 상세 데이터:', data)
           renderJobPostingDetail(data)
         } else {
-          console.log('채용공고 데이터를 찾을 수 없습니다.')
+          console.error('채용공고 데이터를 찾을 수 없습니다.')
         }
-      } catch (error) {
+      })
+      .catch((error) => {
         console.error('채용공고 상세 로드 중 오류:', error)
-      }
-    }
-    
-    
-    // 페이지 로드 시 실행
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadJobPostingDetail)
-    } else {
+        // 에러 발생 시 Fetch API로 재시도
+        loadWithFetch()
+      })
+  }
+  
+  // 페이지 로드 시 실행
+  function init() {
+    waitForSupabase(function() {
       loadJobPostingDetail()
-    }
-  })
+    })
+  }
+  
+  // DOM이 준비되면 실행
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init)
+  } else {
+    init()
+  }
 })()

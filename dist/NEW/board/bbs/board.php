@@ -754,37 +754,17 @@ function checkFrm(obj) {
     }
   })()
   
-  // DOM 로드 후 Supabase 스크립트 로드
-  function initCareerDetail() {
-    const urlParams = new URLSearchParams(window.location.search)
-    const boTable = urlParams.get('bo_table')
-    const wrId = urlParams.get('wr_id')
-    
-    if (boTable === 'career' && wrId) {
-      // Supabase 클라이언트 로드
-      if (typeof supabase === 'undefined') {
-        const script = document.createElement('script')
-        script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
-        script.onload = function() {
-          loadCareerDetail()
-        }
-        document.head.appendChild(script)
-      } else {
-        loadCareerDetail()
-      }
-    }
-  }
+  // 채용공고 상세 페이지인 경우 스크립트 로드
+  const urlParams = new URLSearchParams(window.location.search)
+  const boTable = urlParams.get('bo_table')
+  const wrId = urlParams.get('wr_id')
   
-  function loadCareerDetail() {
+  if (boTable === 'career' && wrId) {
+    // career-detail-supabase.js 로드
     const script = document.createElement('script')
     script.src = '/NEW/js/career-detail-supabase.js'
+    script.async = true
     document.head.appendChild(script)
-  }
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCareerDetail)
-  } else {
-    initCareerDetail()
   }
 })()
 </script>
