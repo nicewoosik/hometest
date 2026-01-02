@@ -80,13 +80,86 @@
       // breadcrumb 변경
       const breadcrumbPath = document.getElementById('breadcrumb_path') || document.querySelector('.locs')
       if (breadcrumbPath) {
-        const breadcrumb = breadcrumbPath.querySelector('span') || breadcrumbPath
-        breadcrumb.innerHTML = 'Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings'
+        if (breadcrumbPath.querySelector('span')) {
+          breadcrumbPath.querySelector('span').innerHTML = 'Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings'
+        } else {
+          breadcrumbPath.innerHTML = '<a href="#"><img src="/NEW/images/kor/icon_house.png"></a> Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings'
+        }
       }
       
-      // 서비스 박스 내용 전체 교체
+      // ECS News 내용 숨기기
+      const newsContent = document.querySelector('.ourComBox, .peopleUL2')
+      if (newsContent) {
+        newsContent.style.display = 'none'
+      }
+      
+      // 서비스 박스 내용 교체
       const serviceBox = document.getElementById('service_box') || document.querySelector('.service_box')
       if (serviceBox) {
+        // 상세 내용 HTML 생성
+        let detailHtml = ''
+        
+        if (posting.description) {
+          detailHtml += `<div class="detail-section" style="margin: 20px 0;">${posting.description}</div>`
+        }
+        
+        if (posting.main_duties) {
+          detailHtml += `
+            <div class="detail-section" style="margin: 20px 0;">
+              <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">주요업무</h3>
+              <div>${posting.main_duties}</div>
+            </div>
+          `
+        }
+        
+        if (posting.required_qualifications) {
+          detailHtml += `
+            <div class="detail-section" style="margin: 20px 0;">
+              <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">필수요건</h3>
+              <div>${posting.required_qualifications}</div>
+            </div>
+          `
+        }
+        
+        if (posting.preferred_qualifications) {
+          detailHtml += `
+            <div class="detail-section" style="margin: 20px 0;">
+              <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">우대사항</h3>
+              <div>${posting.preferred_qualifications}</div>
+            </div>
+          `
+        }
+        
+        if (posting.recruitment_process) {
+          detailHtml += `
+            <div class="detail-section" style="margin: 20px 0;">
+              <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">전형일정</h3>
+              <div>${posting.recruitment_process}</div>
+            </div>
+          `
+        }
+        
+        if (posting.contact_email || posting.contact_phone) {
+          detailHtml += `
+            <div class="detail-section" style="margin: 20px 0;">
+              <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">지원문의</h3>
+              ${posting.contact_email ? `<p>이메일: ${escapeHtml(posting.contact_email)}</p>` : ''}
+              ${posting.contact_phone ? `<p>전화: ${escapeHtml(posting.contact_phone)}</p>` : ''}
+            </div>
+          `
+        }
+        
+        if (posting.attachment_url) {
+          detailHtml += `
+            <div class="detail-section" style="margin: 20px 0;">
+              <a href="${escapeHtml(posting.attachment_url)}" target="_blank" style="display: inline-block; padding: 10px 20px; background: #102381; color: white; text-decoration: none; border-radius: 5px;">
+                지원서 다운로드
+              </a>
+            </div>
+          `
+        }
+        
+        // 서비스 박스 전체 내용 교체
         serviceBox.innerHTML = `
           <p class="serv_title">
             <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
@@ -99,7 +172,7 @@
           </div>
           <div class="careerView">
             <div class="careV_Box">
-              <table class="carV_Table">
+              <table class="carV_Table" style="width: 100%; margin-bottom: 20px;">
                 <tr>
                   <td class="carV_title">제목</td>
                   <td class="carV_title_C">${escapeHtml(posting.title)}</td>
@@ -110,7 +183,7 @@
                 </tr>
               </table>
               <div class="career_content">
-                <table class="carInside_Table">
+                <table class="carInside_Table" style="width: 100%; margin-bottom: 20px;">
                   <tr>
                     <th class="carInside_Ta_1">모집부문</th>
                     <th class="carInside_Ta_2">지원대상</th>
@@ -128,83 +201,13 @@
                     <td>${posting.recruitment_count ? `${posting.recruitment_count}명` : ''}</td>
                   </tr>
                 </table>
-                <div class="supabase-dynamic-content"></div>
+                <div class="supabase-dynamic-content">
+                  ${detailHtml}
+                </div>
               </div>
             </div>
           </div>
         `
-        
-        // 상세 내용 렌더링
-        setTimeout(() => {
-          const dynamicContent = document.querySelector('.supabase-dynamic-content')
-          if (dynamicContent) {
-            let html = ''
-            
-            if (posting.description) {
-              html += `<div class="detail-section" style="margin: 20px 0;">${posting.description}</div>`
-            }
-            
-            if (posting.main_duties) {
-              html += `
-                <div class="detail-section" style="margin: 20px 0;">
-                  <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">주요업무</h3>
-                  <div>${posting.main_duties}</div>
-                </div>
-              `
-            }
-            
-            if (posting.required_qualifications) {
-              html += `
-                <div class="detail-section" style="margin: 20px 0;">
-                  <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">필수요건</h3>
-                  <div>${posting.required_qualifications}</div>
-                </div>
-              `
-            }
-            
-            if (posting.preferred_qualifications) {
-              html += `
-                <div class="detail-section" style="margin: 20px 0;">
-                  <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">우대사항</h3>
-                  <div>${posting.preferred_qualifications}</div>
-                </div>
-              `
-            }
-            
-            if (posting.recruitment_process) {
-              html += `
-                <div class="detail-section" style="margin: 20px 0;">
-                  <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">전형일정</h3>
-                  <div>${posting.recruitment_process}</div>
-                </div>
-              `
-            }
-            
-            if (posting.contact_email || posting.contact_phone) {
-              html += `
-                <div class="detail-section" style="margin: 20px 0;">
-                  <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">지원문의</h3>
-                  ${posting.contact_email ? `<p>이메일: ${escapeHtml(posting.contact_email)}</p>` : ''}
-                  ${posting.contact_phone ? `<p>전화: ${escapeHtml(posting.contact_phone)}</p>` : ''}
-                </div>
-              `
-            }
-            
-            if (posting.attachment_url) {
-              html += `
-                <div class="detail-section" style="margin: 20px 0;">
-                  <a href="${escapeHtml(posting.attachment_url)}" target="_blank" style="display: inline-block; padding: 10px 20px; background: #102381; color: white; text-decoration: none; border-radius: 5px;">
-                    지원서 다운로드
-                  </a>
-                </div>
-              `
-            }
-            
-            if (html) {
-              dynamicContent.innerHTML = html
-            }
-          }
-        }, 100)
       }
     }
     

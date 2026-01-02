@@ -699,23 +699,77 @@ function checkFrm(obj) {
 <!-- 채용공고 상세 페이지 동적 로드 -->
 <script>
 (function() {
-  // URL 파라미터 확인
-  const urlParams = new URLSearchParams(window.location.search)
-  const boTable = urlParams.get('bo_table')
-  const wrId = urlParams.get('wr_id')
+  // 즉시 실행하여 ECS News 내용 숨기기
+  (function() {
+    const urlParams = new URLSearchParams(window.location.search)
+    const boTable = urlParams.get('bo_table')
+    const wrId = urlParams.get('wr_id')
+    
+    if (boTable === 'career' && wrId) {
+      // 즉시 ECS News 내용 숨기기
+      const newsContent = document.querySelector('.ourComBox')
+      if (newsContent) {
+        newsContent.style.display = 'none'
+      }
+      
+      // 페이지 제목 및 배너 즉시 변경
+      const subpageImg = document.querySelector('.subpage_img')
+      if (subpageImg) {
+        const title = subpageImg.querySelector('p')
+        if (title) title.textContent = 'Job Openings'
+        const img = subpageImg.querySelector('img')
+        if (img) img.src = '/NEW/images/kor/top_e_04_new.jpg'
+      }
+      
+      // breadcrumb 즉시 변경
+      const locs = document.querySelector('.locs')
+      if (locs) {
+        locs.innerHTML = '<a href="#"><img src="/NEW/images/kor/icon_house.png"></a> Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings'
+      }
+      
+      // 서비스 박스 내용 즉시 교체 (로딩 중 표시)
+      const serviceBox = document.querySelector('.service_box')
+      if (serviceBox) {
+        serviceBox.innerHTML = `
+          <p class="serv_title">
+            <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
+            <i>채용 프로세스</i>
+          </p>
+          <p class="serv_title_bar"><img src="/NEW/images/kor/serv_bar.png" alt=""></p>
+          <div class="servUni_con1">
+            Join the Winning Team<br class="nonBr850">
+            Discover our Potential! Discover your Potential!
+          </div>
+          <div class="careerView">
+            <div class="careV_Box">
+              <div id="career-detail-container" style="padding: 20px; text-align: center;">
+                <p>채용공고 정보를 불러오는 중...</p>
+              </div>
+            </div>
+          </div>
+        `
+      }
+    }
+  })()
   
-  // 채용공고 상세 페이지인 경우
-  if (boTable === 'career' && wrId) {
-    // Supabase 클라이언트 로드 대기
-    if (typeof supabase === 'undefined') {
-      const script = document.createElement('script')
-      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
-      script.onload = function() {
+  // DOM 로드 후 Supabase 스크립트 로드
+  function initCareerDetail() {
+    const urlParams = new URLSearchParams(window.location.search)
+    const boTable = urlParams.get('bo_table')
+    const wrId = urlParams.get('wr_id')
+    
+    if (boTable === 'career' && wrId) {
+      // Supabase 클라이언트 로드
+      if (typeof supabase === 'undefined') {
+        const script = document.createElement('script')
+        script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
+        script.onload = function() {
+          loadCareerDetail()
+        }
+        document.head.appendChild(script)
+      } else {
         loadCareerDetail()
       }
-      document.head.appendChild(script)
-    } else {
-      loadCareerDetail()
     }
   }
   
@@ -723,6 +777,12 @@ function checkFrm(obj) {
     const script = document.createElement('script')
     script.src = '/NEW/js/career-detail-supabase.js'
     document.head.appendChild(script)
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCareerDetail)
+  } else {
+    initCareerDetail()
   }
 })()
 </script>
