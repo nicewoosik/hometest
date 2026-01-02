@@ -775,34 +775,44 @@ function checkFrm(obj) {
 
     // 채용공고 목록 로드
     async function loadJobPostings() {
+        console.log('채용공고 목록 로드 시작');
         try {
             // Supabase 클라이언트 초기화
             const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            console.log('Supabase 클라이언트 초기화 완료');
             
+            // 모든 채용공고 가져오기 (status 필터 제거)
+            console.log('데이터베이스에서 채용공고 조회 시작...');
             const { data, error } = await supabaseClient
                 .from('job_postings')
                 .select('*')
-                .eq('status', 'open')
                 .order('created_at', { ascending: false });
+
+            console.log('데이터베이스 조회 결과:', { data, error });
 
             if (error) {
                 console.error('채용공고 로드 오류:', error);
                 document.getElementById('career_list_tbody').innerHTML = 
-                    '<tr><td colspan="5" style="text-align: center; padding: 20px; color: red;">채용공고를 불러오는 중 오류가 발생했습니다.</td></tr>';
+                    '<tr><td colspan="5" style="text-align: center; padding: 20px; color: red;">채용공고를 불러오는 중 오류가 발생했습니다: ' + escapeHtml(error.message) + '</td></tr>';
                 return;
             }
 
             if (!data || data.length === 0) {
+                console.warn('등록된 채용공고가 없습니다.');
                 document.getElementById('career_list_tbody').innerHTML = 
                     '<tr><td colspan="5" style="text-align: center; padding: 20px;">등록된 채용공고가 없습니다.</td></tr>';
                 return;
             }
 
+            console.log('총 ' + data.length + '개의 채용공고를 찾았습니다:', data);
+
             // 테이블 행 생성
             const tbody = document.getElementById('career_list_tbody');
             tbody.innerHTML = '';
 
-            data.forEach(posting => {
+            console.log('테이블 행 생성 시작, 데이터 개수:', data.length);
+            data.forEach((posting, index) => {
+                console.log(`채용공고 ${index + 1}:`, posting);
                 const row = document.createElement('tr');
                 row.className = 'carL_active';
 
@@ -844,17 +854,24 @@ function checkFrm(obj) {
 
                 tbody.appendChild(row);
             });
+            
+            console.log('채용공고 목록 렌더링 완료, 총 ' + data.length + '개 표시됨');
         } catch (error) {
             console.error('채용공고 로드 중 오류:', error);
             document.getElementById('career_list_tbody').innerHTML = 
-                '<tr><td colspan="5" style="text-align: center; padding: 20px; color: red;">채용공고를 불러오는 중 오류가 발생했습니다.</td></tr>';
+                '<tr><td colspan="5" style="text-align: center; padding: 20px; color: red;">채용공고를 불러오는 중 오류가 발생했습니다: ' + escapeHtml(error.message) + '</td></tr>';
         }
     }
 
     // 페이지 로드 시 실행
+    console.log('채용공고 스크립트 초기화, bo_table:', boTable);
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadJobPostings);
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM 로드 완료, 채용공고 목록 로드 시작');
+            loadJobPostings();
+        });
     } else {
+        console.log('DOM 이미 로드됨, 채용공고 목록 로드 시작');
         loadJobPostings();
     }
 })();
