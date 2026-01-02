@@ -729,11 +729,12 @@ function checkFrm(obj) {
         locs.innerHTML = '<a href="#"><img src="/NEW/images/kor/icon_house.png"></a> Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings'
       }
       
-      // 서비스 박스를 careerProcess_box로 변경
+      // 서비스 박스를 careerProcess_box로 변경하고 초기 구조 준비
       const serviceBox = document.querySelector('.service_box')
       if (serviceBox) {
         // service_box를 careerProcess_box로 변경
         serviceBox.className = 'careerProcess_box'
+        // 초기 구조만 설정 (career-detail-supabase.js가 나중에 내용을 채움)
         serviceBox.innerHTML = `
           <p class="serv_title">
             <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
@@ -746,7 +747,7 @@ function checkFrm(obj) {
           </div>
           <div class="careerView">
             <div class="careV_Box">
-              <div id="career-detail-container" style="padding: 20px; text-align: center;">
+              <div id="career-detail-loading" style="padding: 20px; text-align: center;">
                 <p>채용공고 정보를 불러오는 중...</p>
               </div>
             </div>

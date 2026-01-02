@@ -31,6 +31,7 @@
   // 채용공고 상세 정보를 렌더링하는 함수
   function renderJobPostingDetail(posting) {
     console.log('채용공고 상세 데이터 렌더링:', posting)
+    console.log('서비스 박스 찾기 시작...')
     
     // 페이지 제목 업데이트
     document.title = `${posting.title} - ECS텔레콤`
@@ -54,9 +55,13 @@
     }
     
     // ECS News 내용 숨기기
-    const newsContent = document.querySelector('.ourComBox, .peopleUL2')
+    const newsContent = document.querySelector('.ourComBox')
     if (newsContent) {
       newsContent.style.display = 'none'
+    }
+    const peopleUL2 = document.querySelector('.peopleUL2')
+    if (peopleUL2) {
+      peopleUL2.style.display = 'none'
     }
     
     // careerProcess_box 또는 service_box 찾기
@@ -81,15 +86,15 @@
       }
     }
     
-    // 상세 내용 HTML 생성 (기존 HTML 구조와 동일하게)
+    // 상세 내용 HTML 생성 (기존 HTML 구조와 정확히 동일하게)
     let detailHtml = ''
     
-    // 상세 설명
+    // 상세 설명 (description이 있으면 먼저 표시)
     if (posting.description) {
-      detailHtml += `<div class="carInTXT">${posting.description}</div>`
+      detailHtml += `<p class="carInTXT">${posting.description}</p>`
     }
     
-    // 주요업무 (수행직무)
+    // 주요업무 (수행직무) - Y_1.png 아이콘 사용
     if (posting.main_duties || posting.work_experience) {
       detailHtml += `<div class="carInTXT_title"><img src="/NEW/images/kor/Y_1.png" alt="수행직무"></div>`
       if (posting.main_duties) {
@@ -112,7 +117,7 @@
       }
     }
     
-    // 지원서 다운로드
+    // 지원서 다운로드 - Y_4.png 아이콘 사용
     if (posting.attachment_url) {
       detailHtml += `
         <div class="carInTXT_title"><img src="/NEW/images/kor/Y_4.png" alt="지원서다운"></div>
@@ -124,7 +129,7 @@
       `
     }
     
-    // 전형일정
+    // 전형일정 - Y_5.png 아이콘 사용
     if (posting.recruitment_process) {
       detailHtml += `
         <div class="carInTXT_title"><img src="/NEW/images/kor/Y_5.png" alt="전형일정"></div>
@@ -132,7 +137,7 @@
       `
     }
     
-    // 지원문의
+    // 지원문의 - Y_6.png 아이콘 사용
     if (posting.contact_email || posting.contact_phone) {
       let contactHtml = ''
       if (posting.contact_email) {
@@ -163,6 +168,9 @@
         </a>
       </div>
     `
+    
+    console.log('서비스 박스 찾음:', serviceBox)
+    console.log('생성할 HTML 길이:', detailHtml.length)
     
     // 서비스 박스 전체 내용 교체 (기존 HTML 구조와 동일하게)
     serviceBox.innerHTML = `
@@ -211,6 +219,17 @@
         </div>
       </div>
     `
+    
+    console.log('HTML 렌더링 완료')
+    console.log('렌더링된 서비스 박스:', serviceBox.innerHTML.substring(0, 200))
+    
+    // CSS가 적용되었는지 확인
+    const computedStyle = window.getComputedStyle(serviceBox)
+    console.log('서비스 박스 스타일:', {
+      display: computedStyle.display,
+      width: computedStyle.width,
+      className: serviceBox.className
+    })
   }
   
   // Fetch API를 사용하여 직접 데이터 로드 (Supabase 클라이언트가 없을 때)
