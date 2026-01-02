@@ -214,17 +214,30 @@
             
             // 실제 테이블의 모든 필드를 명시적으로 조회 (마감된 것도 포함)
             // status 필터 없이 모든 채용공고 조회 (접수중 + 마감 모두 표시)
-            // RLS 정책을 우회하기 위해 명시적으로 모든 데이터 요청
+            // 모든 데이터를 가져오기 위해 명시적으로 쿼리
+            console.log('=== 채용공고 조회 시작 ===');
             const { data, error, count } = await supabaseClient
                 .from('job_postings')
-                .select('*', { count: 'exact', head: false })
+                .select('*', { count: 'exact' })
                 .order('updated_at', { ascending: false })
                 .order('created_at', { ascending: false });
             
-            console.log('Supabase 쿼리 실행 완료');
+            console.log('=== Supabase 쿼리 결과 ===');
             console.log('에러:', error);
-            console.log('데이터:', data);
-            console.log('개수:', count);
+            console.log('조회된 데이터 개수:', data ? data.length : 0);
+            console.log('데이터베이스 총 개수 (count):', count);
+            
+            // count와 실제 데이터 개수 비교
+            if (count !== null && count !== undefined && data && count !== data.length) {
+                console.error('❌ 데이터 불일치: 데이터베이스에는 ' + count + '개가 있지만 ' + data.length + '개만 조회되었습니다!');
+                console.error('이는 RLS 정책이나 다른 필터링 때문일 수 있습니다.');
+            }
+            
+            if (data && data.length > 0) {
+                console.log('조회된 모든 채용공고 ID:', data.map(p => p.id));
+                console.log('조회된 모든 채용공고 제목:', data.map(p => p.title));
+                console.log('조회된 모든 채용공고 상태:', data.map(p => p.status));
+            }
             
             console.log('조회된 채용공고 개수:', data ? data.length : 0);
             console.log('Supabase count:', count);
