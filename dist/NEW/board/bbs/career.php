@@ -93,9 +93,15 @@
 </head>
 <body topmargin="0" leftmargin="0">
 
-<!-- 기존 헤더/네비게이션은 기존 board.php와 동일하게 유지 -->
-<!-- 여기서는 채용공고 컨텐츠 부분만 새로 작성 -->
-
+<!-- 헤더/네비게이션은 기존 board.php와 동일한 구조 사용 -->
+<!-- 간단한 버전으로 구현 -->
+<div class="wrap Mwrap">
+  <div class="bodys">
+    <div class="subpage_img">
+        <p>Job Openings</p>
+        <div><img src="/NEW/images/kor/top_e_04_new.jpg" alt=""></div>
+    </div>
+    
 <div class="subpage_cont">
     <div class="locs">
         <a href="/NEW/html/index.html"><img src="/NEW/images/kor/icon_house.png"></a>
