@@ -191,15 +191,19 @@
             const supabaseClient = getSupabaseClient();
             console.log('Supabase 클라이언트 초기화 완료');
             
-            const { data, error } = await supabaseClient
+            // 실제 테이블의 모든 필드를 명시적으로 조회
+            const { data, error, count } = await supabaseClient
                 .from('job_postings')
-                .select('*')
+                .select('*', { count: 'exact' })
                 .order('updated_at', { ascending: false })
                 .order('created_at', { ascending: false });
             
             console.log('조회된 채용공고 개수:', data ? data.length : 0);
+            console.log('Supabase count:', count);
             if (data && data.length > 0) {
+                console.log('첫 번째 채용공고의 모든 필드:', Object.keys(data[0]));
                 console.log('모든 채용공고 ID 목록:', data.map(p => ({ id: p.id, title: p.title, status: p.status })));
+                console.log('첫 번째 채용공고 전체 데이터:', JSON.stringify(data[0], null, 2));
             }
             
             if (error) {
@@ -289,9 +293,14 @@
             
             const { data, error } = await supabaseClient
                 .from('job_postings')
-                .select('*')
+                .select('*', { count: null })
                 .eq('id', jobId)
                 .single();
+            
+            if (data) {
+                console.log('상세 조회된 채용공고의 모든 필드:', Object.keys(data));
+                console.log('상세 조회된 채용공고 전체 데이터:', JSON.stringify(data, null, 2));
+            }
             
             if (error) {
                 console.error('채용공고 상세 로드 오류:', error);
