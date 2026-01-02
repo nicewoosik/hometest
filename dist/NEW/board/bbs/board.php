@@ -250,18 +250,52 @@ $(function(){
             <p class="title_news"><img src='../data/file/notice/notice_head_1516196421' border='0'></p>
         <div><img src="../../images/kor/top_e_04.jpg" alt=""></div> -->
 	<div class="subpage_img">
-        <p>ECS News</p>
-        <div><img src="/NEW/images/kor/top_e_06_new.jpg" alt=""></div>
+        <p id="subpage_title">ECS News</p>
+        <div><img src="/NEW/images/kor/top_e_06_new.jpg" alt="" id="subpage_banner"></div>
     </div>
     </div>
     <div class="subpage_cont">
         <div class="locs">
             <a href="#"><img src="/NEW/images/kor/icon_house.png"></a>
-            ECS NOW <img src="/NEW/images/kor/icon_next.png">
-            ECS NEWS        </div>
-        <div class="service_box">
-
-
+            <span id="breadcrumb_path">ECS NOW <img src="/NEW/images/kor/icon_next.png"> ECS NEWS</span>
+        </div>
+        
+        <!-- 채용공고 목록 영역 -->
+        <div id="career_list_container" style="display: none;">
+            <div class="service_box">
+                <p class="serv_title">
+                    <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
+                    <i>채용 프로세스</i>
+                </p>
+                <p class="serv_title_bar"><img src="/NEW/images/kor/serv_bar.png" alt=""></p>
+                <div class="servUni_con1">
+                    Join the Winning Team<br class="nonBr850">
+                    Discover our Potential! Discover your Potential!
+                </div>
+            </div>
+            <div class="careerList">
+                <table class="care_List_Table">
+                    <tr>
+                        <th class="carT_T1"><img src="/NEW/images/kor/j_t_1.png" alt="지원여부"></th>
+                        <th class="carT_T2"><img src="/NEW/images/kor/j_t_2.png" alt="공고"></th>
+                        <th class="carT_T3"><img src="/NEW/images/kor/j_t_3.png" alt="지원대상"></th>
+                        <th class="carT_T4"><img src="/NEW/images/kor/j_t_4.png" alt="접수기한"></th>
+                        <th class="carT_T5"><img src="/NEW/images/kor/j_t_5.png" alt="내용"></th>
+                    </tr>
+                    <tbody id="career_list_tbody">
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 20px;">
+                                채용공고를 불러오는 중...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- ECS News 영역 (기본) -->
+        <div id="news_container">
+            <div class="service_box">
 			 <p class="serv_title"><img src='../data/file/notice/notice_tail_1516243874' border='0'>                <i>ECS NEWS</i>
             </p>
             <p class="serv_title_bar"><img src="../../images/kor/serv_bar.png" alt=""></p>
@@ -380,6 +414,7 @@ $(function(){
 				
             </ul>
        </div>
+    </div>
     </div>
 
 		  
@@ -696,6 +731,134 @@ function checkFrm(obj) {
 <script type="text/javascript" src="/NEW/js/ecs_sub.js"></script>
 <script type="text/javascript" src="/NEW/js/mobile.js"></script>
 
+<!-- Supabase 클라이언트 라이브러리 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- 채용공고 목록 로드 스크립트 -->
+<script type="text/javascript">
+(function() {
+    // URL 파라미터 확인
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        const results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    const boTable = getUrlParameter('bo_table');
+    
+    // 채용공고 페이지가 아니면 실행하지 않음
+    if (boTable !== 'career') {
+        return;
+    }
+
+    // 채용공고 페이지로 변경
+    document.getElementById('subpage_title').textContent = 'Job Openings';
+    document.getElementById('subpage_banner').src = '/NEW/images/kor/top_e_04_new.jpg';
+    document.getElementById('breadcrumb_path').innerHTML = 'Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings';
+    
+    // ECS News 숨기고 채용공고 목록 표시
+    document.getElementById('news_container').style.display = 'none';
+    document.getElementById('career_list_container').style.display = 'block';
+
+    // Supabase 설정
+    const SUPABASE_URL = 'https://qzymoraaukwicqlhjbsy.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr';
+
+    // HTML 이스케이프 함수
+    function escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // 채용공고 목록 로드
+    async function loadJobPostings() {
+        try {
+            // Supabase 클라이언트 초기화
+            const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            
+            const { data, error } = await supabaseClient
+                .from('job_postings')
+                .select('*')
+                .eq('status', 'open')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error('채용공고 로드 오류:', error);
+                document.getElementById('career_list_tbody').innerHTML = 
+                    '<tr><td colspan="5" style="text-align: center; padding: 20px; color: red;">채용공고를 불러오는 중 오류가 발생했습니다.</td></tr>';
+                return;
+            }
+
+            if (!data || data.length === 0) {
+                document.getElementById('career_list_tbody').innerHTML = 
+                    '<tr><td colspan="5" style="text-align: center; padding: 20px;">등록된 채용공고가 없습니다.</td></tr>';
+                return;
+            }
+
+            // 테이블 행 생성
+            const tbody = document.getElementById('career_list_tbody');
+            tbody.innerHTML = '';
+
+            data.forEach(posting => {
+                const row = document.createElement('tr');
+                row.className = 'carL_active';
+
+                // 상태 이미지
+                const statusImg = posting.status === 'open' 
+                    ? '/NEW/images/kor/j_t_jupsu.png' 
+                    : '/NEW/images/kor/j_t_magam.png';
+                const statusAlt = posting.status === 'open' ? '접수중' : '마감';
+
+                // 접수기한 포맷팅
+                let deadlineText = '채용시 마감';
+                if (posting.deadline) {
+                    const deadline = new Date(posting.deadline);
+                    deadlineText = deadline.toLocaleDateString('ko-KR', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                }
+
+                // 지원대상
+                const targetAudience = posting.target_audience || '상시채용';
+
+                row.innerHTML = `
+                    <td class="carJUPIMG">
+                        <img src="${statusImg}" alt="${statusAlt}">
+                    </td>
+                    <td class="TeT TC_title">
+                        <a href="/NEW/board/bbs/board.php?bo_table=career&wr_id=${posting.id}">${escapeHtml(posting.title)}</a>
+                    </td>
+                    <td class="TeT">${escapeHtml(targetAudience)}</td>
+                    <td class="TeT">${deadlineText}</td>
+                    <td class="TeT">
+                        <a href="/NEW/board/bbs/board.php?bo_table=career&wr_id=${posting.id}">
+                            <img src="/NEW/images/kor/j_t_view.png" alt="보기">
+                        </a>
+                    </td>
+                `;
+
+                tbody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('채용공고 로드 중 오류:', error);
+            document.getElementById('career_list_tbody').innerHTML = 
+                '<tr><td colspan="5" style="text-align: center; padding: 20px; color: red;">채용공고를 불러오는 중 오류가 발생했습니다.</td></tr>';
+        }
+    }
+
+    // 페이지 로드 시 실행
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadJobPostings);
+    } else {
+        loadJobPostings();
+    }
+})();
+</script>
 
 </body>
 </html>
