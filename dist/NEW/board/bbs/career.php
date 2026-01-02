@@ -200,9 +200,15 @@
         console.log('채용공고 목록 로드 시작');
         const tbody = document.getElementById('career_list_tbody');
         
+        if (!tbody) {
+            console.error('career_list_tbody 요소를 찾을 수 없습니다.');
+            return;
+        }
+        
         try {
             tbody.innerHTML = '<tr><td colspan="5" class="career-loading">채용공고를 불러오는 중...</td></tr>';
             
+            console.log('Supabase 클라이언트 생성 시도...');
             const supabaseClient = getSupabaseClient();
             console.log('Supabase 클라이언트 초기화 완료');
             
