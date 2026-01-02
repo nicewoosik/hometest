@@ -782,6 +782,12 @@ function checkFrm(obj) {
     // Supabase 설정
     const SUPABASE_URL = 'https://qzymoraaukwicqlhjbsy.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr';
+    
+    // 전역 Supabase 클라이언트 생성 함수 (캐시 방지)
+    function getSupabaseClient() {
+        // 매번 새로운 클라이언트 생성하여 캐시 방지
+        return supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
 
     // HTML 이스케이프 함수
     function escapeHtml(text) {
@@ -795,16 +801,26 @@ function checkFrm(obj) {
     async function loadJobPostings() {
         console.log('채용공고 목록 로드 시작');
         try {
-            // Supabase 클라이언트 초기화
-            const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            // Supabase 클라이언트 초기화 (캐시 무효화를 위해 매번 새로 생성)
+            const supabaseClient = getSupabaseClient();
             console.log('Supabase 클라이언트 초기화 완료');
             
             // 모든 채용공고 가져오기 (status 필터 제거)
-            console.log('데이터베이스에서 채용공고 조회 시작...');
+            // updated_at 기준으로 정렬하여 최신 수정 내용이 반영되도록 함
+            const timestamp = Date.now();
+            console.log('데이터베이스에서 채용공고 조회 시작...', new Date().toISOString(), 'timestamp:', timestamp);
+            // 캐시 무효화를 위해 매번 새로운 요청 보내기
             const { data, error } = await supabaseClient
                 .from('job_postings')
                 .select('*')
+                .order('updated_at', { ascending: false })
                 .order('created_at', { ascending: false });
+            
+            console.log('조회된 채용공고 개수:', data ? data.length : 0);
+            if (data && data.length > 0) {
+                console.log('첫 번째 채용공고 updated_at:', data[0].updated_at);
+                console.log('모든 채용공고 ID 목록:', data.map(p => ({ id: p.id, title: p.title, status: p.status })));
+            }
 
             console.log('데이터베이스 조회 결과:', { data, error });
 
@@ -829,8 +845,20 @@ function checkFrm(obj) {
             tbody.innerHTML = '';
 
             console.log('테이블 행 생성 시작, 데이터 개수:', data.length);
+            let renderedCount = 0;
             data.forEach((posting, index) => {
-                console.log(`채용공고 ${index + 1}:`, posting);
+                console.log(`채용공고 ${index + 1}/${data.length}:`, {
+                    id: posting.id,
+                    title: posting.title,
+                    status: posting.status,
+                    target_audience: posting.target_audience
+                });
+                
+                // title이 없거나 빈 문자열인 경우에도 표시
+                if (!posting.title || posting.title.trim() === '') {
+                    console.warn(`채용공고 ${index + 1}의 title이 비어있습니다:`, posting);
+                }
+                
                 const row = document.createElement('tr');
                 row.className = 'carL_active';
 
@@ -871,9 +899,16 @@ function checkFrm(obj) {
                 `;
 
                 tbody.appendChild(row);
+                renderedCount++;
             });
             
-            console.log('채용공고 목록 렌더링 완료, 총 ' + data.length + '개 표시됨');
+            console.log('채용공고 목록 렌더링 완료, 총 ' + data.length + '개 조회, ' + renderedCount + '개 표시됨');
+            if (data.length !== renderedCount) {
+                console.error('경고: 조회된 데이터 개수와 표시된 데이터 개수가 다릅니다!', {
+                    조회된개수: data.length,
+                    표시된개수: renderedCount
+                });
+            }
         } catch (error) {
             console.error('채용공고 로드 중 오류:', error);
             document.getElementById('career_list_tbody').innerHTML = 
@@ -885,14 +920,21 @@ function checkFrm(obj) {
     async function loadJobPostingDetail() {
         console.log('채용공고 상세 정보 로드 시작, wr_id:', wrId);
         try {
-            const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            // 캐시 무효화를 위해 매번 새로 클라이언트 생성
+            const supabaseClient = getSupabaseClient();
             
-            console.log('데이터베이스에서 채용공고 상세 정보 조회 시작...');
+            const timestamp = Date.now();
+            console.log('데이터베이스에서 채용공고 상세 정보 조회 시작...', new Date().toISOString(), 'timestamp:', timestamp);
+            // 최신 데이터를 가져오기 위해 매번 새로운 요청 보내기
             const { data, error } = await supabaseClient
                 .from('job_postings')
                 .select('*')
                 .eq('id', wrId)
                 .single();
+            
+            if (data) {
+                console.log('조회된 채용공고 updated_at:', data.updated_at);
+            }
 
             console.log('데이터베이스 조회 결과:', { data, error });
 
@@ -1076,19 +1118,10 @@ function checkFrm(obj) {
 
     // 페이지 로드 시 실행
     console.log('채용공고 스크립트 초기화, bo_table:', boTable, 'wr_id:', wrId);
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM 로드 완료');
-            if (wrId) {
-                console.log('상세 페이지 로드 시작');
-                loadJobPostingDetail();
-            } else {
-                console.log('목록 페이지 로드 시작');
-                loadJobPostings();
-            }
-        });
-    } else {
-        console.log('DOM 이미 로드됨');
+    
+    // 페이지 로드 시 항상 최신 데이터를 가져오도록 함수 실행
+    function initializePage() {
+        console.log('페이지 초기화 시작');
         if (wrId) {
             console.log('상세 페이지 로드 시작');
             loadJobPostingDetail();
@@ -1097,6 +1130,28 @@ function checkFrm(obj) {
             loadJobPostings();
         }
     }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM 로드 완료');
+            initializePage();
+        });
+    } else {
+        console.log('DOM 이미 로드됨');
+        initializePage();
+    }
+    
+    // 페이지 포커스 시 데이터 새로고침 (탭 전환 후 돌아올 때 최신 데이터 반영)
+    window.addEventListener('focus', function() {
+        console.log('페이지 포커스 - 데이터 새로고침');
+        if (boTable === 'career') {
+            if (wrId) {
+                loadJobPostingDetail();
+            } else {
+                loadJobPostings();
+            }
+        }
+    });
 })();
 </script>
 
