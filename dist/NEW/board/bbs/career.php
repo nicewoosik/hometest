@@ -262,17 +262,21 @@
                 console.log(`채용공고 ${index + 1}/${data.length}:`, {
                     id: posting.id,
                     title: posting.title,
-                    status: posting.status
+                    status: posting.status,
+                    status_type: typeof posting.status
                 });
                 
+                // 마감된 것도 포함하여 모든 채용공고 표시 (status 필터 없음)
                 const row = document.createElement('tr');
                 row.className = 'carL_active';
                 
-                // 상태 이미지
-                const statusImg = posting.status === 'open' 
+                // 상태 이미지 (접수중/마감 모두 표시)
+                // status가 'open'이면 접수중, 그 외는 모두 마감으로 표시
+                const isOpen = posting.status === 'open' || posting.status === 'OPEN';
+                const statusImg = isOpen
                     ? '/NEW/images/kor/j_t_jupsu.png' 
                     : '/NEW/images/kor/j_t_magam.png';
-                const statusAlt = posting.status === 'open' ? '접수중' : '마감';
+                const statusAlt = isOpen ? '접수중' : '마감';
                 
                 // 접수기한 포맷팅
                 let deadlineText = '채용시 마감';
