@@ -909,6 +909,8 @@ function checkFrm(obj) {
             }
 
             console.log('채용공고 상세 데이터:', data);
+            console.log('지역 필드 값:', data.location);
+            console.log('모든 필드:', JSON.stringify(data, null, 2));
             renderJobPostingDetail(data);
         } catch (error) {
             console.error('채용공고 상세 로드 중 오류:', error);
@@ -920,6 +922,15 @@ function checkFrm(obj) {
     // 채용공고 상세 정보 렌더링
     function renderJobPostingDetail(posting) {
         console.log('채용공고 상세 정보 렌더링 시작:', posting);
+        console.log('렌더링할 지역 값:', posting.location);
+        console.log('렌더링할 모든 필드:', {
+            department: posting.department,
+            target_audience: posting.target_audience,
+            job_type: posting.job_type,
+            location: posting.location,
+            position_level: posting.position_level,
+            recruitment_count: posting.recruitment_count
+        });
         
         // 접수기한 포맷팅
         let deadlineText = '채용시 마감';
