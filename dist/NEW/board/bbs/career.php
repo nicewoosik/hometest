@@ -191,7 +191,8 @@
             const supabaseClient = getSupabaseClient();
             console.log('Supabase 클라이언트 초기화 완료');
             
-            // 실제 테이블의 모든 필드를 명시적으로 조회
+            // 실제 테이블의 모든 필드를 명시적으로 조회 (마감된 것도 포함)
+            // status 필터 없이 모든 채용공고 조회 (접수중 + 마감 모두 표시)
             const { data, error, count } = await supabaseClient
                 .from('job_postings')
                 .select('*', { count: 'exact' })
