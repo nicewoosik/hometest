@@ -249,17 +249,17 @@ $(function(){
   <!-- <div class="subpage_img">
             <p class="title_news"><img src='../data/file/notice/notice_head_1516196421' border='0'></p>
         <div><img src="../../images/kor/top_e_04.jpg" alt=""></div> -->
-	<div class="subpage_img">
-        <p>ECS News</p>
-        <div><img src="/NEW/images/kor/top_e_06_new.jpg" alt=""></div>
+	<div class="subpage_img" id="subpage_img">
+        <p id="subpage_title">ECS News</p>
+        <div><img src="/NEW/images/kor/top_e_06_new.jpg" alt="" id="subpage_banner"></div>
     </div>
     </div>
-    <div class="subpage_cont">
-        <div class="locs">
+    <div class="subpage_cont" id="subpage_cont">
+        <div class="locs" id="breadcrumb">
             <a href="#"><img src="/NEW/images/kor/icon_house.png"></a>
-            ECS NOW <img src="/NEW/images/kor/icon_next.png">
-            ECS NEWS        </div>
-        <div class="service_box">
+            <span id="breadcrumb_path">ECS NOW <img src="/NEW/images/kor/icon_next.png"> ECS NEWS</span>
+        </div>
+        <div class="service_box" id="service_box">
 
 
 			 <p class="serv_title"><img src='../data/file/notice/notice_tail_1516243874' border='0'>                <i>ECS NEWS</i>
@@ -696,6 +696,36 @@ function checkFrm(obj) {
 <script type="text/javascript" src="/NEW/js/ecs_sub.js"></script>
 <script type="text/javascript" src="/NEW/js/mobile.js"></script>
 
+<!-- 채용공고 상세 페이지 동적 로드 -->
+<script>
+(function() {
+  // URL 파라미터 확인
+  const urlParams = new URLSearchParams(window.location.search)
+  const boTable = urlParams.get('bo_table')
+  const wrId = urlParams.get('wr_id')
+  
+  // 채용공고 상세 페이지인 경우
+  if (boTable === 'career' && wrId) {
+    // Supabase 클라이언트 로드 대기
+    if (typeof supabase === 'undefined') {
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
+      script.onload = function() {
+        loadCareerDetail()
+      }
+      document.head.appendChild(script)
+    } else {
+      loadCareerDetail()
+    }
+  }
+  
+  function loadCareerDetail() {
+    const script = document.createElement('script')
+    script.src = '/NEW/js/career-detail-supabase.js'
+    document.head.appendChild(script)
+  }
+})()
+</script>
 
 </body>
 </html>
