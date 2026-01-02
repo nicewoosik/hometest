@@ -66,70 +66,90 @@
       return
     }
     
-    // 상세 내용 HTML 생성
+    // 상세 내용 HTML 생성 (기존 HTML 구조와 동일하게)
     let detailHtml = ''
     
+    // 상세 설명
     if (posting.description) {
-      detailHtml += `<div class="detail-section" style="margin: 20px 0;">${posting.description}</div>`
+      detailHtml += `<div class="carInTXT">${posting.description}</div>`
     }
     
-    if (posting.main_duties) {
-      detailHtml += `
-        <div class="detail-section" style="margin: 20px 0;">
-          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">주요업무</h3>
-          <div>${posting.main_duties}</div>
-        </div>
-      `
+    // 주요업무 (수행직무)
+    if (posting.main_duties || posting.work_experience) {
+      detailHtml += `<div class="carInTXT_title"><img src="/NEW/images/kor/Y_1.png" alt="수행직무"></div>`
+      if (posting.main_duties) {
+        detailHtml += `<div class="carInTXT">${posting.main_duties}</div>`
+      }
     }
     
-    if (posting.required_qualifications) {
-      detailHtml += `
-        <div class="detail-section" style="margin: 20px 0;">
-          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">필수요건</h3>
-          <div>${posting.required_qualifications}</div>
-        </div>
-      `
+    // 필수요건 및 우대사항 (Job Description)
+    if (posting.required_qualifications || posting.preferred_qualifications) {
+      let jobDescHtml = ''
+      if (posting.required_qualifications) {
+        jobDescHtml += posting.required_qualifications
+      }
+      if (posting.preferred_qualifications) {
+        if (jobDescHtml) jobDescHtml += '<br /><br />'
+        jobDescHtml += posting.preferred_qualifications
+      }
+      if (jobDescHtml) {
+        detailHtml += `<div class="carInTXT">${jobDescHtml}</div>`
+      }
     }
     
-    if (posting.preferred_qualifications) {
-      detailHtml += `
-        <div class="detail-section" style="margin: 20px 0;">
-          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">우대사항</h3>
-          <div>${posting.preferred_qualifications}</div>
-        </div>
-      `
-    }
-    
-    if (posting.recruitment_process) {
-      detailHtml += `
-        <div class="detail-section" style="margin: 20px 0;">
-          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">전형일정</h3>
-          <div>${posting.recruitment_process}</div>
-        </div>
-      `
-    }
-    
-    if (posting.contact_email || posting.contact_phone) {
-      detailHtml += `
-        <div class="detail-section" style="margin: 20px 0;">
-          <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">지원문의</h3>
-          ${posting.contact_email ? `<p>이메일: ${escapeHtml(posting.contact_email)}</p>` : ''}
-          ${posting.contact_phone ? `<p>전화: ${escapeHtml(posting.contact_phone)}</p>` : ''}
-        </div>
-      `
-    }
-    
+    // 지원서 다운로드
     if (posting.attachment_url) {
       detailHtml += `
-        <div class="detail-section" style="margin: 20px 0;">
-          <a href="${escapeHtml(posting.attachment_url)}" target="_blank" style="display: inline-block; padding: 10px 20px; background: #102381; color: white; text-decoration: none; border-radius: 5px;">
-            지원서 다운로드
+        <div class="carInTXT_title"><img src="/NEW/images/kor/Y_4.png" alt="지원서다운"></div>
+        <p class="carInTXT">
+          <a href="${escapeHtml(posting.attachment_url)}" target="_blank" title="지원서">
+            <img src="/NEW/images/kor/Y_down_btn.png" alt="지원서다운">
           </a>
-        </div>
+        </p>
       `
     }
     
-    // 서비스 박스 전체 내용 교체
+    // 전형일정
+    if (posting.recruitment_process) {
+      detailHtml += `
+        <div class="carInTXT_title"><img src="/NEW/images/kor/Y_5.png" alt="전형일정"></div>
+        <p class="carInTXT">${posting.recruitment_process}</p>
+      `
+    }
+    
+    // 지원문의
+    if (posting.contact_email || posting.contact_phone) {
+      let contactHtml = ''
+      if (posting.contact_email) {
+        contactHtml += escapeHtml(posting.contact_email)
+      }
+      if (posting.contact_phone) {
+        if (contactHtml) contactHtml += '<br />'
+        contactHtml += escapeHtml(posting.contact_phone)
+      }
+      detailHtml += `
+        <div class="carInTXT_title"><img src="/NEW/images/kor/Y_6.png" alt="지원문의"></div>
+        <p class="carInTXT">${contactHtml}</p>
+      `
+    }
+    
+    // 하단 구분선 및 버튼
+    detailHtml += `
+      <div class="carBotBars"></div>
+      <div class="caree_btns">
+        <a href="/NEW/board/bbs/write.php?bo_table=apply&career=${posting.id}">
+          <img src="/NEW/images/kor/btn_jiwon.png" alt="지원하기">
+        </a>
+        &nbsp;<a href="/NEW/board/bbs/board.php?bo_table=apply&career=${posting.id}">
+          <img src="/NEW/images/kor/btn_jiwonhyun.png" alt="지원현황">
+        </a>&nbsp;
+        <a href="/NEW/board/bbs/board.php?bo_table=career">
+          <img src="/NEW/images/kor/btn_list.png" alt="목록">
+        </a>
+      </div>
+    `
+    
+    // 서비스 박스 전체 내용 교체 (기존 HTML 구조와 동일하게)
     serviceBox.innerHTML = `
       <p class="serv_title">
         <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">
@@ -142,7 +162,7 @@
       </div>
       <div class="careerView">
         <div class="careV_Box">
-          <table class="carV_Table" style="width: 100%; margin-bottom: 20px;">
+          <table class="carV_Table">
             <tr>
               <td class="carV_title">제목</td>
               <td class="carV_title_C">${escapeHtml(posting.title)}</td>
@@ -153,7 +173,7 @@
             </tr>
           </table>
           <div class="career_content">
-            <table class="carInside_Table" style="width: 100%; margin-bottom: 20px;">
+            <table class="carInside_Table">
               <tr>
                 <th class="carInside_Ta_1">모집부문</th>
                 <th class="carInside_Ta_2">지원대상</th>
@@ -171,9 +191,7 @@
                 <td>${posting.recruitment_count ? `${posting.recruitment_count}명` : ''}</td>
               </tr>
             </table>
-            <div class="supabase-dynamic-content">
-              ${detailHtml}
-            </div>
+            ${detailHtml}
           </div>
         </div>
       </div>
