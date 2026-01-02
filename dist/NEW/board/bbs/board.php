@@ -729,9 +729,11 @@ function checkFrm(obj) {
         locs.innerHTML = '<a href="#"><img src="/NEW/images/kor/icon_house.png"></a> Recruitment <img src="/NEW/images/kor/icon_next.png"> Job Openings'
       }
       
-      // 서비스 박스 내용 즉시 교체 (로딩 중 표시)
+      // 서비스 박스를 careerProcess_box로 변경
       const serviceBox = document.querySelector('.service_box')
       if (serviceBox) {
+        // service_box를 careerProcess_box로 변경
+        serviceBox.className = 'careerProcess_box'
         serviceBox.innerHTML = `
           <p class="serv_title">
             <img src="/NEW/images/kor/serv_title14.png" alt="채용공고">

@@ -59,11 +59,26 @@
       newsContent.style.display = 'none'
     }
     
-    // 서비스 박스 내용 교체
-    const serviceBox = document.getElementById('service_box') || document.querySelector('.service_box')
+    // careerProcess_box 또는 service_box 찾기
+    let serviceBox = document.querySelector('.careerProcess_box')
+    if (!serviceBox) {
+      serviceBox = document.getElementById('service_box') || document.querySelector('.service_box')
+      // service_box를 careerProcess_box로 변경
+      if (serviceBox) {
+        serviceBox.className = 'careerProcess_box'
+      }
+    }
+    
     if (!serviceBox) {
       console.error('서비스 박스를 찾을 수 없습니다.')
-      return
+      const subpageCont = document.querySelector('.subpage_cont')
+      if (subpageCont) {
+        serviceBox = document.createElement('div')
+        serviceBox.className = 'careerProcess_box'
+        subpageCont.appendChild(serviceBox)
+      } else {
+        return
+      }
     }
     
     // 상세 내용 HTML 생성 (기존 HTML 구조와 동일하게)
