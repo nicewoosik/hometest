@@ -225,6 +225,16 @@
             if (data && data.length > 0) {
                 console.log('첫 번째 채용공고의 모든 필드:', Object.keys(data[0]));
                 console.log('모든 채용공고 ID 목록:', data.map(p => ({ id: p.id, title: p.title, status: p.status })));
+                
+                // status별 개수 확인
+                const statusCounts = {};
+                data.forEach(p => {
+                    statusCounts[p.status] = (statusCounts[p.status] || 0) + 1;
+                });
+                console.log('Status별 개수:', statusCounts);
+                console.log('접수중 개수:', statusCounts['open'] || 0);
+                console.log('마감 개수:', statusCounts['closed'] || 0);
+                
                 console.log('첫 번째 채용공고 전체 데이터:', JSON.stringify(data[0], null, 2));
             }
             
@@ -241,9 +251,12 @@
             }
             
             console.log('총 ' + data.length + '개의 채용공고를 찾았습니다');
+            console.log('마감된 채용공고 포함 여부 확인:', data.filter(p => p.status !== 'open' && p.status !== 'OPEN').length, '개');
             
             tbody.innerHTML = '';
             let renderedCount = 0;
+            let openCount = 0;
+            let closedCount = 0;
             
             data.forEach((posting, index) => {
                 console.log(`채용공고 ${index + 1}/${data.length}:`, {
@@ -293,9 +306,22 @@
                 
                 tbody.appendChild(row);
                 renderedCount++;
+                if (isOpen) {
+                    openCount++;
+                } else {
+                    closedCount++;
+                }
             });
             
             console.log('채용공고 목록 렌더링 완료, 총 ' + data.length + '개 조회, ' + renderedCount + '개 표시됨');
+            console.log('접수중: ' + openCount + '개, 마감: ' + closedCount + '개');
+            
+            if (data.length !== renderedCount) {
+                console.error('경고: 조회된 데이터 개수와 표시된 데이터 개수가 다릅니다!', {
+                    조회된개수: data.length,
+                    표시된개수: renderedCount
+                });
+            }
             
         } catch (error) {
             console.error('채용공고 로드 중 오류:', error);
