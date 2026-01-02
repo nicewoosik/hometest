@@ -47,6 +47,9 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@12.0.1/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12.0.1/swiper-bundle.min.css" />
 
+<!-- Supabase 클라이언트 라이브러리 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <!--[if lte IE 8]>
 <style type="text/css">
 #bg ul li{background:none !important}
@@ -600,105 +603,92 @@ document.addEventListener("DOMContentLoaded", () => {
 var SUPABASE_URL = 'https://qzymoraaukwicqlhjbsy.supabase.co'
 var SUPABASE_ANON_KEY = 'sb_publishable_9h5TGNNrnzpjvWCu_CYxVg_VuOC7XFr'
 
-// 간편문의 폼 제출 함수
-function submitInquiry(formData) {
-  console.log('문의 제출 시작:', formData)
+// Supabase 클라이언트 초기화
+var supabaseClient = null;
+
+function initializeSupabase() {
+  if (typeof window.supabase !== 'undefined') {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    });
+    console.log('Supabase 클라이언트 초기화 완료');
+  }
+}
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof window.supabase !== 'undefined') {
+    initializeSupabase();
+  } else {
+    var checkSupabase = setInterval(function() {
+      if (typeof window.supabase !== 'undefined') {
+        initializeSupabase();
+        clearInterval(checkSupabase);
+      }
+    }, 100);
+    setTimeout(function() {
+      clearInterval(checkSupabase);
+    }, 5000);
+  }
+});
+
+// 간편문의 폼 제출 함수 (Supabase 클라이언트 사용)
+async function submitInquiry(formData) {
+  console.log('문의 제출 시작:', formData);
   
-  // 전송할 데이터 준비 (테이블 스키마에 맞게)
-  var requestData = {
+  // Supabase 클라이언트가 초기화되지 않았다면 초기화 시도
+  if (!supabaseClient) {
+    if (typeof window.supabase !== 'undefined') {
+      initializeSupabase();
+    } else {
+      throw new Error('Supabase 클라이언트를 초기화할 수 없습니다.');
+    }
+  }
+  
+  // 전송할 데이터 준비
+  const inquiryData = {
     name: formData.wr_name || null,
     company: formData.wr_subject || null,
     email: formData.wr_email || null,
     phone: formData.wr_2 || null,
     content: formData.wr_content || null,
-    status: 'new',
-    created_at: new Date().toISOString()
+    status: 'new'
+  };
+  
+  // 빈 문자열을 null로 변환
+  Object.keys(inquiryData).forEach(function(key) {
+    if (inquiryData[key] === '') {
+      inquiryData[key] = null;
+    }
+  });
+  
+  console.log('전송할 데이터:', inquiryData);
+  
+  try {
+    // Supabase 클라이언트 사용 (RLS가 자동으로 처리됨)
+    if (supabaseClient) {
+      const { data, error } = await supabaseClient
+        .from('inquiries')
+        .insert([inquiryData])
+        .select();
+      
+      if (error) {
+        console.error('Supabase 에러:', error);
+        throw new Error(error.message || '문의 접수 실패');
+      }
+      
+      console.log('성공:', data);
+      return { success: true, data };
+    } else {
+      throw new Error('Supabase 클라이언트를 초기화할 수 없습니다.');
+    }
+  } catch (error) {
+    console.error('문의 접수 오류:', error);
+    throw error;
   }
-  
-  // null 값 제거 (선택적 필드인 경우)
-  Object.keys(requestData).forEach(function(key) {
-    if (requestData[key] === '') {
-      requestData[key] = null
-    }
-  })
-  
-  console.log('전송할 데이터:', requestData)
-  console.log('Supabase URL:', SUPABASE_URL + '/rest/v1/inquiries')
-  console.log('Supabase Key:', SUPABASE_ANON_KEY.substring(0, 20) + '...')
-  
-  // 요청 헤더 준비
-  var headers = {
-    'Content-Type': 'application/json',
-    'apikey': SUPABASE_ANON_KEY,
-    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-    'Prefer': 'return=representation'
-  }
-  
-  console.log('요청 URL:', SUPABASE_URL + '/rest/v1/inquiries')
-  console.log('요청 헤더:', headers)
-  console.log('요청 본문:', requestData)
-  
-  return fetch(SUPABASE_URL + '/rest/v1/inquiries', {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify(requestData)
-  })
-  .then(function(response) {
-    console.log('=== Supabase 응답 정보 ===')
-    console.log('응답 상태:', response.status, response.statusText)
-    console.log('응답 헤더:', Object.fromEntries(response.headers.entries()))
-    console.log('응답 URL:', response.url)
-    
-    if (!response.ok) {
-      return response.text().then(function(text) {
-        console.error('=== Supabase 에러 상세 ===')
-        console.error('응답 본문 (텍스트):', text)
-        console.error('응답 상태 코드:', response.status)
-        console.error('응답 상태 텍스트:', response.statusText)
-        
-        var errorData
-        try {
-          errorData = JSON.parse(text)
-          console.error('응답 본문 (JSON):', errorData)
-          console.error('에러 코드:', errorData.code)
-          console.error('에러 메시지:', errorData.message)
-          console.error('에러 힌트:', errorData.hint)
-          console.error('에러 상세:', errorData.details)
-        } catch (e) {
-          errorData = { message: text || '문의 접수 실패', hint: response.statusText }
-          console.error('JSON 파싱 실패:', e)
-        }
-        
-        // RLS 정책 오류인 경우 상세 정보 출력
-        if (response.status === 403 || response.status === 401) {
-          console.error('=== RLS 정책 오류 진단 ===')
-          console.error('1. Supabase 프로젝트의 RLS가 활성화되어 있는지 확인')
-          console.error('2. inquiries 테이블에 anon 역할에 대한 INSERT 정책이 있는지 확인')
-          console.error('3. 정책의 WITH CHECK 조건이 true인지 확인')
-          console.error('4. API 키가 올바른지 확인 (anon key 사용 중)')
-          throw new Error('권한 오류 (RLS): ' + (errorData.message || '') + ' (상태: ' + response.status + ', 코드: ' + (errorData.code || 'N/A') + ')')
-        }
-        
-        throw new Error(errorData.message || errorData.hint || errorData.details || '문의 접수 실패 (상태: ' + response.status + ')')
-      })
-    }
-    return response.json()
-  })
-  .catch(function(error) {
-    console.error('문의 접수 오류:', error)
-    console.error('에러 스택:', error.stack)
-    
-    if (error.message) {
-      throw error
-    }
-    
-    // 네트워크 오류인 경우
-    if (error.name === 'TypeError' && error.message.includes('fetch')) {
-      throw new Error('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.')
-    }
-    
-    throw new Error('알 수 없는 오류가 발생했습니다: ' + error.toString())
-  })
 }
 
 function checkFrm(obj) {
