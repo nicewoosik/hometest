@@ -52,6 +52,7 @@ var g4_is_ie     = navigator.userAgent.toLowerCase().indexOf("msie") != -1;
 </script>
 <!-- <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script> -->
 <script type="text/javascript" src="/NEW/board/js/common.js"></script>
+<script type="text/javascript" src="/NEW/board/js/ajax.js"></script>
 <body topmargin="0" leftmargin="0" >
 <script type="text/javascript" src="/NEW/board/js/sideview.js"></script>
 
@@ -727,6 +728,7 @@ function checkFrm(obj) {
 <!-- 게시판 목록 끝 -->
 <br />
 <!-- 사용스킨 : gallery -->
+<script type="text/javascript" src="/NEW/board/js/board.js"></script>
 <script type="text/javascript" src="/NEW/board/js/wrest.js"></script>
 
 <!-- 새창 대신 사용하는 iframe -->
