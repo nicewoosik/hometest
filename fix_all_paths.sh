@@ -16,3 +16,4 @@ find dist/css -name "*.css" -exec sed -i '' 's|url(\.\.\/images/|url(/NEW/images
 
 echo "✅ 경로 수정 완료!"
 
+

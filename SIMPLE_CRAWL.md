@@ -43,3 +43,4 @@ wget --recursive --page-requisites --html-extension --convert-links --domains=ec
 
 wget이 설치되어 있다면 이 방법이 더 확실합니다.
 
+
