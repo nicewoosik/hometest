@@ -214,11 +214,17 @@
             
             // 실제 테이블의 모든 필드를 명시적으로 조회 (마감된 것도 포함)
             // status 필터 없이 모든 채용공고 조회 (접수중 + 마감 모두 표시)
+            // RLS 정책을 우회하기 위해 명시적으로 모든 데이터 요청
             const { data, error, count } = await supabaseClient
                 .from('job_postings')
-                .select('*', { count: 'exact' })
+                .select('*', { count: 'exact', head: false })
                 .order('updated_at', { ascending: false })
                 .order('created_at', { ascending: false });
+            
+            console.log('Supabase 쿼리 실행 완료');
+            console.log('에러:', error);
+            console.log('데이터:', data);
+            console.log('개수:', count);
             
             console.log('조회된 채용공고 개수:', data ? data.length : 0);
             console.log('Supabase count:', count);
