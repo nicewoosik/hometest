@@ -251,12 +251,19 @@
             }
             
             if (!data || data.length === 0) {
-                console.warn('등록된 채용공고가 없습니다.');
-                tbody.innerHTML = '<tr><td colspan="5" class="career-loading">등록된 채용공고가 없습니다.</td></tr>';
+                console.warn('등록된 채용공고가 없습니다. count:', count);
+                if (count && count > 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="career-error">데이터베이스에는 ' + count + '개의 채용공고가 있지만 조회되지 않았습니다. RLS 정책을 확인해주세요.</td></tr>';
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="5" class="career-loading">등록된 채용공고가 없습니다.</td></tr>';
+                }
                 return;
             }
             
-            console.log('총 ' + data.length + '개의 채용공고를 찾았습니다');
+            console.log('총 ' + data.length + '개의 채용공고를 찾았습니다 (데이터베이스 count: ' + count + ')');
+            if (count && count !== data.length) {
+                console.warn('⚠️ 경고: 데이터베이스에는 ' + count + '개가 있지만 ' + data.length + '개만 조회되었습니다! RLS 정책을 확인하세요.');
+            }
             console.log('마감된 채용공고 포함 여부 확인:', data.filter(p => p.status !== 'open' && p.status !== 'OPEN').length, '개');
             
             tbody.innerHTML = '';
