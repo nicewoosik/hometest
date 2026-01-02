@@ -746,21 +746,24 @@ function checkFrm(obj) {
 <!-- 채용공고 목록 로드 스크립트 -->
 <script type="text/javascript">
 (function() {
-    // URL 파라미터 확인
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        const results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
+    try {
+        // URL 파라미터 확인
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
 
-    const boTable = getUrlParameter('bo_table');
-    const wrId = getUrlParameter('wr_id');
-    
-    // 채용공고 페이지가 아니면 실행하지 않음
-    if (boTable !== 'career') {
-        return;
-    }
+        const boTable = getUrlParameter('bo_table');
+        const wrId = getUrlParameter('wr_id');
+        
+        // 채용공고 페이지가 아니면 실행하지 않음
+        if (boTable !== 'career') {
+            return;
+        }
+        
+        console.log('채용공고 스크립트 시작, bo_table:', boTable, 'wr_id:', wrId);
 
     // 채용공고 페이지로 변경
     document.getElementById('subpage_title').textContent = 'Job Openings';
